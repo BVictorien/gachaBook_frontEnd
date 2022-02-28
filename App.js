@@ -7,6 +7,8 @@ import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import CardScreen from './screens/CardScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import signIn from "./screens/signIn"
+import singUp from "./screens/signUp"
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -58,6 +60,8 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+        <Stack.Screen name="SignUp" component={singUp} />
+        <Stack.Screen name="SignIn" component={signIn} />
       </Stack.Navigator>
     </NavigationContainer>
   );
