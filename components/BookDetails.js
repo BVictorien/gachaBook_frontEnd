@@ -1,10 +1,15 @@
+//////////////////////////////////////IMPORT///////////////////////////////////////////////
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Image, Card } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
 
+
+//////////////////////////////////////Functions///////////////////////////////////////////////
 export default class BookDetails extends Component {
+/**/ 
+
   render() {
     return (
       <View style={styles.bookItem}>
@@ -27,7 +32,7 @@ export default class BookDetails extends Component {
     );
   }
 }
-
+//////////////////////////////////////Styles///////////////////////////////////////////////
 const styles = StyleSheet.create({
   bookItem: {
     width: 300,
