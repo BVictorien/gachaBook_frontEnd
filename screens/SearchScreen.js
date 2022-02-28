@@ -11,7 +11,7 @@ function SearchScreen() {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
       if (status === 'granted') {
         Location.watchPositionAsync({ distanceInterval: 2 }, (location) => {
-          console.log(location);
+          // console.log(location);
         });
       }
     }
