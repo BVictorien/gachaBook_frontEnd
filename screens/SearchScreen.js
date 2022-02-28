@@ -5,6 +5,8 @@ import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import * as Permissions from 'expo-permissions';
 
+import BookDetails from '../components/BookDetails';
+
 function SearchScreen() {
   useEffect(() => {
     async function askPermissions() {
@@ -19,15 +21,24 @@ function SearchScreen() {
   }, []);
 
   return (
-    <MapView
-      style={{ flex: 1 }}
-      initialRegion={{
-        latitude: 48.866667,
-        longitude: 2.333333,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
-    />
+    <View style={styles.container}>
+      <MapView
+        style={{ width: '100%', height: '50%' }}
+        // style={{ flex: 1 }}
+        initialRegion={{
+          latitude: 48.866667,
+          longitude: 2.333333,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
+      <Text style={styles.title}>Around Me</Text>
+      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+    </View>
+    // </View>
   );
 }
 
@@ -36,8 +47,15 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1E202A',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  title: {
+    color: '#ffff',
+    margin: 10,
+    fontSize: 20,
   },
 });
