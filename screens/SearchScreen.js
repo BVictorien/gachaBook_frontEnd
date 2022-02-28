@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
 import * as Location from 'expo-location';
 // import MapView, { Marker } from 'react-native-maps';
@@ -10,7 +10,7 @@ import BookDetails from '../components/BookDetails';
 function SearchScreen() {
   useEffect(() => {
     async function askPermissions() {
-      let { status } = await Permissions.askAsync(Permissions.LOCATION);
+      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status === 'granted') {
         Location.watchPositionAsync({ distanceInterval: 2 }, (location) => {
           console.log(location);
@@ -33,10 +33,12 @@ function SearchScreen() {
         }}
       />
       <Text style={styles.title}>Around Me</Text>
-      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-      <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+      <ScrollView style={{ flex: 1, marginTop: 10 }}>
+        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+      </ScrollView>
     </View>
     // </View>
   );

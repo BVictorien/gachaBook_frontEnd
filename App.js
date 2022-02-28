@@ -7,8 +7,8 @@ import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import CardScreen from './screens/CardScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import signIn from "./screens/signIn"
-import singUp from "./screens/signUp"
+import signIn from './screens/signIn';
+import singUp from './screens/signUp';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -42,7 +42,8 @@ const BottomNavigator = () => {
         activeTintColor: '#009788',
         inactiveTintColor: '#FFFFFF',
         style: {
-          backgroundColor: '#111224',
+          backgroundColor: '#1E202A',
+          borderTopWidth: 0,
         },
       }}
     >
