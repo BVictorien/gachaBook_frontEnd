@@ -11,8 +11,7 @@ import {
 import { Button, Card, Badge } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
-//////////////////////////////////////Function///////////////////////////////////////////////
-function BookDetailsCard() {
+const CartScreen = () => {
   return (
     <View style={styles.bookItem}>
       <Card.Divider />
@@ -34,7 +33,7 @@ function BookDetailsCard() {
   );
 }
 
-const CardScreen = (props) => {
+const CartScreen = (props) => {
   //////////////////////////////////////States and vars///////////////////////////
 
   /////////////////////////////////////Return////////////////////////////////////
@@ -74,8 +73,8 @@ const CardScreen = (props) => {
   );
 };
 
-export default CardScreen;
-//////////////////////////////////////Style///////////////////////////////////////////////
+export default CartScreen;
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
