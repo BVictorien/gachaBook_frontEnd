@@ -77,10 +77,12 @@ const ProfileScreen = () => {
           </View>
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        <View style={styles.containerFavorites}>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        </View>
       </ScrollView>
     </View>
   );
@@ -94,9 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1E202A',
     color: '#fff',
     // alignItems: 'center',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     width: '100%',
     height: '100%',
   },
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 20,
     borderRadius: 5,
-    // width: '70%',
   },
   link: {
     flexDirection: 'row',
@@ -130,4 +129,7 @@ const styles = StyleSheet.create({
   sliderHorizontal: {
     flexDirection: 'row',
   },
+  // containerFavorites: {
+  //   justifyContent: 'center',
+  // },
 });

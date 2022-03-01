@@ -34,10 +34,12 @@ function SearchScreen() {
       />
       <Text style={styles.title}>Around Me</Text>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-        <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        <View style={styles.container}>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+        </View>
       </ScrollView>
     </View>
     // </View>
@@ -50,7 +52,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1E202A',
-    alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
     height: '100%',

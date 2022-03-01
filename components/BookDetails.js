@@ -30,7 +30,6 @@ export default class BookDetails extends Component {
 
 const styles = StyleSheet.create({
   bookItem: {
-    width: 300,
     backgroundColor: '#1E202A',
     flexDirection: 'row',
     marginBottom: 6,
