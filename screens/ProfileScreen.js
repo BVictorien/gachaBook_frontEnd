@@ -8,7 +8,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import BookDetails from '../components/BookDetails';
 
-const ProfileScreen = () => {
+const ProfileScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
@@ -27,6 +27,8 @@ const ProfileScreen = () => {
             />
             <Text style={{ color: '#fff' }}>Scan</Text>
           </View>
+          <Text style={styles.barre}>|</Text>
+
           <View style={styles.link}>
             <EvilIcons
               name="location"
@@ -36,6 +38,8 @@ const ProfileScreen = () => {
             />
             <Text style={{ color: '#fff' }}>Get Point</Text>
           </View>
+          <Text style={styles.barre}>|</Text>
+
           <View style={styles.link}>
             <FontAwesome
               name="credit-card-alt"
@@ -50,26 +54,31 @@ const ProfileScreen = () => {
         <ScrollView horizontal={true}>
           <View style={styles.sliderHorizontal}>
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
@@ -78,10 +87,22 @@ const ProfileScreen = () => {
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
         </View>
       </ScrollView>
     </View>
@@ -99,6 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
+    marginTop: 25,
   },
   topContainer: {
     marginTop: 30,
@@ -128,6 +150,10 @@ const styles = StyleSheet.create({
   },
   sliderHorizontal: {
     flexDirection: 'row',
+  },
+  barre: {
+    backgroundColor: 'black',
+    width: 1,
   },
   // containerFavorites: {
   //   justifyContent: 'center',
