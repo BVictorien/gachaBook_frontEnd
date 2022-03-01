@@ -46,7 +46,7 @@ const CardScreen = (props) => {
       <View style={styles.logo}>
         <Image
           style={styles.image}
-          source={require("../assets/logo-gachaBook.png")}
+          source={require("../assets/logoGachaBook.png")}
         />
         <Text style={styles.text}>GachaBook</Text>
       </View>
