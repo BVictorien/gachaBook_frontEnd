@@ -1,8 +1,8 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React from "react";
-import { View, Image, StyleSheet } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function signIn(props) {
@@ -13,12 +13,12 @@ function signIn(props) {
           name="close"
           size={25}
           color="#BDBDBD"
-          onPress={() => props.navigation.navigate("BottomNavigator")}
+          onPress={() => props.navigation.navigate('BottomNavigator')}
         />
 
         <Text style={styles.inscription}>Connexion</Text>
         <Text
-          onPress={() => props.navigation.navigate("SignIn")}
+          onPress={() => props.navigation.navigate('SignIn')}
           style={styles.connexion}
         >
           Inscription
@@ -27,7 +27,7 @@ function signIn(props) {
       <View style={styles.logo}>
         <Image
           style={styles.image}
-          source={require("../assets/logo-gachaBook.png")}
+          source={require('../assets/logoGachaBook.png')}
         />
         <Text style={styles.text}>GachaBook</Text>
       </View>
@@ -45,7 +45,7 @@ function signIn(props) {
         />
         <Button
           buttonStyle={styles.facebook}
-          title={"Connexion avec Facebook"}
+          title={'Connexion avec Facebook'}
           icon={
             <Ionicons
               name="logo-facebook"
@@ -77,32 +77,32 @@ function signIn(props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#1E202A",
-    justifyContent: "space-evenly",
+    backgroundColor: '#1E202A',
+    justifyContent: 'space-evenly',
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   logo: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   image: {
     width: 100,
     height: 100,
   },
   text: {
-    color: "white",
+    color: 'white',
     fontSize: 35,
   },
   inscription: {
-    color: "white",
+    color: 'white',
     fontSize: 35,
     marginLeft: 35,
   },
   buttonContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   facebook: {
     borderRadius: 50,
@@ -110,23 +110,23 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   google: {
-    backgroundColor: "red",
+    backgroundColor: 'red',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   signUp: {
-    backgroundColor: "#F5960D",
+    backgroundColor: '#F5960D',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   connexion: {
-    color: "#F5960D",
+    color: '#F5960D',
   },
   input: {
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
 });
 ///////////////////////////////////Styles//////////////////////////////////////////////////
