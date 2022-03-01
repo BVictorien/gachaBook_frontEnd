@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const CardScreen = () => {
+const CartScreen = () => {
   return (
     <View style={styles.container}>
       <Text>CardScreen</Text>
@@ -9,7 +9,7 @@ const CardScreen = () => {
   );
 };
 
-export default CardScreen;
+export default CartScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -5,7 +5,7 @@ import React from 'react';
 
 import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
-import CardScreen from './screens/CardScreen';
+import CartScreen from './screens/CartScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import signIn from "./screens/signIn"
 import singUp from "./screens/signUp"
@@ -30,7 +30,7 @@ const BottomNavigator = () => {
             iconName = 'ios-location';
           } else if (route.name == 'Home') {
             iconName = 'ios-home';
-          } else if (route.name == 'Card') {
+          } else if (route.name == 'Cart') {
             iconName = 'ios-basket';
           } else if (route.name == 'Profile') {
             iconName = 'ios-person';
@@ -48,7 +48,7 @@ const BottomNavigator = () => {
     >
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Card" component={CardScreen} />
+      <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
