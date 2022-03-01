@@ -30,7 +30,7 @@ const BottomNavigator = () => {
             iconName = 'ios-location';
           } else if (route.name == 'Home') {
             iconName = 'ios-home';
-          } else if (route.name == 'Card') {
+          } else if (route.name == 'Cart') {
             iconName = 'ios-basket';
           } else if (route.name == 'Profile') {
             iconName = 'ios-person';
