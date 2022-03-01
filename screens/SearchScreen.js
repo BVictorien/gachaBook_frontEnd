@@ -1,13 +1,18 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-// import MapView, { Marker } from 'react-native-maps';
 import MapView from 'react-native-maps';
 import * as Permissions from 'expo-permissions';
+import { Input, Icon } from 'react-native-elements';
 
 import BookDetails from '../components/BookDetails';
 
 function SearchScreen() {
+  const [search, setSearch] = useState('');
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
+
   useEffect(() => {
     async function askPermissions() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -22,8 +27,16 @@ function SearchScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.search}>
+        <Input
+          placeholder="   Cherchez un livre..."
+          onChangeText={updateSearch}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+          rightIcon={<Icon name="search" size={45} color="#E9940A" />}
+        />
+      </View>
       <MapView
-        style={{ width: '100%', height: '50%' }}
+        style={{ width: '100%', height: '35%' }}
         // style={{ flex: 1 }}
         initialRegion={{
           latitude: 48.866667,
@@ -60,5 +73,16 @@ const styles = StyleSheet.create({
     color: '#ffff',
     margin: 10,
     fontSize: 20,
+  },
+  search: {
+    backgroundColor: 'white',
+    // width: '90%',
+    height: 50,
+    // marginLeft: 15,
+    // marginRight: 15,
+    // marginTop: 30,
+    margin: 10,
+    marginTop: 40,
+    borderRadius: 30,
   },
 });

@@ -11,7 +11,7 @@ import BookDetails from '../components/BookDetails';
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <ScrollView style={{ flex: 1, marginTop: 50 }}>
+      <ScrollView style={{ flex: 1, marginTop: 10 }}>
         <View style={styles.topContainer}>
           <Text style={{ color: '#fff' }}>Hello</Text>
           <Text style={{ color: '#fff' }}>Nicolas Jevtic</Text>
