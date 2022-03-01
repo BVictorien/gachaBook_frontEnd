@@ -10,6 +10,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import signIn from "./screens/signIn";
 import singUp from "./screens/signUp";
 import AddBook from "./screens/AddBook";
+import ScanCode from "./screens/ScanCode"
+
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -65,6 +67,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={singUp} />
         <Stack.Screen name="SignIn" component={signIn} />
         <Stack.Screen name="AddBook" component={AddBook} />
+        <Stack.Screen name="ScanCode" component={ScanCode} />
       </Stack.Navigator>
     </NavigationContainer>
   );
