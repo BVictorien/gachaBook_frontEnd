@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import CartScreen from './screens/CartScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ChatScreen from './screens/ChatScreen';
 import signIn from "./screens/signIn"
 import singUp from "./screens/signUp"
 
@@ -16,8 +17,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons } from '@expo/vector-icons';
 
+
 const Stack = createStackNavigator();
+const Stack2 = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+// let screen = ProfileScreen;
 
 const BottomNavigator = () => {
   return (
@@ -45,14 +50,34 @@ const BottomNavigator = () => {
           backgroundColor: '#111224',
         },
       }}
+
     >
+
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={StackNav} listeners={
+               ({navigation}) => ({
+                 tabPress: (event) => {
+                    event.preventDefault();
+                    navigation.navigate('Profile', {
+                       screen: 'Profile'
+                    });
+               }
+            })
+         } />
       <Tab.Screen name="Cart" component={CartScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
+
+const StackNav = () => {
+  return (
+    <Stack2.Navigator screenOptions={{ headerShown: false }}>
+      <Stack2.Screen name="Profile" component={ProfileScreen} />
+      <Stack2.Screen name="Chat" component={ChatScreen} />
+    </Stack2.Navigator>
+  )
+}
 
 export default function App() {
   return (
@@ -62,6 +87,7 @@ export default function App() {
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
         <Stack.Screen name="SignUp" component={singUp} />
         <Stack.Screen name="SignIn" component={signIn} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
