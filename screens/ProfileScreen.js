@@ -1,10 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
-<<<<<<< HEAD
-import { Image } from 'react-native-elements';
-=======
 import { Image, Input } from 'react-native-elements';
->>>>>>> homeScreen
 
 import { AntDesign } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
@@ -15,13 +11,6 @@ import BookDetails from '../components/BookDetails';
 const ProfileScreen = (props) => {
   return (
     <View style={styles.container}>
-<<<<<<< HEAD
-      <ScrollView style={{ flex: 1, marginTop: 10 }}>
-        <View style={styles.topContainer}>
-          <Text style={{ color: '#fff' }}>Hello</Text>
-          <Text style={{ color: '#fff' }}>Nicolas Jevtic</Text>
-        </View>
-=======
 
       <View style={styles.topContainer}>
         <View>
@@ -40,7 +29,6 @@ const ProfileScreen = (props) => {
       </View>
 
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
->>>>>>> homeScreen
 
         <View style={styles.navigation}>
           <View style={styles.link}>
