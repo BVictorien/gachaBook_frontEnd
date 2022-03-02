@@ -18,7 +18,7 @@ const ProfileScreen = (props) => {
           <Text style={styles.titletop}>Hello</Text>
           <Text style={styles.titletop}>Nicolas Jevtic</Text>
         </View>
-        <View>
+        {/* <View>
           <FontAwesome
             name="envelope-o"
             size={35}
@@ -28,7 +28,7 @@ const ProfileScreen = (props) => {
               props.navigation.navigate("Chat", { screen: "ChatScreen" })
             }
           />
-        </View>
+        </View> */}
       </View>
 
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
@@ -67,7 +67,7 @@ const ProfileScreen = (props) => {
               onPress={() =>
                 props.navigation.navigate("Chat", { screen: "ChatScreen" })
               }
-              style={{ color: "#fff" }}
+              style={{ color: "#fff", marginLeft:5 }}
             >
               Messages
             </Text>
