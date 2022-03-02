@@ -11,7 +11,7 @@ import {
 import { Button, Card, Badge } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
-const CartScreen = () => {
+const BookDetailsCard = () => {
   return (
     <View style={styles.bookItem}>
       <Card.Divider />
@@ -31,7 +31,7 @@ const CartScreen = () => {
       <Card.Divider />
     </View>
   );
-}
+};
 
 const CartScreen = (props) => {
   //////////////////////////////////////States and vars///////////////////////////
