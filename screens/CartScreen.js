@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
   },
   points: {
     marginLeft: 10,
+    backgroundColor: "#6D7D8B",
   },
   total: {
     marginTop: 10,
@@ -151,12 +152,12 @@ const styles = StyleSheet.create({
   payer: {
     backgroundColor: '#F5960D',
     borderRadius: 50,
-    width: 300,
+    width: 350,
     marginBottom: 10,
   },
   reap: {
     backgroundColor: '#6D7D8B',
     borderRadius: 50,
-    width: 300,
+    width: 350,
   },
 });
