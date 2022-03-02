@@ -1,3 +1,4 @@
+//////////////////////////////////////IMPORT//////////////////////////////////////////////////////
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 import { Image } from "react-native-elements";
@@ -8,10 +9,10 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import BookDetails from "../components/BookDetails";
 
+//////////////////////////////////////Function/////////////////////////////////////////////////////
 const ProfileScreen = (props) => {
   return (
     <View style={styles.container}>
-
       <View style={styles.topContainer}>
         <View>
           <Text style={styles.titletop}>Hello</Text>
@@ -23,13 +24,14 @@ const ProfileScreen = (props) => {
             size={35}
             color="#FFF"
             style={{ marginRight: 35, marginTop: 5 }}
-            onPress={() => props.navigation.navigate('Chat', { screen: 'ChatScreen' })}
+            onPress={() =>
+              props.navigation.navigate("Chat", { screen: "ChatScreen" })
+            }
           />
         </View>
       </View>
 
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
-
         <View style={styles.navigation}>
           <View style={styles.link}>
             <AntDesign
@@ -53,13 +55,22 @@ const ProfileScreen = (props) => {
           <Text style={styles.barre}>|</Text>
 
           <View style={styles.link}>
-            <EvilIcons
-              name="location"
+            <AntDesign
+              onPress={() =>
+                props.navigation.navigate("Chat", { screen: "ChatScreen" })
+              }
+              name="message1"
               size={24}
               color="#6D7D8B"
-              style={{ marginRight: 5 }}
             />
-            <Text style={{ color: "#fff" }}>Get Point</Text>
+            <Text
+              onPress={() =>
+                props.navigation.navigate("Chat", { screen: "ChatScreen" })
+              }
+              style={{ color: "#fff" }}
+            >
+              Messages
+            </Text>
           </View>
           <Text style={styles.barre}>|</Text>
 
@@ -69,18 +80,25 @@ const ProfileScreen = (props) => {
               size={24}
               color="#6D7D8B"
               style={{ marginRight: 5 }}
-              onPress={()=>{props.navigation.navigate("Store")}}
+              onPress={() => {
+                props.navigation.navigate("Store");
+              }}
             />
-            <Text 
-            onPress={()=>{props.navigation.navigate("Store")}}
-            style={{ color: "#fff" }}>My Card</Text>
+            <Text
+              onPress={() => {
+                props.navigation.navigate("Store");
+              }}
+              style={{ color: "#fff" }}
+            >
+              My Card
+            </Text>
           </View>
         </View>
         <Text style={styles.title}>Mes livres en ventes :</Text>
         <ScrollView horizontal={true}>
           <View style={styles.sliderHorizontal}>
             <Image
-              onPress={() => props.navigation.navigate('BookScreen')}
+              onPress={() => props.navigation.navigate("BookScreen")}
               style={styles.imageBook}
               resizeMode="cover"
               source={require("../assets/favicon.png")}
@@ -120,7 +138,7 @@ const ProfileScreen = (props) => {
 };
 
 export default ProfileScreen;
-
+//////////////////////////////////////styles/////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -134,14 +152,14 @@ const styles = StyleSheet.create({
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   titletop: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 17,
-    fontStyle: 'italic',
-    textShadowColor: 'rgba(252, 252, 252, 0.75)',
+    fontStyle: "italic",
+    textShadowColor: "rgba(252, 252, 252, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
