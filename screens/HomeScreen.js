@@ -77,10 +77,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
-  elevation: {
-    elevation: 20,
-    shadowColor: '#F69D0C',
-  },
   search: {
     flexDirection: 'row',
     marginTop: 50,
