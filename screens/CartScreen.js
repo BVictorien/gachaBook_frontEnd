@@ -64,7 +64,13 @@ const CartScreen = (props) => {
         <Text>69 pts</Text>
       </View>
       <View style={styles.buttons}>
-        <Button buttonStyle={styles.payer} title="Payer" />
+        <Button
+          onPress={() => {
+            props.navigation.navigate("PaymentEnCours");
+          }}
+          buttonStyle={styles.payer}
+          title="Payer"
+        />
         <Button
           onPress={() => {
             props.navigation.navigate("Store");

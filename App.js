@@ -15,6 +15,7 @@ import singUp from "./screens/signUp";
 import ScanCode from "./screens/ScanCode";
 import AddBook from "./screens/AddBook";
 import Store from "./screens/Store";
+import PaymentEnCours from "./screens/PaymentEnCours";
 
 /*-------------------------------------------------------------------------*/
 import { NavigationContainer } from "@react-navigation/native";
@@ -105,6 +106,7 @@ export default function App() {
           <Stack.Screen name="ScanCode" component={ScanCode} />
           <Stack.Screen name="BookScreen" component={BookScreen} />
           <Stack.Screen name="Store" component={Store} />
+          <Stack.Screen name="PaymentEnCours" component={PaymentEnCours} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
