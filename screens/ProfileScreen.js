@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
-import { Image } from 'react-native-elements';
+import { Image, Input } from 'react-native-elements';
 
 import { AntDesign } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
@@ -8,14 +8,27 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import BookDetails from '../components/BookDetails';
 
-const ProfileScreen = () => {
+const ProfileScreen = (props) => {
   return (
     <View style={styles.container}>
-      <ScrollView style={{ flex: 1, marginTop: 10 }}>
-        <View style={styles.topContainer}>
-          <Text style={{ color: '#fff' }}>Hello</Text>
-          <Text style={{ color: '#fff' }}>Nicolas Jevtic</Text>
+
+      <View style={styles.topContainer}>
+        <View>
+          <Text style={styles.titletop}>Hello</Text>
+          <Text style={styles.titletop}>Nicolas Jevtic</Text>
         </View>
+        <View>
+          <FontAwesome
+            name="envelope-o"
+            size={35}
+            color="#FFF"
+            style={{ marginRight: 35, marginTop: 5 }}
+            onPress={() => props.navigation.navigate('Chat', { screen: 'ChatScreen' })}
+          />
+        </View>
+      </View>
+
+      <ScrollView style={{ flex: 1, marginTop: 10 }}>
 
         <View style={styles.navigation}>
           <View style={styles.link}>
@@ -27,6 +40,8 @@ const ProfileScreen = () => {
             />
             <Text style={{ color: '#fff' }}>Scan</Text>
           </View>
+          <Text style={styles.barre}>|</Text>
+
           <View style={styles.link}>
             <EvilIcons
               name="location"
@@ -36,6 +51,8 @@ const ProfileScreen = () => {
             />
             <Text style={{ color: '#fff' }}>Get Point</Text>
           </View>
+          <Text style={styles.barre}>|</Text>
+
           <View style={styles.link}>
             <FontAwesome
               name="credit-card-alt"
@@ -50,6 +67,7 @@ const ProfileScreen = () => {
         <ScrollView horizontal={true}>
           <View style={styles.sliderHorizontal}>
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
@@ -103,6 +121,16 @@ const styles = StyleSheet.create({
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  titletop: {
+    color: '#FFF',
+    fontSize: 17,
+    fontStyle: 'italic',
+    textShadowColor: 'rgba(252, 252, 252, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   navigation: {
     flexDirection: 'row',

@@ -7,7 +7,7 @@ import { Input, Icon } from 'react-native-elements';
 
 import BookDetails from '../components/BookDetails';
 
-function SearchScreen() {
+function SearchScreen(props) {
   const [search, setSearch] = useState('');
   const updateSearch = (search) => {
     setSearch(search);
@@ -48,10 +48,22 @@ function SearchScreen() {
       <Text style={styles.title}>Around Me</Text>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
         <View style={styles.container}>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
         </View>
       </ScrollView>
     </View>

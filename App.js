@@ -5,8 +5,10 @@ import React from 'react';
 
 import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
-import CardScreen from './screens/CardScreen';
+import CartScreen from './screens/CartScreen';
+import BookScreen from './screens/BookScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ChatScreen from './screens/ChatScreen';
 import signIn from './screens/signIn';
 import singUp from './screens/signUp';
 
@@ -17,7 +19,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
+const Stack2 = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+// let screen = ProfileScreen;
 
 const BottomNavigator = () => {
   return (
@@ -49,9 +54,29 @@ const BottomNavigator = () => {
     >
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Cart" component={CardScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Profile"
+        component={StackNav}
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault();
+            navigation.navigate('Profile', {
+              screen: 'Profile',
+            });
+          },
+        })}
+      />
+      <Tab.Screen name="Cart" component={CartScreen} />
     </Tab.Navigator>
+  );
+};
+
+const StackNav = () => {
+  return (
+    <Stack2.Navigator screenOptions={{ headerShown: false }}>
+      <Stack2.Screen name="Profile" component={ProfileScreen} />
+      <Stack2.Screen name="Chat" component={ChatScreen} />
+    </Stack2.Navigator>
   );
 };
 
@@ -63,6 +88,8 @@ export default function App() {
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
         <Stack.Screen name="SignUp" component={singUp} />
         <Stack.Screen name="SignIn" component={signIn} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="BookScreen" component={BookScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
