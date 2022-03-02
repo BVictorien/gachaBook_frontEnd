@@ -10,14 +10,18 @@ import ProfileScreen from "./screens/ProfileScreen";
 import signIn from "./screens/signIn";
 import singUp from "./screens/signUp";
 import AddBook from "./screens/AddBook";
-import ScanCode from "./screens/ScanCode"
-
+import ScanCode from "./screens/ScanCode";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Ionicons } from "@expo/vector-icons";
+
+import { Provider } from "react-redux";
+import { createStore, combineReducers } from "redux";
+import scanBookReducer from "./reducers/scanBookReducer";
+const store = createStore(combineReducers({ scanBookReducer }));
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -60,16 +64,18 @@ const BottomNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-        <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
-        <Stack.Screen name="SignUp" component={singUp} />
-        <Stack.Screen name="SignIn" component={signIn} />
-        <Stack.Screen name="AddBook" component={AddBook} />
-        <Stack.Screen name="ScanCode" component={ScanCode} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer style={styles.container}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+          <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+          <Stack.Screen name="SignUp" component={singUp} />
+          <Stack.Screen name="SignIn" component={signIn} />
+          <Stack.Screen name="AddBook" component={AddBook} />
+          <Stack.Screen name="ScanCode" component={ScanCode} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

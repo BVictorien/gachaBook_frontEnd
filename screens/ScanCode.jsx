@@ -1,11 +1,12 @@
-//////////////////////////////////IMPORT///////////////////////////////////////////////////////
+//////////////////////////////////IMPORT////////////////////////////////////////////////////////////
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useIsFocused } from "@react-navigation/native";
+import { connect } from "react-redux";
 
-//////////////////////////////////Function///////////////////////////////////////////////////////
-export default function App(props) {
+//////////////////////////////////Function//////////////////////////////////////////////////////////
+function ScanCode(props) {
   //////////////////////////////////State////////////////////////////////////////////////////
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -27,8 +28,13 @@ export default function App(props) {
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${data}`
     );
     const dataRes = await scan.json();
-    alert(`Titre: ${dataRes.items[0].volumeInfo.title} 
-    Auteur: ${dataRes.items[0].volumeInfo.authors[0]}`);
+    // alert(`Titre: ${dataRes.items[0].volumeInfo.title} 
+    // Auteur: ${dataRes.items[0].volumeInfo.authors[0]}`);
+    props.sendBookDetail(
+      dataRes.items[0].volumeInfo.title,
+      dataRes.items[0].volumeInfo.authors[0]
+    );
+    props.navigation.navigate("AddBook")
   };
   /*------------------------------------------------------------------*/
   if (hasPermission === null) {
@@ -79,3 +85,17 @@ const styles = StyleSheet.create({
     color: "#F5960D",
   },
 });
+
+//////////////////////////////////Redux///////////////////////////////////////////////////////////
+/*-----------------------------------------------------------*/
+
+/*-----------------------------------------------------------*/
+function mapDispatchToProps(dispatch) {
+  return {
+    sendBookDetail: function (title, author) {
+      dispatch({ type: "BookDetail", title, author });
+    },
+  };
+}
+/*-----------------------------------------------------------*/
+export default connect(null, mapDispatchToProps)(ScanCode);

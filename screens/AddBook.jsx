@@ -1,7 +1,9 @@
 //////////////////////////////////////////IMPORT//////////////////////////////////////////////////
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { View, Image, StyleSheet, ScrollView } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
+import { connect } from "react-redux";
 
 //////////////////////////////////////////Function//////////////////////////////////////////////////
 
@@ -21,6 +23,7 @@ function AddBook(props) {
 
   //////////////////////////////Methods //////////////////////////////////////
   /*------------------------------------------------------*/
+
   async function saveBook() {
     let response = await fetch("http://192.168.10.150:3000/save-book", {
       method: "POST",
@@ -29,7 +32,14 @@ function AddBook(props) {
     });
   }
   /*------------------------------------------------------*/
-
+  useEffect(() => {
+    if (props.bookDetails[0] != undefined) {
+      setTitre(props.bookDetails[0].title);
+      setAuteur(props.bookDetails[0].author);
+    }
+    console.log(props);
+  }, [props]);
+  /*------------------------------------------------------*/
   ///////////////////////////////Return////////////////////////////////////////
   return (
     <View style={styles.background}>
@@ -41,19 +51,19 @@ function AddBook(props) {
       >
         back
       </Text>
-      <View style={styles.barreButton}>
-        <Text style={styles.ajoutText}>Ajouter un Livre</Text>
-        <Image
-          style={{ width: "90%" }}
-          source={require("../assets/code-barre.png")}
-        />
-        <Button
-          buttonStyle={styles.button}
-          title="Scanner le Livre"
-          onPress={() => props.navigation.navigate("ScanCode")}
-        />
-      </View>
       <ScrollView>
+        <View style={styles.barreButton}>
+          <Text style={styles.ajoutText}>Ajouter un Livre</Text>
+          <Image
+            style={{ width: "90%" }}
+            source={require("../assets/code-barre.png")}
+          />
+          <Button
+            buttonStyle={styles.button}
+            title="Scanner le Livre"
+            onPress={() => props.navigation.navigate("ScanCode")}
+          />
+        </View>
         <View style={{ marginTop: 19 }}>
           <Input
             containerStyle={{ width: 370 }}
@@ -130,13 +140,13 @@ function AddBook(props) {
             buttonStyle={styles.photoButton}
             title="Prendre photo du livre"
           />
+          <Button
+            buttonStyle={styles.photoButton}
+            title="Ajouter le Livre"
+            onPress={() => saveBook()}
+          />
         </View>
       </ScrollView>
-      <Button
-        buttonStyle={styles.buttonAjout}
-        title="Ajouter le Livre"
-        onPress={() => saveBook()}
-      />
     </View>
   );
 }
@@ -164,7 +174,7 @@ const styles = StyleSheet.create({
   barreButton: {
     backgroundColor: "white",
     alignItems: "center",
-    width: "90%",
+
     borderRadius: 5,
   },
   button: {
@@ -184,11 +194,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginLeft: 10,
   },
-  buttonAjout: {
-    backgroundColor: "#F5960D",
-    borderRadius: 50,
-    width: 350,
-    marginBottom: 20,
-  },
 });
-export default AddBook;
+
+//////////////////////////////////////////Redux//////////////////////////////////////////////////
+/*------------------------------------------------------*/
+function mapStateToProps(state) {
+  return { bookDetails: state.scanBookReducer };
+}
+/*------------------------------------------------------*/
+export default connect(mapStateToProps, null)(AddBook);
