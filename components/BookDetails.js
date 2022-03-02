@@ -1,18 +1,21 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Image, Card } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
-
+// import BookDetails from '../components/BookDetails';
 
 //////////////////////////////////////Functions///////////////////////////////////////////////
 export default class BookDetails extends Component {
-/**/ 
+  /**/
 
   render() {
     return (
-      <View style={styles.bookItem}>
+      <TouchableOpacity
+        style={styles.bookItem}
+        onPress={() => this.props.navigation.navigate('BookScreen')}
+      >
         <Card.Divider />
         <Image
           style={styles.image}
@@ -28,7 +31,7 @@ export default class BookDetails extends Component {
           <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
         </View>
         <Card.Divider />
-      </View>
+      </TouchableOpacity>
     );
   }
 }
