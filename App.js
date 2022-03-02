@@ -55,16 +55,17 @@ const BottomNavigator = () => {
 
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={StackNav} listeners={
-               ({navigation}) => ({
-                 tabPress: (event) => {
-                    event.preventDefault();
-                    navigation.navigate('Profile', {
-                       screen: 'Profile'
-                    });
-               }
-            })
-         } />
+      <Tab.Screen name="Profile" component={StackNav}
+        listeners={
+          ({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate('Profile', {
+                screen: 'Profile'
+              });
+            }
+          })
+        } />
       <Tab.Screen name="Cart" component={CartScreen} />
     </Tab.Navigator>
   );
