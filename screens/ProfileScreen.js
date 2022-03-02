@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
-import { Image, Input } from 'react-native-elements';
+import { Image } from 'react-native-elements';
 
 import { AntDesign } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
@@ -37,8 +37,18 @@ const ProfileScreen = (props) => {
               size={24}
               color="#6D7D8B"
               style={{ marginRight: 5 }}
+              onPress={() => {
+                props.navigation.navigate('AddBook');
+              }}
             />
-            <Text style={{ color: '#fff' }}>Scan</Text>
+            <Text
+              onPress={() => {
+                props.navigation.navigate('AddBook');
+              }}
+              style={{ color: '#fff' }}
+            >
+              Scan
+            </Text>
           </View>
           <Text style={styles.barre}>|</Text>
 
@@ -59,8 +69,18 @@ const ProfileScreen = (props) => {
               size={24}
               color="#6D7D8B"
               style={{ marginRight: 5 }}
+              onPress={() => {
+                props.navigation.navigate('Store');
+              }}
             />
-            <Text style={{ color: '#fff' }}>My Card</Text>
+            <Text
+              onPress={() => {
+                props.navigation.navigate('Store');
+              }}
+              style={{ color: '#fff' }}
+            >
+              My Card
+            </Text>
           </View>
         </View>
         <Text style={styles.title}>Mes livres en ventes :</Text>
