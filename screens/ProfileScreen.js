@@ -40,11 +40,8 @@ const ProfileScreen = (props) => {
             />
             <Text style={{ color: '#fff' }}>Scan</Text>
           </View>
-<<<<<<< HEAD
           <Text style={styles.barre}>|</Text>
 
-=======
->>>>>>> homeScreen
           <View style={styles.link}>
             <EvilIcons
               name="location"
@@ -54,11 +51,8 @@ const ProfileScreen = (props) => {
             />
             <Text style={{ color: '#fff' }}>Get Point</Text>
           </View>
-<<<<<<< HEAD
           <Text style={styles.barre}>|</Text>
 
-=======
->>>>>>> homeScreen
           <View style={styles.link}>
             <FontAwesome
               name="credit-card-alt"
@@ -73,46 +67,27 @@ const ProfileScreen = (props) => {
         <ScrollView horizontal={true}>
           <View style={styles.sliderHorizontal}>
             <Image
-<<<<<<< HEAD
               onPress={() => props.navigation.navigate('BookScreen')}
-=======
->>>>>>> homeScreen
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
-<<<<<<< HEAD
-              onPress={() => props.navigation.navigate('BookScreen')}
-=======
->>>>>>> homeScreen
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
-<<<<<<< HEAD
-              onPress={() => props.navigation.navigate('BookScreen')}
-=======
->>>>>>> homeScreen
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
-<<<<<<< HEAD
-              onPress={() => props.navigation.navigate('BookScreen')}
-=======
->>>>>>> homeScreen
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
-<<<<<<< HEAD
-              onPress={() => props.navigation.navigate('BookScreen')}
-=======
->>>>>>> homeScreen
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
@@ -121,29 +96,10 @@ const ProfileScreen = (props) => {
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
-<<<<<<< HEAD
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
-          ></BookDetails>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
-          ></BookDetails>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
-          ></BookDetails>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
-          ></BookDetails>
-=======
           <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
           <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
           <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
           <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
->>>>>>> homeScreen
         </View>
       </ScrollView>
     </View>
@@ -161,16 +117,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-<<<<<<< HEAD
-    marginTop: 25,
-=======
->>>>>>> homeScreen
   },
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
-<<<<<<< HEAD
-=======
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -181,7 +131,6 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(252, 252, 252, 0.75)',
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
->>>>>>> homeScreen
   },
   navigation: {
     flexDirection: 'row',
@@ -207,13 +156,6 @@ const styles = StyleSheet.create({
   },
   sliderHorizontal: {
     flexDirection: 'row',
-<<<<<<< HEAD
-  },
-  barre: {
-    backgroundColor: 'black',
-    width: 1,
-=======
->>>>>>> homeScreen
   },
   // containerFavorites: {
   //   justifyContent: 'center',

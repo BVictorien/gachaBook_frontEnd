@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-=======
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Input, Text, Icon, ListItem } from 'react-native-elements';
->>>>>>> homeScreen
 
 const ChatScreen = () => {
 
@@ -16,18 +11,6 @@ const ChatScreen = () => {
     return (
         <>
             <View style={styles.container}>
-<<<<<<< HEAD
-                <Text>Back</Text>
-                <Text>MESSAGES</Text>
-                <Text>RDV</Text>
-            </View>
-            <View>
-                <Input placeholder="   Cherchez un livre..." onChangeText={updateSearch}
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    rightIcon={<Icon name='arrow' size={45} color="#E9940A" onPress={() => handleChat()} />}
-                />
-            </View>
-=======
                 <View style={styles.top}>
                     <Text style={styles.top}>Back</Text>
                     <Text style={styles.top}>MESSAGES</Text>
@@ -82,7 +65,6 @@ const ChatScreen = () => {
                 </View>
             </View>
 
->>>>>>> homeScreen
         </>
     );
 };
@@ -92,10 +74,6 @@ export default ChatScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-<<<<<<< HEAD
-        backgroundColor: '#50, 50, 55',
-    },
-=======
         backgroundColor: '#505055',
     },
     top: {
@@ -135,5 +113,4 @@ const styles = StyleSheet.create({
         height: 75,
         borderRadius: 10,
     }
->>>>>>> homeScreen
 });

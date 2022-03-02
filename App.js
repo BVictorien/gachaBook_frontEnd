@@ -7,15 +7,9 @@ import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import CartScreen from './screens/CartScreen';
 import ProfileScreen from './screens/ProfileScreen';
-<<<<<<< HEAD
-import signIn from './screens/signIn';
-import singUp from './screens/signUp';
-import BookScreen from './screens/BookScreen';
-=======
 import ChatScreen from './screens/ChatScreen';
 import signIn from "./screens/signIn"
 import singUp from "./screens/signUp"
->>>>>>> homeScreen
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -95,11 +89,7 @@ export default function App() {
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
         <Stack.Screen name="SignUp" component={singUp} />
         <Stack.Screen name="SignIn" component={signIn} />
-<<<<<<< HEAD
-        <Stack.Screen name="BookScreen" component={BookScreen} />
-=======
         <Stack.Screen name="Chat" component={ChatScreen} />
->>>>>>> homeScreen
       </Stack.Navigator>
     </NavigationContainer>
   );
