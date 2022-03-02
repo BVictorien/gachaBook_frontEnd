@@ -17,7 +17,7 @@ import AddBook from "./screens/AddBook";
 import Store from "./screens/Store";
 import PaymentEnCours from "./screens/PaymentEnCours";
 
-/*-------------------------------------------------------------------------*/
+import UserScreen from "./screens/UserScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
