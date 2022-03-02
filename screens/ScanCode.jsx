@@ -28,13 +28,18 @@ function ScanCode(props) {
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${data}`
     );
     const dataRes = await scan.json();
-    // alert(`Titre: ${dataRes.items[0].volumeInfo.title} 
+    // alert(`Titre: ${dataRes.items[0].volumeInfo.title}
     // Auteur: ${dataRes.items[0].volumeInfo.authors[0]}`);
     props.sendBookDetail(
       dataRes.items[0].volumeInfo.title,
-      dataRes.items[0].volumeInfo.authors[0]
+      dataRes.items[0].volumeInfo.authors[0],
+      dataRes.items[0].volumeInfo.language,
+      dataRes.items[0].volumeInfo.pageCount,
+      data,
+      dataRes.items[0].volumeInfo.publisher,
+      
     );
-    props.navigation.navigate("AddBook")
+    props.navigation.navigate("AddBook");
   };
   /*------------------------------------------------------------------*/
   if (hasPermission === null) {
@@ -92,8 +97,25 @@ const styles = StyleSheet.create({
 /*-----------------------------------------------------------*/
 function mapDispatchToProps(dispatch) {
   return {
-    sendBookDetail: function (title, author) {
-      dispatch({ type: "BookDetail", title, author });
+    sendBookDetail: function (
+      title,
+      author,
+      language,
+      pageCount,
+      barcode,
+      editor,
+     
+    ) {
+      dispatch({
+        type: "BookDetail",
+        title,
+        author,
+        language,
+        pageCount,
+        barcode,
+        editor,
+       
+      });
     },
   };
 }

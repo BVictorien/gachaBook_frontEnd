@@ -25,7 +25,7 @@ function AddBook(props) {
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch("http://192.168.10.150:3000/save-book", {
+    let response = await fetch("http://192.168.10.132:3000/save-book", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}`,
@@ -36,8 +36,11 @@ function AddBook(props) {
     if (props.bookDetails[0] != undefined) {
       setTitre(props.bookDetails[0].title);
       setAuteur(props.bookDetails[0].author);
+      setLangue(props.bookDetails[0].language);
+      setNbPages(JSON.stringify(props.bookDetails[0].pageCount));
+      setCodeBarre(props.bookDetails[0].barcode);
+      setEditeur(props.bookDetails[0].editor);
     }
-    console.log(props);
   }, [props]);
   /*------------------------------------------------------*/
   ///////////////////////////////Return////////////////////////////////////////
