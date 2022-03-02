@@ -11,7 +11,6 @@ import BookDetails from '../components/BookDetails';
 const ProfileScreen = (props) => {
   return (
     <View style={styles.container}>
-
       <View style={styles.topContainer}>
         <View>
           <Text style={styles.titletop}>Hello</Text>
@@ -23,13 +22,14 @@ const ProfileScreen = (props) => {
             size={35}
             color="#FFF"
             style={{ marginRight: 35, marginTop: 5 }}
-            onPress={() => props.navigation.navigate('Chat', { screen: 'ChatScreen' })}
+            onPress={() =>
+              props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+            }
           />
         </View>
       </View>
 
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
-
         <View style={styles.navigation}>
           <View style={styles.link}>
             <AntDesign
@@ -73,21 +73,25 @@ const ProfileScreen = (props) => {
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
             />
             <Image
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
               source={require('../assets/favicon.png')}
@@ -96,10 +100,22 @@ const ProfileScreen = (props) => {
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
-          <BookDetails style={{ width: '100%', height: '25%' }}></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
         </View>
       </ScrollView>
     </View>

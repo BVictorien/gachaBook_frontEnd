@@ -4,7 +4,7 @@ import { Image, Button } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
 
-function BookScreen() {
+function BookScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.containerBook}>
@@ -52,7 +52,11 @@ function BookScreen() {
             magnam. Placeat velit rem unde natus cum earum similique, amet totam
             nesciunt nostrum.
           </Text>
-          <Button buttonStyle={styles.contact} title="Contacter le vendeur" />
+          <Button
+            buttonStyle={styles.contact}
+            title="Contacter le vendeur"
+            onPress={() => props.navigation.navigate('UserScreen')}
+          />
         </View>
 
         <View style={styles.icons}>

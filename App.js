@@ -11,6 +11,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import ChatScreen from './screens/ChatScreen';
 import signIn from './screens/signIn';
 import singUp from './screens/signUp';
+import UserScreen from './screens/UserScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -90,6 +91,7 @@ export default function App() {
         <Stack.Screen name="SignIn" component={signIn} />
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="BookScreen" component={BookScreen} />
+        <Stack.Screen name="UserScreen" component={UserScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
