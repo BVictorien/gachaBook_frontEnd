@@ -69,8 +69,11 @@ const ProfileScreen = (props) => {
               size={24}
               color="#6D7D8B"
               style={{ marginRight: 5 }}
+              onPress={()=>{props.navigation.navigate("Store")}}
             />
-            <Text style={{ color: "#fff" }}>My Card</Text>
+            <Text 
+            onPress={()=>{props.navigation.navigate("Store")}}
+            style={{ color: "#fff" }}>My Card</Text>
           </View>
         </View>
         <Text style={styles.title}>Mes livres en ventes :</Text>

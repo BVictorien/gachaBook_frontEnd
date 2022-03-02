@@ -1,8 +1,9 @@
-// import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from "react-native";
-
+/////////////////////////////////////IMPORT//////////////////////////////////////////////////////////
 import React from "react";
+import { StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
+/*-------------------------------------------------------------------------*/
 import HomeScreen from "./screens/HomeScreen";
 import SearchScreen from "./screens/SearchScreen";
 import CartScreen from "./screens/CartScreen";
@@ -13,24 +14,27 @@ import signIn from "./screens/signIn";
 import singUp from "./screens/signUp";
 import ScanCode from "./screens/ScanCode";
 import AddBook from "./screens/AddBook";
+import Store from "./screens/Store";
 
+/*-------------------------------------------------------------------------*/
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Ionicons } from "@expo/vector-icons";
-
+/*-------------------------------------------------------------------------*/
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import scanBookReducer from "./reducers/scanBookReducer";
 const store = createStore(combineReducers({ scanBookReducer }));
 
+/*-------------------------------------------------------------------------*/
 const Stack = createStackNavigator();
 const Stack2 = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // let screen = ProfileScreen;
-
+/////////////////////////////////////Funtion//////////////////////////////////////////////////////////
+/*-------------------------------------------------------------------------*/
 const BottomNavigator = () => {
   return (
     <Tab.Navigator
@@ -78,6 +82,7 @@ const BottomNavigator = () => {
   );
 };
 
+/*-------------------------------------------------------------------------*/
 const StackNav = () => {
   return (
     <Stack2.Navigator screenOptions={{ headerShown: false }}>
@@ -86,7 +91,7 @@ const StackNav = () => {
     </Stack2.Navigator>
   );
 };
-
+/*-------------------------------------------------------------------------*/
 export default function App() {
   return (
     <Provider store={store}>
@@ -99,12 +104,13 @@ export default function App() {
           <Stack.Screen name="AddBook" component={AddBook} />
           <Stack.Screen name="ScanCode" component={ScanCode} />
           <Stack.Screen name="BookScreen" component={BookScreen} />
+          <Stack.Screen name="Store" component={Store} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
 }
-
+/////////////////////////////////////Style//////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,
