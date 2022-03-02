@@ -3,17 +3,16 @@ import { StyleSheet } from "react-native";
 
 import React from "react";
 
-import HomeScreen from './screens/HomeScreen';
-import SearchScreen from './screens/SearchScreen';
-import CartScreen from './screens/CartScreen';
-import BookScreen from './screens/BookScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import ChatScreen from './screens/ChatScreen';
-import signIn from './screens/signIn';
-import singUp from './screens/signUp';
+import HomeScreen from "./screens/HomeScreen";
+import SearchScreen from "./screens/SearchScreen";
+import CartScreen from "./screens/CartScreen";
+import BookScreen from "./screens/BookScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import ChatScreen from "./screens/ChatScreen";
+import signIn from "./screens/signIn";
+import singUp from "./screens/signUp";
 import ScanCode from "./screens/ScanCode";
 import AddBook from "./screens/AddBook";
-
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -68,8 +67,8 @@ const BottomNavigator = () => {
         listeners={({ navigation }) => ({
           tabPress: (event) => {
             event.preventDefault();
-            navigation.navigate('Profile', {
-              screen: 'Profile',
+            navigation.navigate("Profile", {
+              screen: "Profile",
             });
           },
         })}
@@ -99,6 +98,7 @@ export default function App() {
           <Stack.Screen name="SignIn" component={signIn} />
           <Stack.Screen name="AddBook" component={AddBook} />
           <Stack.Screen name="ScanCode" component={ScanCode} />
+          <Stack.Screen name="BookScreen" component={BookScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
