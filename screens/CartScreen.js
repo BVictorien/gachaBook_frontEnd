@@ -31,7 +31,7 @@ const BookDetailsCard = () => {
       <Card.Divider />
     </View>
   );
-}
+};
 
 const CartScreen = (props) => {
   //////////////////////////////////////States and vars///////////////////////////
