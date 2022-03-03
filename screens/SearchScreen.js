@@ -32,7 +32,7 @@ function SearchScreen(props) {
           placeholder="   Cherchez un livre..."
           onChangeText={updateSearch}
           inputContainerStyle={{ borderBottomWidth: 0 }}
-          rightIcon={<Icon name="search" size={45} color="#E9940A" />}
+          rightIcon={<Icon name="search" size={45} color="#F5960D" />}
         />
       </View>
       <MapView
