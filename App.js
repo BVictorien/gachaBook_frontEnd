@@ -15,6 +15,7 @@ import ScanCode from "./screens/ScanCode";
 import AddBook from "./screens/AddBook";
 import Store from "./screens/Store";
 import PaymentEnCours from "./screens/PaymentEnCours";
+import paymentCard from "./screens/paymentCard";
 
 import UserScreen from "./screens/UserScreen";
 import { NavigationContainer } from "@react-navigation/native";
@@ -114,6 +115,7 @@ export default function App() {
           <Stack.Screen name="Store" component={Store} />
           <Stack.Screen name="PaymentEnCours" component={PaymentEnCours} />
           <Stack.Screen name="UserScreen" component={UserScreen} />
+          <Stack.Screen name="paymentCard" component={paymentCard} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

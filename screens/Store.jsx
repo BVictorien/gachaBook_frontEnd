@@ -7,9 +7,14 @@ import { Button, Input, Text } from "react-native-elements";
 function Store(props) {
   return (
     <View style={styles.background}>
-      <Text 
-      onPress={()=>{ props.navigation.navigate("BottomNavigator")}}
-      style={styles.backButton}>back</Text>
+      <Text
+        onPress={() => {
+          props.navigation.navigate("BottomNavigator");
+        }}
+        style={styles.backButton}
+      >
+        back
+      </Text>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Réapprovisionner </Text>
@@ -36,10 +41,13 @@ function Store(props) {
           <Text style={styles.prix}>25 €</Text>
         </View>
         <Button
+          onPress={() => {
+            props.navigation.navigate("paymentCard");
+          }}
           buttonStyle={styles.button}
           title="Recharger mon compte             "
         />
-        <Image source={require("../assets/cardBrand.png")}/>
+        <Image source={require("../assets/cardBrand.png")} />
       </View>
     </View>
   );
