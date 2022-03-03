@@ -11,9 +11,6 @@ import BookDetails from "../components/BookDetails";
 import {connect} from 'react-redux'
 
 const ProfileScreen = (props) => {
-useEffect(() => {
-  console.log(props)
-}, [props])
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>

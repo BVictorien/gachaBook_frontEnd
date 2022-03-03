@@ -1,8 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
 /*-------------------------------------------------------------------------*/
 import HomeScreen from './screens/HomeScreen';

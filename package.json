@@ -36,12 +36,8 @@
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
     "react-redux": "^7.2.6",
-<<<<<<< HEAD
     "redux": "^4.1.2",
     "socket.io-client": "^4.4.1"
-=======
-    "redux": "^4.1.2"
->>>>>>> ff5a98ff13ca98f61e82ec1dd7458000c3d47d73
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
