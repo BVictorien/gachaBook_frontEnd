@@ -58,7 +58,7 @@ function HomeScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, backgroundColor: '#1F1E1C',
+    flex: 1, backgroundColor: '#1E202A',
   },
   logout: {
     color: '#E9940A',

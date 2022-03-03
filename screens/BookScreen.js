@@ -60,7 +60,11 @@ function BookScreen(props) {
             magnam. Placeat velit rem unde natus cum earum similique, amet totam
             nesciunt nostrum.
           </Text>
-          <Button buttonStyle={styles.contact} title="Contacter le vendeur" />
+          <Button
+            buttonStyle={styles.contact}
+            title="Contacter le vendeur"
+            onPress={() => props.navigation.navigate('UserScreen')}
+          />
         </View>
 
         <View style={styles.icons}>

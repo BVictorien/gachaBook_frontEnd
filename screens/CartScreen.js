@@ -1,5 +1,5 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React from 'react';
+import React from "react";
 import {
   View,
   Image,
@@ -7,9 +7,9 @@ import {
   Text,
   ScrollView,
   SafeAreaView,
-} from 'react-native';
-import { Button, Card, Badge } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
+} from "react-native";
+import { Button, Card, Badge } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 
 const BookDetailsCard = () => {
   return (
@@ -18,14 +18,14 @@ const BookDetailsCard = () => {
       <Image
         style={styles.imageBook}
         resizeMode="cover"
-        source={require('../assets/favicon.png')}
+        source={require("../assets/nicolas.jpg")}
       />
       <View>
         <Text style={styles.name}>Titre</Text>
         <Text style={styles.description}>Descriptions du livre</Text>
       </View>
       <View style={styles.icons}>
-        <Ionicons name={(iconName = 'trash')} size={25} color={'gray'} />
+        <Ionicons name={(iconName = "trash")} size={25} color={"gray"} />
         <Button buttonStyle={styles.points} title="6pts" />
       </View>
       <Card.Divider />
@@ -45,14 +45,15 @@ const CartScreen = (props) => {
       <View style={styles.logo}>
         <Image
           style={styles.image}
-          source={require('../assets/logoGachaBook.png')}
+          source={require("../assets/logoGachaBook.png")}
         />
         <Text style={styles.text}>GachaBook</Text>
       </View>
+      {/* <Image 
+      style={styles.nicolas}
+      source={require('../assets/nicolas.jpg')}/> */}
       <ScrollView>
         <View>
-          <BookDetailsCard />
-          <BookDetailsCard />
           <BookDetailsCard />
           <BookDetailsCard />
           <BookDetailsCard />
@@ -63,8 +64,17 @@ const CartScreen = (props) => {
         <Text>69 pts</Text>
       </View>
       <View style={styles.buttons}>
-        <Button buttonStyle={styles.payer} title="Payer" />
         <Button
+          onPress={() => {
+            props.navigation.navigate("PaymentEnCours");
+          }}
+          buttonStyle={styles.payer}
+          title="Payer"
+        />
+        <Button
+          onPress={() => {
+            props.navigation.navigate("Store");
+          }}
           buttonStyle={styles.reap}
           title="Réaprovisionner votre compte"
         />
@@ -74,49 +84,49 @@ const CartScreen = (props) => {
 };
 
 export default CartScreen;
-
+/////////////////////////////////////Return////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#1E202A',
-    justifyContent: 'space-evenly',
+    backgroundColor: "#1E202A",
+    justifyContent: "space-evenly",
     marginTop: 30,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 10,
   },
   logo: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
     width: 100,
     height: 100,
   },
   text: {
-    color: 'white',
+    color: "white",
     fontSize: 35,
   },
   inscription: {
-    color: 'white',
+    color: "white",
     fontSize: 35,
   },
   connexion: {
-    color: '#F5960D',
+    color: "#F5960D",
   },
   description: {
-    color: '#fff',
+    color: "#fff",
   },
   bookItem: {
-    backgroundColor: '#1E202A',
-    flexDirection: 'row',
+    backgroundColor: "#1E202A",
+    flexDirection: "row",
     marginBottom: 6,
     padding: 10,
   },
   name: {
-    color: '#fff',
+    color: "#fff",
   },
   imageBook: {
     width: 40,
@@ -124,20 +134,21 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   icons: {
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    alignItems: 'center',
+    flexDirection: "row",
+    marginLeft: "auto",
+    alignItems: "center",
   },
   points: {
     marginLeft: 10,
+    backgroundColor: "#6D7D8B",
   },
   total: {
     marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    marginLeft: "auto",
+    backgroundColor: "white",
     padding: 15,
     borderRadius: 50,
   },
@@ -145,18 +156,18 @@ const styles = StyleSheet.create({
     marginRight: 50,
   },
   buttons: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 20,
   },
   payer: {
-    backgroundColor: '#F5960D',
+    backgroundColor: "#F5960D",
     borderRadius: 50,
-    width: 300,
+    width: 350,
     marginBottom: 10,
   },
   reap: {
-    backgroundColor: '#6D7D8B',
+    backgroundColor: "#6D7D8B",
     borderRadius: 50,
-    width: 300,
+    width: 350,
   },
 });
