@@ -1,43 +1,41 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function SignIn(props) {
-
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [userExists, setUserExists] = useState(false);
   const [listErrorsSignIn, setErrorsSignIn] = useState([]);
 
-
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
     const data = await fetch('http://192.168.10.117:3000/sign-in', {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
     });
 
-    const body = await data.json()
-    if(body.result == true){
-      props.addToken(body.token)
-      props.addUsername(body.user.username)
-      console.log(body.user.username)
-      setUserExists(true)
-      props.navigation.navigate('Profile')
-    }  else {
-      setErrorsSignIn(body.error)
+    const body = await data.json();
+    if (body.result == true) {
+      props.addToken(body.token);
+      props.addUsername(body.user.username);
+      console.log(body.user.username);
+      setUserExists(true);
+      props.navigation.navigate('Profile');
+    } else {
+      setErrorsSignIn(body.error);
     }
-  }
+  };
 
   let tabErrorSignIn = listErrorsSignIn.map((error, i) => {
-    return(<Text style={styles.error}>{error}</Text>)
-  })
+    return <Text style={styles.error}>{error}</Text>;
+  });
 
   return (
     <View style={styles.background}>
@@ -49,61 +47,50 @@ function SignIn(props) {
           onPress={() => props.navigation.navigate('BottomNavigator')}
         />
 
-        <Text style={styles.inscription}>Connexion</Text>
         <Text
-          onPress={() => props.navigation.navigate('SignUp', {screen: 'SignUp'})}
+          onPress={() =>
+            props.navigation.navigate('SignUp', { screen: 'SignUp' })
+          }
           style={styles.connexion}
         >
           Inscription
         </Text>
       </View>
       <View style={styles.logo}>
-        <Image
-          style={styles.image}
-          source={require('../assets/logoGachaBook.png')}
-        />
-        <Text style={styles.text}>GachaBook</Text>
+        <Image style={styles.image} source={require('../assets/pic3.jpg')} />
       </View>
       <View style={styles.buttonContainer}>
         <Input
-          containerStyle={{ width: 370 }}
+          containerStyle={{ width: 360 }}
           inputStyle={styles.input}
-          placeholder="Email"
+          placeholder="  Email"
           onChangeText={(val) => setSignInEmail(val)}
         />
         <Input
-          containerStyle={{ width: 370 }}
+          containerStyle={{ width: 360 }}
           inputStyle={styles.input}
-          placeholder="Mot de passe"
+          placeholder="  Mot de passe"
           onChangeText={(val) => setSignInPassword(val)}
           secureTextEntry={true}
         />
         {tabErrorSignIn}
+        <View style={styles.button}>
+          <Button
+            buttonStyle={styles.facebook}
+            icon={<Ionicons name="logo-facebook" size={24} color="white" />}
+          />
+          <Button
+            buttonStyle={styles.google}
+            icon={<Ionicons name="logo-google" size={24} color="white" />}
+          />
+        </View>
         <Button
-          buttonStyle={styles.facebook}
-          title={'Connexion avec Facebook'}
-          icon={
-            <Ionicons
-              name="logo-facebook"
-              size={24}
-              color="white"
-              style={{ marginRight: 20 }}
-            />
+          buttonStyle={styles.signIn}
+          title="Connexion"
+          onPress={() =>
+            handleSubmitSignin(signInEmail, signInPassword, props.token)
           }
         />
-        <Button
-          buttonStyle={styles.google}
-          title="Connexion avec Google    "
-          icon={
-            <Ionicons
-              name="logo-google"
-              size={24}
-              color="white"
-              style={{ marginRight: 20 }}
-            />
-          }
-        />
-        <Button buttonStyle={styles.signIn} title="Connexion" onPress={() => handleSubmitSignin(signInEmail, signInPassword, props.token)}/>
         <Text style={styles.connexion}>Mot de passe oublié ? </Text>
       </View>
     </View>
@@ -113,20 +100,29 @@ function SignIn(props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#1E202A',
+    backgroundColor: '#DBE6E7',
     justifyContent: 'space-evenly',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    // marginTop: 30,
   },
   logo: {
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 340,
+    height: 200,
+    borderRadius: 5,
+    // marginTop: 20,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 250,
+    height: 170,
   },
   text: {
     color: 'white',
@@ -139,27 +135,28 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
+    // padding: 20,
   },
   facebook: {
     borderRadius: 50,
-    width: 300,
-    marginBottom: 10,
+    // width: 300,
+    margin: 10,
   },
   google: {
     backgroundColor: 'red',
     borderRadius: 50,
-    width: 300,
-    marginBottom: 10,
+    // width: 300,
+    margin: 10,
   },
   signIn: {
-    backgroundColor: '#F5960D',
+    backgroundColor: '#007576',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   connexion: {
-    color: '#F5960D',
-    fontStyle: 'italic',
+    color: '#007576',
+    fontWeight: 'bold',
   },
   input: {
     borderRadius: 5,
@@ -174,19 +171,20 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
+  button: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
 });
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    addToken: function(token){
-      dispatch({type: 'addToken', token: token})
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
     },
-    addUsername: function(username){
-      dispatch({type: 'addUsername', username: username})
-    }
-  }
+    addUsername: function (username) {
+      dispatch({ type: 'addUsername', username: username });
+    },
+  };
 }
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignIn)
+export default connect(null, mapDispatchToProps)(SignIn);
