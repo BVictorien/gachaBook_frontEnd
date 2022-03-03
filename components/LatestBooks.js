@@ -20,7 +20,7 @@ export default class BookDetails extends Component {
                             <Text style={styles.author}>Oscar WILDE</Text>
                         </View>
                         <View style={styles.icons}>
-                            <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
+                            <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
                             <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
                             <Text style={styles.points}>2 pts</Text>
                         </View>
@@ -35,7 +35,7 @@ export default class BookDetails extends Component {
                             <Text style={styles.author}>Ken FOLLETT</Text>
                         </View>
                         <View style={styles.icons}>
-                            <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
+                            <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
                             <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
                             <Text style={styles.points}>2 pts</Text>
                         </View>
@@ -52,7 +52,7 @@ export default class BookDetails extends Component {
                             <Text style={styles.author}>Oscar WILDE</Text>
                         </View>
                         <View style={styles.icons}>
-                            <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
+                            <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
                             <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
                             <Text style={styles.points}>2 pts</Text>
                         </View>
@@ -67,7 +67,7 @@ export default class BookDetails extends Component {
                             <Text style={styles.author}>Ken FOLLETT</Text>
                         </View>
                         <View style={styles.icons}>
-                            <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
+                            <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
                             <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
                             <Text style={styles.points}>2 pts</Text>
                         </View>
@@ -84,7 +84,7 @@ export default class BookDetails extends Component {
                             <Text style={styles.author}>Oscar WILDE</Text>
                         </View>
                         <View style={styles.icons}>
-                            <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
+                            <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
                             <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
                             <Text style={styles.points}>2 pts</Text>
                         </View>
@@ -99,7 +99,7 @@ export default class BookDetails extends Component {
                             <Text style={styles.author}>Ken FOLLETT</Text>
                         </View>
                         <View style={styles.icons}>
-                            <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
+                            <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
                             <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
                             <Text style={styles.points}>2 pts</Text>
                         </View>
