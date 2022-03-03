@@ -17,14 +17,13 @@ function SignIn(props) {
 
 
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
-    const data = await fetch('http://192.168.10.115:3000/sign-in', {
+    const data = await fetch('http://192.168.10.117:3000/sign-in', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`
     });
 
     const body = await data.json()
-    console.log(body.user.username)
     if(body.result == true){
       props.addToken(body.token)
       props.addUsername(body.user.username)
