@@ -29,9 +29,10 @@ import { createStore, combineReducers } from "redux";
 import scanBookReducer from "./reducers/scanBookReducer";
 import token from "./reducers/token";
 import username from "./reducers/username";
+import userIdReducer from "./reducers/userIdReducer";
 
 const store = createStore(
-  combineReducers({ token, username, scanBookReducer })
+  combineReducers({ token, username, scanBookReducer, userIdReducer })
 );
 
 /*-------------------------------------------------------------------------*/

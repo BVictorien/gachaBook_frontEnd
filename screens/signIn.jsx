@@ -18,17 +18,18 @@ function SignIn(props) {
   ///////////////////////////////////Methods////////////////////////////////////
   /*------------------------------------------------*/
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
-    const data = await fetch("http://192.168.10.117:3000/sign-in", {
+    const data = await fetch("http://192.168.10.130:3000/sign-in", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
     });
 
     const body = await data.json();
+    console.log(body.userId)
     if (body.result == true) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
-      console.log(body.user.username);
+      props.getUserId(body.userId);
       setUserExists(true);
       props.navigation.navigate("Profile");
     } else {
@@ -194,6 +195,9 @@ function mapDispatchToProps(dispatch) {
     },
     addUsername: function (username) {
       dispatch({ type: "addUsername", username: username });
+    },
+    getUserId: function (userId) {
+      dispatch({ type: "getUserId", userId: userId });
     },
   };
 }

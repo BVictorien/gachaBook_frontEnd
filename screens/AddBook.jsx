@@ -20,19 +20,43 @@ function AddBook(props) {
   const [disponibilite, setDisponibilite] = useState(true);
   const [condition, setCondition] = useState("");
   const [prix, setPrix] = useState("");
+  const [imageLink, setImagelink] = useState("");
 
   //////////////////////////////Methods //////////////////////////////////////
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch("http://192.168.10.132:3000/save-book", {
+    let response = await fetch("http://192.168.10.130:3000/save-book", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}`,
+      body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,
     });
+    setTitre("");
+    setAuteur("");
+    setDescription("");
+    setLangue("");
+    setNbPages("");
+    setEditeur("");
+    setAnnee("");
+    setCodeBarre("");
+    setCondition("");
+    setPrix("");
+    setImagelink("");
   }
   /*------------------------------------------------------*/
   useEffect(() => {
+    setTitre("");
+    setAuteur("");
+    setDescription("");
+    setLangue("");
+    setNbPages("");
+    setEditeur("");
+    setAnnee("");
+    setCodeBarre("");
+    setCondition("");
+    setPrix("");
+    setImagelink("");
+
     if (props.bookDetails[0] != undefined) {
       setTitre(props.bookDetails[0].title);
       setAuteur(props.bookDetails[0].author);
@@ -40,6 +64,7 @@ function AddBook(props) {
       setNbPages(JSON.stringify(props.bookDetails[0].pageCount));
       setCodeBarre(props.bookDetails[0].barcode);
       setEditeur(props.bookDetails[0].editor);
+      setImagelink(props.bookDetails[0].imageLink);
     }
   }, [props]);
   /*------------------------------------------------------*/
@@ -82,13 +107,7 @@ function AddBook(props) {
             value={auteur}
             onChangeText={(x) => setAuteur(x)}
           />
-          <Input
-            containerStyle={{ width: 370 }}
-            inputStyle={styles.input}
-            placeholder="Description"
-            value={description}
-            onChangeText={(x) => setDescription(x)}
-          />
+
           <Input
             containerStyle={{ width: 370 }}
             inputStyle={styles.input}
@@ -103,12 +122,28 @@ function AddBook(props) {
             value={nbPages}
             onChangeText={(x) => setNbPages(x)}
           />
+
           <Input
             containerStyle={{ width: 370 }}
             inputStyle={styles.input}
             placeholder="Editeur"
             value={editeur}
             onChangeText={(x) => setEditeur(x)}
+          />
+
+          <Input
+            containerStyle={{ width: 370 }}
+            inputStyle={styles.input}
+            placeholder="Code-barre"
+            value={codeBarre}
+            onChangeText={(x) => setCodeBarre(x)}
+          />
+          <Input
+            containerStyle={{ width: 370 }}
+            inputStyle={styles.input}
+            placeholder="Description"
+            value={description}
+            onChangeText={(x) => setDescription(x)}
           />
           <Input
             containerStyle={{ width: 370 }}
@@ -117,14 +152,6 @@ function AddBook(props) {
             value={annee}
             onChangeText={(x) => setAnnee(x)}
           />
-          <Input
-            containerStyle={{ width: 370 }}
-            inputStyle={styles.input}
-            placeholder="Code-barre"
-            value={codeBarre}
-            onChangeText={(x) => setCodeBarre(x)}
-          />
-
           <Input
             containerStyle={{ width: 370 }}
             inputStyle={styles.input}
@@ -146,7 +173,9 @@ function AddBook(props) {
           <Button
             buttonStyle={styles.photoButton}
             title="Ajouter le Livre"
-            onPress={() => saveBook()}
+            onPress={() => {
+              saveBook(), props.navigation.navigate("BottomNavigator");
+            }}
           />
         </View>
       </ScrollView>
@@ -202,7 +231,7 @@ const styles = StyleSheet.create({
 //////////////////////////////////////////Redux//////////////////////////////////////////////////
 /*------------------------------------------------------*/
 function mapStateToProps(state) {
-  return { bookDetails: state.scanBookReducer };
+  return { bookDetails: state.scanBookReducer, userId: state.userIdReducer };
 }
 /*------------------------------------------------------*/
 export default connect(mapStateToProps, null)(AddBook);
