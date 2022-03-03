@@ -1,16 +1,31 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React, { useEffect } from 'react';
-import { Image, Input } from 'react-native-elements';
+/////////////////////////////////////IMPORTS//////////////////////////////////////////////////////////
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useEffect } from "react";
+import { Image, Input } from "react-native-elements";
 
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import BookDetails from "../components/BookDetails";
 
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-const ProfileScreen = (props) => {
+/////////////////////////////////////Functions//////////////////////////////////////////////////////////
+
+const ProfileScreen = async (props) => {
+  /////////////////////////////////////State declarations///////////////////////////////////////////////
+
+  /////////////////////////////////////Methodes/////////////////////////////////////////////////////////
+  // useEffect(() => {
+  //   let userBooks = await fetch("http://192.168.10.130:3000/get-user-books", {
+  //     method: "GET",
+
+  //     body: `userId=${props.userId}`,
+  //   });
+  //   let bookResult = await userBooks.json();
+  // }, []);
+  /////////////////////////////////////Return///////////////////////////////////////////////////////////
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -67,7 +82,7 @@ const ProfileScreen = (props) => {
               onPress={() =>
                 props.navigation.navigate("Chat", { screen: "ChatScreen" })
               }
-              style={{ color: "#fff", marginLeft:5 }}
+              style={{ color: "#fff", marginLeft: 5 }}
             >
               Messages
             </Text>
@@ -131,38 +146,34 @@ const ProfileScreen = (props) => {
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
-        <BookDetails
+          <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
-
         </View>
       </ScrollView>
     </View>
   );
 };
-
-function mapStateToProps(state){
-  return {username: state.username}
+/////////////////////////////////////Redux//////////////////////////////////////////////////////////
+function mapStateToProps(state) {
+  return { username: state.username, userId: state.userIdReducers };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(ProfileScreen);
-
+export default connect(mapStateToProps, null)(ProfileScreen);
+/////////////////////////////////////Styles//////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,
