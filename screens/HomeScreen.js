@@ -3,8 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { Input, Text, Icon } from 'react-native-elements';
 import LatestBooks from '../components/LatestBooks';
 import NearestBooks from '../components/NearestBooks';
+import {connect} from 'react-redux';
 
-export default function HomeScreen(props) {
+function HomeScreen(props) {
 
   const [search, setSearch] = useState("");
   const updateSearch = (search) => {
@@ -23,7 +24,7 @@ export default function HomeScreen(props) {
   // } else {
   //   logout = <Text style={styles.login}>Connexion</Text>;
   // }
-  let logout = <Text style={styles.login}>Connexion</Text>
+  let logout = <Text style={styles.login} onPress={() => props.navigation.navigate('SignIn', {screen: 'SignIn'})}>Connexion</Text>
 
   return (
     <>
@@ -95,3 +96,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
   }
 });
+
+function mapStateToProps(state) {
+  return { token: state.token }
+ }  
+
+
+export default connect(
+  mapStateToProps,
+  null
+)(HomeScreen)

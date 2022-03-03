@@ -1,11 +1,45 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
+
 import { Ionicons } from '@expo/vector-icons';
 
+import {connect} from 'react-redux';
+
 ///////////////////////////////////Function//////////////////////////////////////////////////
-function signIn(props) {
+function SignIn(props) {
+
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [userExists, setUserExists] = useState(false);
+  const [listErrorsSignIn, setErrorsSignIn] = useState([]);
+
+
+  var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
+    const data = await fetch('http://192.168.10.115:3000/sign-in', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`
+    });
+
+    const body = await data.json()
+    console.log(body.user.username)
+    if(body.result == true){
+      props.addToken(body.token)
+      props.addUsername(body.user.username)
+      console.log(body.user.username)
+      setUserExists(true)
+      props.navigation.navigate('Profile')
+    }  else {
+      setErrorsSignIn(body.error)
+    }
+  }
+
+  let tabErrorSignIn = listErrorsSignIn.map((error, i) => {
+    return(<Text style={styles.error}>{error}</Text>)
+  })
+
   return (
     <View style={styles.background}>
       <View style={styles.header}>
@@ -18,7 +52,7 @@ function signIn(props) {
 
         <Text style={styles.inscription}>Connexion</Text>
         <Text
-          onPress={() => props.navigation.navigate('SignIn')}
+          onPress={() => props.navigation.navigate('SignUp', {screen: 'SignUp'})}
           style={styles.connexion}
         >
           Inscription
@@ -36,13 +70,16 @@ function signIn(props) {
           containerStyle={{ width: 370 }}
           inputStyle={styles.input}
           placeholder="Email"
+          onChangeText={(val) => setSignInEmail(val)}
         />
         <Input
           containerStyle={{ width: 370 }}
           inputStyle={styles.input}
           placeholder="Mot de passe"
+          onChangeText={(val) => setSignInPassword(val)}
           secureTextEntry={true}
         />
+        {tabErrorSignIn}
         <Button
           buttonStyle={styles.facebook}
           title={'Connexion avec Facebook'}
@@ -67,8 +104,8 @@ function signIn(props) {
             />
           }
         />
-        <Button buttonStyle={styles.signUp} title="Connexion" />
-        <Text style={styles.connexion}>Mot de passe oublier ? </Text>
+        <Button buttonStyle={styles.signIn} title="Connexion" onPress={() => handleSubmitSignin(signInEmail, signInPassword, props.token)}/>
+        <Text style={styles.connexion}>Mot de passe oublié ? </Text>
       </View>
     </View>
   );
@@ -115,7 +152,7 @@ const styles = StyleSheet.create({
     width: 300,
     marginBottom: 10,
   },
-  signUp: {
+  signIn: {
     backgroundColor: '#F5960D',
     borderRadius: 50,
     width: 300,
@@ -123,12 +160,34 @@ const styles = StyleSheet.create({
   },
   connexion: {
     color: '#F5960D',
+    fontStyle: 'italic',
   },
   input: {
     borderRadius: 5,
     backgroundColor: 'white',
   },
+  error: {
+    color: '#FF7',
+    marginBottom: 25,
+    fontStyle: 'italic',
+    fontSize: 25,
+    textShadowColor: 'rgba(252, 252, 252, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
 });
-///////////////////////////////////Styles//////////////////////////////////////////////////
 
-export default signIn;
+function mapDispatchToProps(dispatch){
+  return {
+    addToken: function(token){
+      dispatch({type: 'addToken', token: token})
+    },
+    addUsername: function(username){
+      dispatch({type: 'addUsername', username: username})
+    }
+  }
+}
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn)

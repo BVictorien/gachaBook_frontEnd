@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Input, Text, Icon, ListItem } from 'react-native-elements';
+import { FontAwesome } from '@expo/vector-icons';
+import socketIOClient from "socket.io-client";
 
-const ChatScreen = () => {
+var socket = socketIOClient("http://192.168.10.115:3000");
+
+const ChatScreen = (props) => {
+
+    const [currentMessage, setCurrentMessage] = useState();
+    const [listMessage, setListMessage] = useState([]);
 
     handleChat = () => {
-
+        console.log('Message envoyé');
     }
 
     return (
         <>
             <View style={styles.container}>
                 <View style={styles.top}>
-                    <Text style={styles.top}>Back</Text>
+                    <Text style={styles.top}>
+                        <FontAwesome
+                            name="reply"
+                            size={35}
+                            color="#FBAF19"
+                            style={{ marginRight: 35, marginTop: 5 }}
+                            onPress={() => props.navigation.goBack()}
+                        />
+                    </Text>
                     <Text style={styles.top}>MESSAGES</Text>
                     <Text style={styles.top}>RDV</Text>
                 </View>
@@ -57,7 +72,7 @@ const ChatScreen = () => {
 
                 </ScrollView>
 
-                <View style={{padding: 0, marginBottom: 0}}>
+                <View style={{ padding: 0, marginBottom: 0 }}>
                     <Input style={styles.input} placeholder="   Message..."
                         inputContainerStyle={{ borderBottomWidth: 0 }}
                         rightIcon={<Icon name='arrow-circle-up' size={41} color="#E9940A" onPress={() => handleChat()} />}
@@ -77,8 +92,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#505055',
     },
     top: {
-        color: 'white',
-        fontSize: 15,
+        color: '#FFF',
+        fontSize: 23,
         fontWeight: 'bold',
         marginTop: 21,
         marginLeft: 15,

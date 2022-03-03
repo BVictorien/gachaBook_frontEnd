@@ -1,6 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-
 import React from 'react';
 
 import HomeScreen from './screens/HomeScreen';
@@ -8,8 +7,9 @@ import SearchScreen from './screens/SearchScreen';
 import CartScreen from './screens/CartScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ChatScreen from './screens/ChatScreen';
-import signIn from "./screens/signIn"
-import singUp from "./screens/signUp"
+import BookScreen from './screens/BookScreen';
+import SignIn from "./screens/SignIn"
+import SignUp from "./screens/SignUp"
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,6 +17,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons } from '@expo/vector-icons';
 
+import {provider, Provider} from 'react-redux'
+import {createStore, combineReducers} from 'redux'
+import token from './reducers/token'
+import username from './reducers/username'
+
+const store = createStore(combineReducers({token, username}))
 
 const Stack = createStackNavigator();
 const Stack2 = createStackNavigator();
@@ -83,15 +89,18 @@ const StackNav = () => {
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-        <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
-        <Stack.Screen name="SignUp" component={singUp} />
-        <Stack.Screen name="SignIn" component={signIn} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer style={styles.container}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+          <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="Chat" component={ChatScreen} />
+          <Stack.Screen name="BookScreen" component={BookScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
