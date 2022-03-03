@@ -1,34 +1,34 @@
 // import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from "react-native";
-import React from "react";
+import { StyleSheet } from 'react-native';
+import React from 'react';
 
 /*-------------------------------------------------------------------------*/
-import HomeScreen from "./screens/HomeScreen";
-import SearchScreen from "./screens/SearchScreen";
-import CartScreen from "./screens/CartScreen";
-import BookScreen from "./screens/BookScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import ChatScreen from "./screens/ChatScreen";
-import signIn from "./screens/signIn";
-import singUp from "./screens/signUp";
-import ScanCode from "./screens/ScanCode";
-import AddBook from "./screens/AddBook";
-import Store from "./screens/Store";
-import PaymentEnCours from "./screens/PaymentEnCours";
-import paymentCard from "./screens/paymentCard";
+import HomeScreen from './screens/HomeScreen';
+import SearchScreen from './screens/SearchScreen';
+import CartScreen from './screens/CartScreen';
+import BookScreen from './screens/BookScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ChatScreen from './screens/ChatScreen';
+import signIn from './screens/signIn';
+import singUp from './screens/signUp';
+import ScanCode from './screens/ScanCode';
+import AddBook from './screens/AddBook';
+import Store from './screens/Store';
+import PaymentEnCours from './screens/PaymentEnCours';
+import paymentCard from './screens/paymentCard';
 
-import UserScreen from "./screens/UserScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import UserScreen from './screens/UserScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 
-import { provider, Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import scanBookReducer from "./reducers/scanBookReducer";
-import token from "./reducers/token";
-import username from "./reducers/username";
+import { provider, Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import scanBookReducer from './reducers/scanBookReducer';
+import token from './reducers/token';
+import username from './reducers/username';
 
 const store = createStore(
   combineReducers({ token, username, scanBookReducer })
@@ -49,24 +49,26 @@ const BottomNavigator = () => {
         tabBarIcon: ({ color }) => {
           let iconName;
 
-          if (route.name == "Search") {
-            iconName = "ios-location";
-          } else if (route.name == "Home") {
-            iconName = "ios-home";
-          } else if (route.name == "Cart") {
-            iconName = "ios-basket";
-          } else if (route.name == "Profile") {
-            iconName = "ios-person";
+          if (route.name == 'Search') {
+            iconName = 'ios-location';
+          } else if (route.name == 'Home') {
+            iconName = 'ios-home';
+          } else if (route.name == 'Cart') {
+            iconName = 'ios-basket';
+          } else if (route.name == 'Profile') {
+            iconName = 'ios-person';
           }
           return <Ionicons name={iconName} size={25} color={color} />;
         },
       })}
       tabBarOptions={{
-        activeTintColor: "#009788",
-        inactiveTintColor: "#FFFFFF",
+        activeTintColor: '#009788',
+        inactiveTintColor: '#6D7D8B',
         style: {
-          backgroundColor: "#1E202A",
+          backgroundColor: '#fff',
           borderTopWidth: 0,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         },
       }}
     >
@@ -78,8 +80,8 @@ const BottomNavigator = () => {
         listeners={({ navigation }) => ({
           tabPress: (event) => {
             event.preventDefault();
-            navigation.navigate("Profile", {
-              screen: "Profile",
+            navigation.navigate('Profile', {
+              screen: 'Profile',
             });
           },
         })}
@@ -125,8 +127,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#DBE6E7',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

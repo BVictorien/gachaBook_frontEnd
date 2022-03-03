@@ -1,7 +1,7 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React from "react";
-import { View, Image, StyleSheet } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
+import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
 
 //////////////////////////////////////Function///////////////////////////////////////////////
 function Store(props) {
@@ -9,7 +9,7 @@ function Store(props) {
     <View style={styles.background}>
       <Text
         onPress={() => {
-          props.navigation.navigate("BottomNavigator");
+          props.navigation.navigate('BottomNavigator');
         }}
         style={styles.backButton}
       >
@@ -42,12 +42,12 @@ function Store(props) {
         </View>
         <Button
           onPress={() => {
-            props.navigation.navigate("paymentCard");
+            props.navigation.navigate('paymentCard');
           }}
           buttonStyle={styles.button}
           title="Recharger mon compte             "
         />
-        <Image source={require("../assets/cardBrand.png")} />
+        <Image source={require('../assets/cardBrand.png')} />
       </View>
     </View>
   );
@@ -57,57 +57,57 @@ export default Store;
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#1E202A",
+    backgroundColor: '#1E202A',
   },
   backButton: {
-    color: "#F5960D",
+    color: '#F5960D',
     marginTop: 80,
     marginLeft: 15,
   },
   header: {
     marginLeft: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   container: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   title: {
-    color: "white",
+    color: 'white',
     fontSize: 25,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   title2: {
-    color: "white",
+    color: 'white',
     fontSize: 25,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 50,
   },
   input: {
-    flexDirection: "row",
-    backgroundColor: "white",
-    width: "95%",
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    width: '95%',
     borderRadius: 5,
     marginBottom: 20,
   },
   point: {
-    color: "#BDBDBD",
+    color: '#BDBDBD',
     fontSize: 25,
     marginLeft: 5,
     marginTop: 5,
     marginBottom: 5,
   },
   prix: {
-    color: "#BDBDBD",
-    marginLeft: "auto",
+    color: '#BDBDBD',
+    marginLeft: 'auto',
     fontSize: 25,
     marginRight: 5,
     marginTop: 5,
     marginBottom: 5,
   },
   button: {
-    backgroundColor: "#F5960D",
+    backgroundColor: '#F5960D',
     borderRadius: 50,
-    width: "90%",
+    width: '90%',
     marginTop: 20,
     padding: 20,
   },

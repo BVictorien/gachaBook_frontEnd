@@ -1,39 +1,38 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function SignUp(props) {
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [signUpUsername, setSignUpUsername] = useState('');
+  const [userExists, setUserExists] = useState(false);
+  const [listErrorsSignUp, setErrorsSignUp] = useState([]);
 
-const [signUpEmail, setSignUpEmail] = useState('');
-const [signUpPassword, setSignUpPassword] = useState('');
-const [signUpUsername, setSignUpUsername] = useState('');
-const [userExists, setUserExists] = useState(false);
-const [listErrorsSignUp, setErrorsSignUp] = useState([]);
+  const handleSubmitSignUp = async () => {
+    const data = await fetch('http://192.168.10.115:3000/sign-up', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
+    });
+    const body = await data.json();
+    if (body.result == true) {
+      props.addToken(body.token);
+      setUserExists(true);
+      props.navigation.navigate('SignIn');
+    } else {
+      setErrorsSignUp(body.error);
+    }
+  };
 
-const handleSubmitSignUp = async () => {
-  const data = await fetch('http://192.168.10.115:3000/sign-up', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
-  })
-  const body = await data.json()
-  if(body.result == true){
-    props.addToken(body.token)
-    setUserExists(true)
-    props.navigation.navigate('SignIn')
-  } else {
-    setErrorsSignUp(body.error)
-  }
-}
-
-let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
-  return(<Text style={styles.error}>{error}</Text>)
-})
+  let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
+    return <Text style={styles.error}>{error}</Text>;
+  });
 
   return (
     <View style={styles.background}>
@@ -45,7 +44,6 @@ let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
           onPress={() => props.navigation.navigate('BottomNavigator')}
         />
 
-        <Text style={styles.inscription}>Inscription</Text>
         <Text
           onPress={() => props.navigation.navigate('SignIn')}
           style={styles.connexion}
@@ -54,61 +52,46 @@ let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
         </Text>
       </View>
       <View style={styles.logo}>
-        <Image
-          style={styles.image}
-          source={require('../assets/logoGachaBook.png')}
-        />
-        <Text style={styles.text}>GachaBook</Text>
+        <Image style={styles.image} source={require('../assets/pic3.jpg')} />
       </View>
       <View style={styles.buttonContainer}>
-
         <Input
-          containerStyle={{ width: 370 }}
+          containerStyle={{ width: 360 }}
           inputStyle={styles.input}
-          placeholder="Pseudo"
+          placeholder="  Pseudo"
           onChangeText={(val) => setSignUpUsername(val)}
         />
-
         <Input
-          containerStyle={{ width: 370 }}
+          containerStyle={{ width: 360 }}
           inputStyle={styles.input}
-          placeholder="Email"
+          placeholder="  Email"
           onChangeText={(val) => setSignUpEmail(val)}
         />
-
         <Input
-          containerStyle={{ width: 370 }}
+          containerStyle={{ width: 360 }}
           inputStyle={styles.input}
-          placeholder="Mot de passe"
+          placeholder="  Mot de passe"
           secureTextEntry={true}
           onChangeText={(val) => setSignUpPassword(val)}
         />
-                {tabErrorSignUp}
+        {tabErrorSignUp}
         <Button
-          buttonStyle={styles.facebook}
-          title={'Inscription avec Facebook'}
-          icon={
-            <Ionicons
-              name="logo-facebook"
-              size={24}
-              color="white"
-              style={{ marginRight: 20 }}
-            />
-          }
+          buttonStyle={styles.signUp}
+          title="Inscription"
+          onPress={() => handleSubmitSignUp()}
         />
-        <Button
-          buttonStyle={styles.google}
-          title="Inscription avec Google    "
-          icon={
-            <Ionicons
-              name="logo-google"
-              size={24}
-              color="white"
-              style={{ marginRight: 20 }}
-            />
-          }
-        />
-        <Button buttonStyle={styles.signUp} title="Inscription" onPress={() => handleSubmitSignUp()} />
+        <Text style={{ fontWeight: 'bold' }}>ou</Text>
+        <Text style={{ fontWeight: 'bold' }}>S'inscrire avec :</Text>
+        <View style={styles.button}>
+          <Button
+            buttonStyle={styles.facebook}
+            icon={<Ionicons name="logo-facebook" size={24} color="white" />}
+          />
+          <Button
+            buttonStyle={styles.google}
+            icon={<Ionicons name="logo-google" size={24} color="white" />}
+          />
+        </View>
       </View>
     </View>
   );
@@ -117,20 +100,29 @@ let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#1E202A',
+    backgroundColor: '#DBE6E7',
     justifyContent: 'space-evenly',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 30,
   },
   logo: {
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 340,
+    height: 200,
+    borderRadius: 5,
+    marginTop: 20,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 250,
+    height: 170,
   },
   text: {
     color: 'white',
@@ -143,26 +135,28 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
+    padding: 20,
   },
   facebook: {
     borderRadius: 50,
-    width: 300,
-    marginBottom: 10,
+    // width: 300,
+    margin: 10,
   },
   google: {
     backgroundColor: 'red',
     borderRadius: 50,
-    width: 300,
-    marginBottom: 10,
+    // width: 300,
+    margin: 10,
   },
   signUp: {
-    backgroundColor: '#F5960D',
+    backgroundColor: '#007576',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   connexion: {
-    color: '#F5960D',
+    color: '#007576',
+    fontWeight: 'bold',
   },
   input: {
     borderRadius: 5,
@@ -177,17 +171,16 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
+  button: {
+    flexDirection: 'row',
+  },
 });
 
-
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    addToken: function(token){
-      dispatch({type: 'addToken', token: token})
-    }
-  }
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
+  };
 }
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUp)
+export default connect(null, mapDispatchToProps)(SignUp);

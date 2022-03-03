@@ -2,13 +2,13 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
 import { Image, Input } from 'react-native-elements';
 
-import { AntDesign } from "@expo/vector-icons";
-import { EvilIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
-import BookDetails from "../components/BookDetails";
+import BookDetails from '../components/BookDetails';
 
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
 
 const ProfileScreen = (props) => {
   return (
@@ -40,14 +40,14 @@ const ProfileScreen = (props) => {
               color="#6D7D8B"
               style={{ marginRight: 5 }}
               onPress={() => {
-                props.navigation.navigate("AddBook");
+                props.navigation.navigate('AddBook');
               }}
             />
             <Text
               onPress={() => {
-                props.navigation.navigate("AddBook");
+                props.navigation.navigate('AddBook');
               }}
-              style={{ color: "#fff" }}
+              style={{ color: '#252525' }}
             >
               Scan
             </Text>
@@ -57,7 +57,7 @@ const ProfileScreen = (props) => {
           <View style={styles.link}>
             <AntDesign
               onPress={() =>
-                props.navigation.navigate("Chat", { screen: "ChatScreen" })
+                props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
               name="message1"
               size={24}
@@ -65,9 +65,9 @@ const ProfileScreen = (props) => {
             />
             <Text
               onPress={() =>
-                props.navigation.navigate("Chat", { screen: "ChatScreen" })
+                props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
-              style={{ color: "#fff", marginLeft:5 }}
+              style={{ color: '#252525', marginLeft: 5 }}
             >
               Messages
             </Text>
@@ -81,14 +81,14 @@ const ProfileScreen = (props) => {
               color="#6D7D8B"
               style={{ marginRight: 5 }}
               onPress={() => {
-                props.navigation.navigate("Store");
+                props.navigation.navigate('Store');
               }}
             />
             <Text
               onPress={() => {
-                props.navigation.navigate("Store");
+                props.navigation.navigate('Store');
               }}
-              style={{ color: "#fff" }}
+              style={{ color: '#252525' }}
             >
               My Card
             </Text>
@@ -98,43 +98,44 @@ const ProfileScreen = (props) => {
         <ScrollView horizontal={true}>
           <View style={styles.sliderHorizontal}>
             <Image
-              onPress={() => props.navigation.navigate("BookScreen")}
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
-              source={require("../assets/favicon.png")}
+              s
+              source={require('../assets/nicolas.jpg')}
             />
             <Image
-              onPress={() => props.navigation.navigate("BookScreen")}
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
-              source={require("../assets/favicon.png")}
+              s
+              source={require('../assets/nicolas.jpg')}
             />
             <Image
-              onPress={() => props.navigation.navigate("BookScreen")}
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
-              source={require("../assets/favicon.png")}
+              s
+              source={require('../assets/nicolas.jpg')}
             />
             <Image
-              onPress={() => props.navigation.navigate("BookScreen")}
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
-              source={require("../assets/favicon.png")}
+              s
+              source={require('../assets/nicolas.jpg')}
             />
             <Image
-              onPress={() => props.navigation.navigate("BookScreen")}
+              onPress={() => props.navigation.navigate('BookScreen')}
               style={styles.imageBook}
               resizeMode="cover"
-              source={require("../assets/favicon.png")}
+              s
+              source={require('../assets/nicolas.jpg')}
             />
           </View>
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
-        <BookDetails
-            navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
-          ></BookDetails>
           <BookDetails
             navigation={props.navigation}
             style={{ width: '100%', height: '25%' }}
@@ -147,72 +148,76 @@ const ProfileScreen = (props) => {
             navigation={props.navigation}
             style={{ width: '100%', height: '25%' }}
           ></BookDetails>
-
+          <BookDetails
+            navigation={props.navigation}
+            style={{ width: '100%', height: '25%' }}
+          ></BookDetails>
         </View>
       </ScrollView>
     </View>
   );
 };
 
-function mapStateToProps(state){
-  return {username: state.username}
+function mapStateToProps(state) {
+  return { username: state.username };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(ProfileScreen);
+export default connect(mapStateToProps, null)(ProfileScreen);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1E202A",
-    color: "#fff",
+    backgroundColor: '#DBE6E7',
+    color: '#252525',
     // alignItems: 'center',
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
   },
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   titletop: {
-    color: "#FFF",
+    color: '#252525',
     fontSize: 17,
-    fontStyle: "italic",
-    textShadowColor: "rgba(252, 252, 252, 0.75)",
+    fontStyle: 'italic',
+    textShadowColor: 'rgba(252, 252, 252, 0.75)',
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
   navigation: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(192, 195, 219,0.24)",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(192, 195, 219,0.24)',
     padding: 10,
     margin: 20,
-    borderRadius: 5,
+    borderRadius: 15,
   },
   link: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
-    color: "#ffff",
+    color: '#252525',
     margin: 10,
+    fontWeight: 'bold',
     fontSize: 20,
   },
   imageBook: {
-    width: 100,
-    height: 100,
-    margin: 20,
+    width: 150,
+    height: 200,
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 10,
+    borderRadius: 5,
   },
   sliderHorizontal: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
-  // containerFavorites: {
-  //   justifyContent: 'center',
-  // },
+  containerFavorites: {
+    alignItems: 'center',
+  },
 });
