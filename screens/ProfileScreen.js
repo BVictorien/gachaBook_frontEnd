@@ -1,7 +1,6 @@
-//////////////////////////////////////IMPORT//////////////////////////////////////////////////////
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import React from "react";
-import { Image } from "react-native-elements";
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, Input } from 'react-native-elements';
 
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -9,14 +8,18 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import BookDetails from "../components/BookDetails";
 
-//////////////////////////////////////Function/////////////////////////////////////////////////////
+import {connect} from 'react-redux'
+
 const ProfileScreen = (props) => {
+useEffect(() => {
+  console.log(props)
+}, [props])
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <View>
           <Text style={styles.titletop}>Hello</Text>
-          <Text style={styles.titletop}>Nicolas Jevtic</Text>
+          <Text style={styles.titletop}>{props.username}</Text>
         </View>
         {/* <View>
           <FontAwesome
@@ -131,30 +134,38 @@ const ProfileScreen = (props) => {
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
-          <BookDetails
+        <BookDetails
             navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
+            style={{ width: '100%', height: '25%' }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
+            style={{ width: '100%', height: '25%' }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
+            style={{ width: '100%', height: '25%' }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
+            style={{ width: '100%', height: '25%' }}
           ></BookDetails>
+
         </View>
       </ScrollView>
     </View>
   );
 };
 
-export default ProfileScreen;
-//////////////////////////////////////styles/////////////////////////////////////////////////////
+function mapStateToProps(state){
+  return {username: state.username}
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(ProfileScreen);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

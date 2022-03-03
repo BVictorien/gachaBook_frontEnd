@@ -1,11 +1,40 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
+import {connect} from 'react-redux';
+
 ///////////////////////////////////Function//////////////////////////////////////////////////
-function signUp(props) {
+function SignUp(props) {
+
+const [signUpEmail, setSignUpEmail] = useState('');
+const [signUpPassword, setSignUpPassword] = useState('');
+const [signUpUsername, setSignUpUsername] = useState('');
+const [userExists, setUserExists] = useState(false);
+const [listErrorsSignUp, setErrorsSignUp] = useState([]);
+
+const handleSubmitSignUp = async () => {
+  const data = await fetch('http://192.168.10.115:3000/sign-up', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
+  })
+  const body = await data.json()
+  if(body.result == true){
+    props.addToken(body.token)
+    setUserExists(true)
+    props.navigation.navigate('SignIn')
+  } else {
+    setErrorsSignUp(body.error)
+  }
+}
+
+let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
+  return(<Text style={styles.error}>{error}</Text>)
+})
+
   return (
     <View style={styles.background}>
       <View style={styles.header}>
@@ -32,22 +61,29 @@ function signUp(props) {
         <Text style={styles.text}>GachaBook</Text>
       </View>
       <View style={styles.buttonContainer}>
+
         <Input
           containerStyle={{ width: 370 }}
           inputStyle={styles.input}
-          placeholder="Nom"
+          placeholder="Pseudo"
+          onChangeText={(val) => setSignUpUsername(val)}
         />
+
         <Input
           containerStyle={{ width: 370 }}
           inputStyle={styles.input}
           placeholder="Email"
+          onChangeText={(val) => setSignUpEmail(val)}
         />
+
         <Input
           containerStyle={{ width: 370 }}
           inputStyle={styles.input}
           placeholder="Mot de passe"
           secureTextEntry={true}
+          onChangeText={(val) => setSignUpPassword(val)}
         />
+                {tabErrorSignUp}
         <Button
           buttonStyle={styles.facebook}
           title={'Inscription avec Facebook'}
@@ -72,7 +108,7 @@ function signUp(props) {
             />
           }
         />
-        <Button buttonStyle={styles.signUp} title="Inscription" />
+        <Button buttonStyle={styles.signUp} title="Inscription" onPress={() => handleSubmitSignUp()} />
       </View>
     </View>
   );
@@ -132,6 +168,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white',
   },
+  error: {
+    color: '#FF7',
+    marginBottom: 25,
+    fontStyle: 'italic',
+    fontSize: 25,
+    textShadowColor: 'rgba(252, 252, 252, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
 });
 
-export default signUp;
+
+function mapDispatchToProps(dispatch){
+  return {
+    addToken: function(token){
+      dispatch({type: 'addToken', token: token})
+    }
+  }
+}
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp)

@@ -1,14 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Image, Button } from 'react-native-elements';
-
+import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 function BookScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.containerBook}>
-        <Text style={styles.buttonBack}>Back</Text>
+        <Text style={styles.buttonBack}>
+        <FontAwesome
+                            name="reply"
+                            size={35}
+                            color="#FBAF19"
+                            style={{ marginRight: 35, marginTop: 5 }}
+                            onPress={() => props.navigation.goBack()}
+                        />
+        </Text>
         <View style={styles.imageView}>
           <Image>
             <Image

@@ -1,4 +1,5 @@
-/////////////////////////////////////IMPORT//////////////////////////////////////////////////////////
+// import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,11 +23,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-/*-------------------------------------------------------------------------*/
-import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { Ionicons } from '@expo/vector-icons';
+
+import {provider, Provider} from 'react-redux'
+import {createStore, combineReducers} from 'redux'
 import scanBookReducer from './reducers/scanBookReducer';
-const store = createStore(combineReducers({ scanBookReducer }));
+import token from './reducers/token'
+import username from './reducers/username'
+
+const store = createStore(combineReducers({token, username, scanBookReducer}))
 
 /*-------------------------------------------------------------------------*/
 const Stack = createStackNavigator();
@@ -102,6 +107,7 @@ export default function App() {
           <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
           <Stack.Screen name="SignUp" component={singUp} />
           <Stack.Screen name="SignIn" component={signIn} />
+          <Stack.Screen name="Chat" component={ChatScreen} />
           <Stack.Screen name="AddBook" component={AddBook} />
           <Stack.Screen name="ScanCode" component={ScanCode} />
           <Stack.Screen name="BookScreen" component={BookScreen} />
