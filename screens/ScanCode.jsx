@@ -7,12 +7,12 @@ import { connect } from "react-redux";
 
 //////////////////////////////////Function//////////////////////////////////////////////////////////
 function ScanCode(props) {
-  //////////////////////////////////State////////////////////////////////////////////////////
+  //////////////////////////////////State///////////////////////////////////////////
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const isFocused = useIsFocused();
 
-  //////////////////////////////////Method/////////////////////////////////////////////////
+  //////////////////////////////////Method/////////////////////////////////////////
   /*------------------------------------------------------------------*/
   useEffect(() => {
     (async () => {
@@ -30,6 +30,12 @@ function ScanCode(props) {
     const dataRes = await scan.json();
     // alert(`Titre: ${dataRes.items[0].volumeInfo.title}
     // Auteur: ${dataRes.items[0].volumeInfo.authors[0]}`);
+    let image = "";
+
+    dataRes.items[0].volumeInfo.imageLinks == undefined
+      ? (image = "No image")
+      : (image = dataRes.items[0].volumeInfo.imageLinks.thumbnail);
+
     props.sendBookDetail(
       dataRes.items[0].volumeInfo.title,
       dataRes.items[0].volumeInfo.authors[0],
@@ -37,7 +43,7 @@ function ScanCode(props) {
       dataRes.items[0].volumeInfo.pageCount,
       data,
       dataRes.items[0].volumeInfo.publisher,
-      
+      image
     );
     props.navigation.navigate("AddBook");
   };
@@ -104,7 +110,7 @@ function mapDispatchToProps(dispatch) {
       pageCount,
       barcode,
       editor,
-     
+      imageLink
     ) {
       dispatch({
         type: "BookDetail",
@@ -114,7 +120,7 @@ function mapDispatchToProps(dispatch) {
         pageCount,
         barcode,
         editor,
-       
+        imageLink,
       });
     },
   };

@@ -9,7 +9,7 @@ export default function (bookDetails = [], action) {
         pageCount: action.pageCount,
         barcode: action.barcode,
         editor: action.editor,
-       
+        imageLink: action.imageLink,
       },
     ];
     return newBookDetails;

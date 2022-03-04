@@ -1,28 +1,69 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React, { useEffect } from 'react';
-import { Image, Input } from 'react-native-elements';
+/////////////////////////////////////IMPORTS//////////////////////////////////////////////////////////
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Input, Image } from "react-native-elements";
 
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import Svg, { G, Circle } from 'react-native-svg';
 
 import BookDetails from '../components/BookDetails';
+import { EvilIcons } from "@expo/vector-icons";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from 'react-redux';
 
+/////////////////////////////////////Functions//////////////////////////////////////////////////////////
 const ProfileScreen = (props) => {
-  const radius = 80;
-  const circleCircumference = 2 * Math.PI * radius;
-  const coins = 77;
-  const points = 95;
-  const restToHundred = 100 - points;
-  const totalCoins = coins + restToHundred;
-  const totalPoints = points + restToHundred;
-  const displacementCoins =
-    circleCircumference - (circleCircumference * coins) / 100;
-  const displacementPoints =
-    circleCircumference - (circleCircumference * points) / 100;
+const radius = 80;
+const circleCircumference = 2 * Math.PI * radius;
+const coins = 77;
+const points = 95;
+const restToHundred = 100 - points;
+const totalCoins = coins + restToHundred;
+const totalPoints = points + restToHundred;
+const displacementCoins =
+  circleCircumference - (circleCircumference * coins) / 100;
+const displacementPoints =
+  circleCircumference - (circleCircumference * points) / 100;
+  var userBooks = {};
+  var myImage;
+  /////////////////////////////////////State declarations///////////////////////////////////////////////
+  const [refresh, setRefresh] = useState(false);
+  const [myBooks, setMyBooks] = useState([]);
+  /////////////////////////////////////Methodes/////////////////////////////////////////////////////////
+  /*-------------------------------------------------------*/
+  // useEffect(() => {
+  //   const fetchBook = async () => {
+  //     let userBooks = await fetch(
+  //       `http://192.168.10.174:3000/get-user-books?userId=${props.userId}`
+  //     );
+  //     setMyBooks(await userBooks.json());
+  //   };
+  //   fetchBook();
+  //   console.log(myBooks);
+  // }, [refresh]);
+  /*-------------------------------------------------------*/
+  // useEffect(() => {
+  //   AsyncStorage.getItem("userBooks", function (error, data) {
+  //     userBooks = JSON.parse(data);
+  //     console.log(userBooks.books[2].image);
+  //   });
 
+  //   /*-------------------------------------------------------*/
+  //   userBooks.books.map((x) => (
+  //     <Image
+  //       onPress={() => props.navigation.navigate("BookScreen")}
+  //       style={styles.imageBook}
+  //       resizeMode="cover"
+  //       source={{
+  //         uri: require("../assets/favicon.png"),
+  //       }}
+  //     />
+  //   ));
+  // }, [refresh]);
+
+  /////////////////////////////////////Return///////////////////////////////////////////////////////////
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -105,6 +146,15 @@ const ProfileScreen = (props) => {
             <Text style={styles.label}>{points} / 100</Text>
           </View>
         </View>
+        {/* <View>
+        //   <FontAwesome
+        //     name="refresh"
+        //     size={35}
+        //     color="#FFF"
+        //     style={{ marginRight: 35, marginTop: 5 }}
+        //     onPress={() => setRefresh(!refresh)}
+        //   />
+        // </View> */}
       </View>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
         <View style={styles.navigation}>
@@ -213,32 +263,32 @@ const ProfileScreen = (props) => {
         <View style={styles.containerFavorites}>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            style={{ width: "100%", height: "25%" }}
           ></BookDetails>
         </View>
       </ScrollView>
     </View>
   );
 };
-
+/////////////////////////////////////Redux//////////////////////////////////////////////////////////
 function mapStateToProps(state) {
-  return { username: state.username };
+  return { username: state.username, userId: state.userIdReducer };
 }
 
 export default connect(mapStateToProps, null)(ProfileScreen);
-
+/////////////////////////////////////Styles//////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,

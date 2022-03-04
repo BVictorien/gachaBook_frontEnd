@@ -5,7 +5,8 @@ import { Button, Input, Text } from 'react-native-elements';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function SignIn(props) {
@@ -15,19 +16,29 @@ function SignIn(props) {
   const [listErrorsSignIn, setErrorsSignIn] = useState([]);
 
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
-    const data = await fetch('http://192.168.10.107:3000/sign-in', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    const data = await fetch("http://192.168.10.174:3000/sign-in", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
     });
 
     const body = await data.json();
+    console.log(body.userId);
     if (body.result == true) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
-      console.log(body.user.username);
+      props.getUserId(body.userId);
       setUserExists(true);
-      props.navigation.navigate('Profile');
+
+      const hihi = async () => {
+        let fechedUserBooks = await fetch(
+          `http://192.168.10.174:3000/get-user-books?userId=${body.userId}`
+        );
+        let userBooks = await fechedUserBooks.json();
+        AsyncStorage.setItem("userBooks", JSON.stringify(userBooks));
+      };
+      hihi();
+      props.navigation.navigate("BottomNavigator");
     } else {
       setErrorsSignIn(body.error);
     }
@@ -181,6 +192,9 @@ function mapDispatchToProps(dispatch) {
     },
     addUsername: function (username) {
       dispatch({ type: 'addUsername', username: username });
+    },
+    getUserId: function (userId) {
+      dispatch({ type: "getUserId", userId: userId });
     },
   };
 }
