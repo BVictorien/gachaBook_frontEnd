@@ -1,8 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { Input, Text, Icon, ListItem } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
-import { connect } from 'react-redux';
+import { connect} from 'react-redux';
 
 import socketIOClient from "socket.io-client";
 var socket = socketIOClient("http://192.168.10.124:3000");
@@ -72,11 +77,73 @@ const ChatScreen = (props) => {
                     </View>
                 </KeyboardAvoidingView>
             </View>
-
-
         </>
     );
-};
+}
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      backgroundColor: '#505055',
+  },
+  top: {
+      color: '#FFF',
+      fontSize: 23,
+      fontWeight: 'bold',
+      marginTop: 21,
+      marginLeft: 15,
+      marginRight: 15,
+      marginBottom: 10,
+      padding: 0,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+  },
+  topbutton: {
+      color: '#FFF',
+      fontSize: 21,
+      fontWeight: 'bold',
+      marginTop: 10,
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+  },
+  input: {
+      backgroundColor: 'white',
+      height: 50,
+      marginLeft: 15,
+      marginRight: 15,
+      marginTop: 10,
+      borderRadius: 30,
+      width: '90%',
+  },
+  rightWrapper: {
+      marginBottom: 5,
+      marginRight: 0,
+      paddingLeft: 5,
+      backgroundColor: '#C0CBE5',
+      width: '55%',
+      height: 95,
+      borderRadius: 10,
+  },
+  leftWrapper: {
+      marginBottom: 5,
+      marginRight: 0,
+      paddingLeft: 5,
+      backgroundColor: '#FFF555',
+      width: '55%',
+      height: 95,
+      borderRadius: 10,
+  },
+  message: {
+      width: '70%',
+      padding: 0,
+      marginLeft: 5,
+      marginRight: 5,
+      marginTop: 5,
+      borderRadius: 50,
+      backgroundColor: '#456283',
+  },
+});
 
 function mapStateToProps(state) {
     return { token: state.token }
@@ -86,134 +153,4 @@ export default connect(
     mapStateToProps,
     null
 )(ChatScreen);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#505055',
-    },
-    top: {
-        color: '#FFF',
-        fontSize: 23,
-        fontWeight: 'bold',
-        marginTop: 21,
-        marginLeft: 15,
-        marginRight: 15,
-        marginBottom: 10,
-        padding: 0,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    topbutton: {
-        color: '#FFF',
-        fontSize: 21,
-        fontWeight: 'bold',
-        marginTop: 10,
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    input: {
-        backgroundColor: 'white',
-        height: 50,
-        marginLeft: 15,
-        marginRight: 15,
-        marginTop: 10,
-        borderRadius: 30,
-        width: '90%',
-    },
-    rightWrapper: {
-        marginBottom: 5,
-        marginRight: 0,
-        paddingLeft: 5,
-        backgroundColor: '#C0CBE5',
-        width: '55%',
-        height: 95,
-        borderRadius: 10,
-    },
-    leftWrapper: {
-        marginBottom: 5,
-        marginRight: 0,
-        paddingLeft: 5,
-        backgroundColor: '#FFF555',
-        width: '55%',
-        height: 95,
-        borderRadius: 10,
-    },
-    message: {
-        width: '70%',
-        padding: 0,
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 5,
-        borderRadius: 50,
-        backgroundColor: '#456283',
-    },
-});
-
-/*  const [messages, setMessages] = useState([]);
-
-   useEffect(() => {
-       setMessages([
-           {
-               _id: 1,
-               text: 'Veuillez me répondre !',
-               createdAt: new Date(),
-               user: {
-                   _id: 2,
-                   name: 'React Native',
-                   avatar: '../assets/ad.jpeg',
-               },
-           },
-       ])
-   }, []) */
-
-/*    const onSend = useCallback((messages = []) => {
-       setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-   }, [])
-
-   const customtInputToolbar = props => {
-       return (
-           <InputToolbar
-               {...props}
-               containerStyle={{
-                   backgroundColor: "pink",
-                   padding: 1,
-                   height: 50,
-                   marginLeft: 15,
-                   marginBottom: 5,
-                   borderRadius: 30,
-               }}
-           />
-       );
-   };
-   
-   const customBubble = props => {
-       return (
-           <Bubble
-               {...props}
-               textStyle={{
-                   right: {
-                       color: "#20F3C8"
-                   },
-                   left: {
-                       color: "#9120F3"
-                   }
-               }}
-               style={styles.leftWrapper}
-           />
-       )
-   }; */
-
-/*    <GiftedChat
-               messages={messages}
-               placeholder='Votre message...'
-               alwaysShowSend={true}
-               onSend={messages => onSend(messages)}
-               user={{
-                   _id: 1,
-               }}
-               renderInputToolbar={props => customtInputToolbar(props)}
-               renderBubble={props => customBubble(props)}
-           /> */
 
