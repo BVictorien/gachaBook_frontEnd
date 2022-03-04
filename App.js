@@ -1,7 +1,7 @@
 /////////////////////////////////////IMPORTS//////////////////////////////////////////////////////////
 // import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
-import React from 'react';
+import { StyleSheet } from "react-native";
+import React from "react";
 
 /*-------------------------------------------------------------------------*/
 import HomeScreen from "./screens/HomeScreen";
@@ -53,23 +53,23 @@ const BottomNavigator = () => {
         tabBarIcon: ({ color }) => {
           let iconName;
 
-          if (route.name == 'Search') {
-            iconName = 'ios-location';
-          } else if (route.name == 'Home') {
-            iconName = 'ios-home';
-          } else if (route.name == 'Cart') {
-            iconName = 'ios-basket';
-          } else if (route.name == 'Profile') {
-            iconName = 'ios-person';
+          if (route.name == "Search") {
+            iconName = "ios-location";
+          } else if (route.name == "Home") {
+            iconName = "ios-home";
+          } else if (route.name == "Cart") {
+            iconName = "ios-basket";
+          } else if (route.name == "Profile") {
+            iconName = "ios-person";
           }
           return <Ionicons name={iconName} size={25} color={color} />;
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#009788',
-        inactiveTintColor: '#6D7D8B',
+        activeTintColor: "#009788",
+        inactiveTintColor: "#6D7D8B",
         style: {
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
           borderTopWidth: 0,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
@@ -77,16 +77,16 @@ const BottomNavigator = () => {
         },
       }}
     >
-      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen
         name="Profile"
         component={StackNav}
         listeners={({ navigation }) => ({
           tabPress: (event) => {
             event.preventDefault();
-            navigation.navigate('Profile', {
-              screen: 'Profile',
+            navigation.navigate("Profile", {
+              screen: "Profile",
             });
           },
         })}
@@ -132,10 +132,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DBE6E7',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
+    backgroundColor: "#DBE6E7",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
 });

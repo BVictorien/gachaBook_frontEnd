@@ -148,7 +148,7 @@ function AddBook(props) {
             onChangeText={(x) => setDescription(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
             placeholder="Annee"
             value={annee}

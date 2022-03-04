@@ -28,7 +28,7 @@ function HomeScreen(props) {
   // } else {
   //   logout = <Text style={styles.login}>Connexion</Text>;
   // }
-  let logout = (
+  logout = (
     <Text
       style={styles.login}
       onPress={() => props.navigation.navigate("SignIn", { screen: "SignIn" })}
@@ -56,97 +56,99 @@ function HomeScreen(props) {
     );
   };
 
-  props.navigation.navigate("BottomNavigator", { screen: "Search" });
-}
-/*--------------------------------------------------*/
-const disconnect = () => {
-  props.disconnect();
-  AsyncStorage.clear();
-};
-/*--------------------------------------------------*/
-if (!props.userId) {
-  logout = (
-    <Text
-      style={styles.login}
-      onPress={() => props.navigation.navigate("SignIn", { screen: "SignIn" })}
-    >
-      Connexion
-    </Text>
-  );
-} else {
-  logout = (
-    <Text onPress={() => disconnect()} style={styles.login}>
-      Deconnexion
-    </Text>
-  );
-}
-/*--------------------------------------------------*/
-/////////////////////////////////////Return/////////////////////////////////////
-return (
-  <ScrollView>
-    <View style={styles.container}>
-      <View style={styles.search}>
-        <Text style={{ color: "#252525", fontWeight: "bold", fontSize: 30 }}>
-          GachaBook
-        </Text>
-        {logout}
-      </View>
-      <View
-        style={{
-          backgroundColor: "white",
-          width: "90%",
-          height: 50,
-          marginLeft: 15,
-          marginRight: 15,
-          marginTop: 30,
-          borderRadius: 30,
-        }}
+  // props.navigation.navigate("BottomNavigator", { screen: "Search" });
+
+  /*--------------------------------------------------*/
+  const disconnect = () => {
+    props.disconnect();
+    AsyncStorage.clear();
+  };
+  /*--------------------------------------------------*/
+  if (!props.userId) {
+    logout = (
+      <Text
+        style={styles.login}
+        onPress={() =>
+          props.navigation.navigate("SignIn", { screen: "SignIn" })
+        }
       >
-        <Input
-          placeholder="   Cherchez un livre..."
-          onChangeText={updateSearch}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
-          rightIcon={
-            <Icon
-              name="search"
-              size={30}
-              color="#E9940A"
-              onPress={() => handleSearch()}
-            />
-          }
-        />
-      </View>
+        Connexion
+      </Text>
+    );
+  } else {
+    logout = (
+      <Text onPress={() => disconnect()} style={styles.login}>
+        Deconnexion
+      </Text>
+    );
+  }
+  /*--------------------------------------------------*/
+  /////////////////////////////////////Return/////////////////////////////////////
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.search}>
+          <Text style={{ color: "#252525", fontWeight: "bold", fontSize: 30 }}>
+            GachaBook
+          </Text>
+          {logout}
+        </View>
+        <View
+          style={{
+            backgroundColor: "white",
+            width: "90%",
+            height: 50,
+            marginLeft: 15,
+            marginRight: 15,
+            marginTop: 30,
+            borderRadius: 30,
+          }}
+        >
+          <Input
+            placeholder="   Cherchez un livre..."
+            onChangeText={updateSearch}
+            inputContainerStyle={{ borderBottomWidth: 0 }}
+            rightIcon={
+              <Icon
+                name="search"
+                size={30}
+                color="#E9940A"
+                onPress={() => handleSearch()}
+              />
+            }
+          />
+        </View>
 
-      <View style={styles.logo}>
-        <Image style={styles.image} source={require("../assets/pic1.png")} />
-      </View>
+        <View style={styles.logo}>
+          <Image style={styles.image} source={require("../assets/pic1.png")} />
+        </View>
 
-      <View>
-        <Text style={styles.title}>Livres en ventes :</Text>
-        <ScrollView horizontal={true}>
-          <View style={styles.sliderHorizontal}>
-            <BookDetailsCard />
-            <BookDetailsCard />
-            <BookDetailsCard />
-            <BookDetailsCard />
-            <BookDetailsCard />
-          </View>
-        </ScrollView>
+        <View>
+          <Text style={styles.title}>Livres en ventes :</Text>
+          <ScrollView horizontal={true}>
+            <View style={styles.sliderHorizontal}>
+              <BookDetailsCard />
+              <BookDetailsCard />
+              <BookDetailsCard />
+              <BookDetailsCard />
+              <BookDetailsCard />
+            </View>
+          </ScrollView>
+        </View>
+        <View>
+          <Text style={styles.title}>Prêt de chez vous :</Text>
+          <ScrollView horizontal={true}>
+            <View style={styles.sliderHorizontal}>
+              <BookDetailsCard />
+              <BookDetailsCard />
+              <BookDetailsCard />
+            </View>
+          </ScrollView>
+        </View>
       </View>
-      <View>
-        <Text style={styles.title}>Prêt de chez vous :</Text>
-        <ScrollView horizontal={true}>
-          <View style={styles.sliderHorizontal}>
-            <BookDetailsCard />
-            <BookDetailsCard />
-            <BookDetailsCard />
-          </View>
-        </ScrollView>
-      </View>
-    </View>
-  </ScrollView>
-);
-
+    </ScrollView>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
