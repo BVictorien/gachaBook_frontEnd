@@ -21,6 +21,7 @@ function HomeScreen(props) {
     props.navigation.navigate("BottomNavigator", { screen: "Search" });
   };
 
+<<<<<<< HEAD
   // isConnected = false;
   // let logout;
   // if (isConnected) {
@@ -36,6 +37,17 @@ function HomeScreen(props) {
       Connexion
     </Text>
   );
+=======
+
+   let log = (
+      <Text
+        style={styles.login}
+        onPress={() => props.navigation.navigate('SignIn', { screen: 'SignIn' })}
+      >
+        Connexion
+      </Text>);
+   
+>>>>>>> chatScreenVendredi
 
   const BookDetailsCard = () => {
     return (
@@ -44,8 +56,12 @@ function HomeScreen(props) {
           onPress={() => props.navigation.navigate("BookScreen")}
           style={styles.imageBook}
           resizeMode="cover"
+<<<<<<< HEAD
           s
           source={require("../assets/nicolas.jpg")}
+=======
+          source={require('../assets/nicolas.jpg')}
+>>>>>>> chatScreenVendredi
         />
         <Text style={styles.titleCard}>Title</Text>
         <View style={styles.descriptionCard}>
@@ -91,7 +107,7 @@ function HomeScreen(props) {
           <Text style={{ color: "#252525", fontWeight: "bold", fontSize: 30 }}>
             GachaBook
           </Text>
-          {logout}
+          {log}
         </View>
         <View
           style={{
@@ -136,9 +152,11 @@ function HomeScreen(props) {
           </ScrollView>
         </View>
         <View>
-          <Text style={styles.title}>Prêt de chez vous :</Text>
+          <Text style={styles.title}>Près de chez vous :</Text>
           <ScrollView horizontal={true}>
             <View style={styles.sliderHorizontal}>
+              <BookDetailsCard />
+              <BookDetailsCard />
               <BookDetailsCard />
               <BookDetailsCard />
               <BookDetailsCard />
@@ -221,8 +239,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+<<<<<<< HEAD
 /////////////////////////////////////Redux////////////////////////////////////////////
 /*---------------------------------------------*/
+=======
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
+  };
+}
+
+>>>>>>> chatScreenVendredi
 function mapStateToProps(state) {
   return {
     token: state.token,
@@ -230,6 +260,7 @@ function mapStateToProps(state) {
     username: state.username,
   };
 }
+<<<<<<< HEAD
 /*---------------------------------------------*/
 function mapDispatchToProps(dispatch) {
   return {
@@ -246,4 +277,7 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
+=======
+
+>>>>>>> chatScreenVendredi
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

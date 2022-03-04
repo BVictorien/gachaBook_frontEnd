@@ -16,10 +16,17 @@ function SignIn(props) {
   const [listErrorsSignIn, setErrorsSignIn] = useState([]);
 
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
+<<<<<<< HEAD
     const data = await fetch("http://192.168.10.174:3000/sign-in", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
+=======
+    const data = await fetch('http://192.168.10.124:3000/sign-in', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`,
+>>>>>>> chatScreenVendredi
     });
 
     const body = await data.json();
@@ -27,7 +34,10 @@ function SignIn(props) {
     if (body.result == true) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
+<<<<<<< HEAD
       props.getUserId(body.userId);
+=======
+>>>>>>> chatScreenVendredi
       setUserExists(true);
 
       const hihi = async () => {
