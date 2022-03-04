@@ -1,7 +1,7 @@
 /////////////////////////////////////IMPORTS//////////////////////////////////////////////////////////
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import React, { useEffect } from "react";
-import { Image, Input } from "react-native-elements";
+import React, { useEffect, useState } from "react";
+import { Input, Image } from "react-native-elements";
 
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -12,19 +12,44 @@ import BookDetails from "../components/BookDetails";
 import { connect } from "react-redux";
 
 /////////////////////////////////////Functions//////////////////////////////////////////////////////////
-
-const ProfileScreen = async (props) => {
+const ProfileScreen = (props) => {
+  var userBooks = {};
+  var myImage;
   /////////////////////////////////////State declarations///////////////////////////////////////////////
-
+  const [refresh, setRefresh] = useState(false);
+  const [myBooks, setMyBooks] = useState([]);
   /////////////////////////////////////Methodes/////////////////////////////////////////////////////////
+  /*-------------------------------------------------------*/
   // useEffect(() => {
-  //   let userBooks = await fetch("http://192.168.10.130:3000/get-user-books", {
-  //     method: "GET",
-
-  //     body: `userId=${props.userId}`,
+  //   const fetchBook = async () => {
+  //     let userBooks = await fetch(
+  //       `http://192.168.10.174:3000/get-user-books?userId=${props.userId}`
+  //     );
+  //     setMyBooks(await userBooks.json());
+  //   };
+  //   fetchBook();
+  //   console.log(myBooks);
+  // }, [refresh]);
+  /*-------------------------------------------------------*/
+  // useEffect(() => {
+  //   AsyncStorage.getItem("userBooks", function (error, data) {
+  //     userBooks = JSON.parse(data);
+  //     console.log(userBooks.books[2].image);
   //   });
-  //   let bookResult = await userBooks.json();
-  // }, []);
+
+  //   /*-------------------------------------------------------*/
+  //   userBooks.books.map((x) => (
+  //     <Image
+  //       onPress={() => props.navigation.navigate("BookScreen")}
+  //       style={styles.imageBook}
+  //       resizeMode="cover"
+  //       source={{
+  //         uri: require("../assets/favicon.png"),
+  //       }}
+  //     />
+  //   ));
+  // }, [refresh]);
+
   /////////////////////////////////////Return///////////////////////////////////////////////////////////
   return (
     <View style={styles.container}>
@@ -33,17 +58,15 @@ const ProfileScreen = async (props) => {
           <Text style={styles.titletop}>Hello</Text>
           <Text style={styles.titletop}>{props.username}</Text>
         </View>
-        {/* <View>
+        <View>
           <FontAwesome
-            name="envelope-o"
+            name="refresh"
             size={35}
             color="#FFF"
             style={{ marginRight: 35, marginTop: 5 }}
-            onPress={() =>
-              props.navigation.navigate("Chat", { screen: "ChatScreen" })
-            }
+            onPress={() => setRefresh(!refresh)}
           />
-        </View> */}
+        </View>
       </View>
 
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
@@ -136,12 +159,6 @@ const ProfileScreen = async (props) => {
               resizeMode="cover"
               source={require("../assets/favicon.png")}
             />
-            <Image
-              onPress={() => props.navigation.navigate("BookScreen")}
-              style={styles.imageBook}
-              resizeMode="cover"
-              source={require("../assets/favicon.png")}
-            />
           </View>
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
@@ -169,7 +186,7 @@ const ProfileScreen = async (props) => {
 };
 /////////////////////////////////////Redux//////////////////////////////////////////////////////////
 function mapStateToProps(state) {
-  return { username: state.username, userId: state.userIdReducers };
+  return { username: state.username, userId: state.userIdReducer };
 }
 
 export default connect(mapStateToProps, null)(ProfileScreen);

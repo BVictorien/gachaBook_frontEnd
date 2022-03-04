@@ -4,7 +4,7 @@ import { Input, Text, Icon, ListItem } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import socketIOClient from "socket.io-client";
 
-var socket = socketIOClient("http://192.168.10.117:3000");
+var socket = socketIOClient("http://192.168.10.17:3000");
 
 const ChatScreen = (props) => {
 

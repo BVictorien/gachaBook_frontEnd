@@ -6,6 +6,7 @@ import { Button, Input, Text } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 
 import { connect } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function SignIn(props) {
@@ -18,20 +19,29 @@ function SignIn(props) {
   ///////////////////////////////////Methods////////////////////////////////////
   /*------------------------------------------------*/
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
-    const data = await fetch("http://192.168.10.130:3000/sign-in", {
+    const data = await fetch("http://192.168.10.174:3000/sign-in", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
     });
 
     const body = await data.json();
-    console.log(body.userId)
+    console.log(body.userId);
     if (body.result == true) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
       props.getUserId(body.userId);
       setUserExists(true);
-      props.navigation.navigate("Profile");
+
+      const hihi = async () => {
+        let fechedUserBooks = await fetch(
+          `http://192.168.10.174:3000/get-user-books?userId=${body.userId}`
+        );
+        let userBooks = await fechedUserBooks.json();
+        AsyncStorage.setItem("userBooks", JSON.stringify(userBooks));
+      };
+      hihi();
+      props.navigation.navigate("BottomNavigator");
     } else {
       setErrorsSignIn(body.error);
     }
