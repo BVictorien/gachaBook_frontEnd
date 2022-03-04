@@ -8,14 +8,13 @@ function BookScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.containerBook}>
-        <Text style={styles.buttonBack}>
-        <FontAwesome
-                            name="reply"
-                            size={35}
-                            color="#FBAF19"
-                            style={{ marginRight: 35, marginTop: 5 }}
-                            onPress={() => props.navigation.goBack()}
-                        />
+        <Text
+          onPress={() => {
+            props.navigation.navigate('BottomNavigator');
+          }}
+          style={styles.textBack}
+        >
+          back
         </Text>
         <View style={styles.imageView}>
           <Image>
@@ -81,12 +80,12 @@ export default BookScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'white',
-    backgroundColor: 'rgba(192, 195, 219,0.24)',
+    backgroundColor: '#DBE6E7',
+    // backgroundColor: 'rgba(192, 195, 219,0.24)',
 
     color: '#fff',
     // justifyContent: 'center',
-    marginTop: 30,
+    // marginTop: 30,
     width: '100%',
     height: '100%',
   },
@@ -95,10 +94,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
   },
-  buttonBack: {
-    color: '#F5960D',
-    margin: 10,
-  },
+  // buttonBack: {
+  //   color: '#F5960D',
+  //   margin: 10,
+  // },
   imageView: {
     alignItems: 'center',
     margin: 20,
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
   contact: {
-    backgroundColor: '#F5960D',
+    backgroundColor: '#007576',
     borderRadius: 50,
     marginBottom: 10,
     alignItems: 'center',
@@ -153,5 +152,14 @@ const styles = StyleSheet.create({
   barre: {
     backgroundColor: 'black',
     width: 1,
+  },
+  textBack: {
+    marginTop: 15,
+    color: '#007576',
+    marginRight: 'auto',
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 30,
   },
 });

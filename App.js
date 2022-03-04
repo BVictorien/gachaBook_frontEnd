@@ -69,6 +69,7 @@ const BottomNavigator = () => {
           borderTopWidth: 0,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
+          // marginTop: -40,
         },
       }}
     >
@@ -130,5 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBE6E7',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    height: '100%',
   },
 });

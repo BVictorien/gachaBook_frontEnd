@@ -58,7 +58,7 @@ function AddBook(props) {
         <View style={styles.logo}>
           <Image
             style={styles.imagelogo}
-            source={require('../assets/pic1.png')}
+            source={require('../assets/pic4.png')}
           />
         </View>
         <View style={styles.barreButton}>
@@ -162,19 +162,18 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     backgroundColor: '#DBE6E7',
-    // justifyContent: 'space-evenly',
-    // alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 30,
+    // marginTop: 30,
     width: '100%',
     height: '100%',
   },
   backText: {
     marginTop: 15,
     color: '#007576',
+    marginTop: 50,
     marginRight: 'auto',
     marginLeft: 20,
-    // marginBottom: 15,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   ajoutText: {

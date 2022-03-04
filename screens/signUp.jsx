@@ -8,28 +8,27 @@ import { connect } from 'react-redux';
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function SignUp(props) {
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [signUpUsername, setSignUpUsername] = useState('');
+  const [userExists, setUserExists] = useState(false);
+  const [listErrorsSignUp, setErrorsSignUp] = useState([]);
 
-const [signUpEmail, setSignUpEmail] = useState('');
-const [signUpPassword, setSignUpPassword] = useState('');
-const [signUpUsername, setSignUpUsername] = useState('');
-const [userExists, setUserExists] = useState(false);
-const [listErrorsSignUp, setErrorsSignUp] = useState([]);
-
-const handleSubmitSignUp = async () => {
-  const data = await fetch('http://192.168.10.117:3000/sign-up', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
-  })
-  const body = await data.json()
-  if(body.result == true){
-    props.addToken(body.token)
-    setUserExists(true)
-    props.navigation.navigate('SignIn')
-  } else {
-    setErrorsSignUp(body.error)
-  }
-}
+  const handleSubmitSignUp = async () => {
+    const data = await fetch('http://192.168.10.107:3000/sign-up', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
+    });
+    const body = await data.json();
+    if (body.result == true) {
+      props.addToken(body.token);
+      setUserExists(true);
+      props.navigation.navigate('SignIn');
+    } else {
+      setErrorsSignUp(body.error);
+    }
+  };
 
   let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
     return <Text style={styles.error}>{error}</Text>;
@@ -53,19 +52,22 @@ const handleSubmitSignUp = async () => {
         </Text>
       </View>
       <View style={styles.logo}>
-        <Image style={styles.image} source={require('../assets/pic3.jpg')} />
+        <Image style={styles.image} source={require('../assets/pic3.png')} />
+        <Text style={styles.title}>Inscription</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Input
           containerStyle={{ width: 360 }}
           inputStyle={styles.input}
           placeholder="  Pseudo"
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           onChangeText={(val) => setSignUpUsername(val)}
         />
         <Input
           containerStyle={{ width: 360 }}
           inputStyle={styles.input}
           placeholder="  Email"
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           onChangeText={(val) => setSignUpEmail(val)}
         />
         <Input
@@ -73,6 +75,7 @@ const handleSubmitSignUp = async () => {
           inputStyle={styles.input}
           placeholder="  Mot de passe"
           secureTextEntry={true}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           onChangeText={(val) => setSignUpPassword(val)}
         />
         {tabErrorSignUp}
@@ -110,24 +113,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 30,
   },
   logo: {
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    width: 340,
-    height: 200,
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  image: {
-    width: 250,
-    height: 170,
   },
   text: {
     color: 'white',
     fontSize: 35,
+  },
+  title: {
+    color: '#252525',
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20,
   },
   inscription: {
     color: 'white',
@@ -136,17 +134,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    padding: 20,
   },
   facebook: {
     borderRadius: 50,
-    // width: 300,
     margin: 10,
   },
   google: {
     backgroundColor: 'red',
     borderRadius: 50,
-    // width: 300,
     margin: 10,
   },
   signUp: {

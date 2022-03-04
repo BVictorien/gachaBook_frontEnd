@@ -15,7 +15,7 @@ function SignIn(props) {
   const [listErrorsSignIn, setErrorsSignIn] = useState([]);
 
   var handleSubmitSignin = async (emailFromFront, passwordFromFront, token) => {
-    const data = await fetch('http://192.168.10.124:3000/sign-in', {
+    const data = await fetch('http://192.168.10.107:3000/sign-in', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
@@ -58,16 +58,19 @@ function SignIn(props) {
         </Text>
       </View>
       <View style={styles.logo}>
-        <Image style={styles.image} source={require('../assets/pic3.jpg')} />
+        <Image style={styles.image} source={require('../assets/pic3.png')} />
+        <Text style={styles.title}>Connexion</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Input
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           containerStyle={{ width: 360 }}
           inputStyle={styles.input}
           placeholder="  Email"
           onChangeText={(val) => setSignInEmail(val)}
         />
         <Input
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           containerStyle={{ width: 360 }}
           inputStyle={styles.input}
           placeholder="  Mot de passe"
@@ -110,21 +113,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginTop: 30,
   },
   logo: {
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    width: 340,
-    height: 200,
-    borderRadius: 5,
-    // marginTop: 20,
   },
-  image: {
-    width: 250,
-    height: 170,
+  title: {
+    color: '#252525',
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20,
   },
+
   text: {
     color: 'white',
     fontSize: 35,
@@ -139,13 +138,11 @@ const styles = StyleSheet.create({
   },
   facebook: {
     borderRadius: 50,
-    // width: 300,
     margin: 10,
   },
   google: {
     backgroundColor: 'red',
     borderRadius: 50,
-    // width: 300,
     margin: 10,
   },
   signIn: {

@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#DBE6E7',
-    width: '100%',
-    height: '100%',
+    // width: '100%',
   },
   logout: {
     color: '#E9940A',
@@ -132,8 +131,9 @@ const styles = StyleSheet.create({
   },
   login: {
     color: '#007576',
-    marginLeft: 95,
+    marginLeft: 'auto',
     marginTop: 9,
+    marginRight: 10,
     fontSize: 15,
     fontWeight: 'bold',
   },

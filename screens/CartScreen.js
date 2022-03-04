@@ -38,14 +38,14 @@ const CartScreen = (props) => {
 
   /////////////////////////////////////Return////////////////////////////////////
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={styles.background}>
         <View style={styles.logo}>
           <Image
             style={styles.imagePanier}
             source={require('../assets/pic2.png')}
           />
-          <Text style={styles.inscription}>Panier</Text>
+          <Text style={styles.title}>Panier</Text>
         </View>
         <View>
           <BookDetailsCard />
@@ -86,12 +86,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBE6E7',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    // paddingTop: 1:0,
+    // marginBottom: 20,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    // marginTop: 10,
   },
   logo: {
     alignItems: 'center',
@@ -104,9 +108,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 30,
   },
-  inscription: {
+  title: {
     color: '#252525',
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     margin: 15,
   },

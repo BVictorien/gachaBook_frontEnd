@@ -2,16 +2,15 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
 import { Image, Input } from 'react-native-elements';
 
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import Svg, { G, Circle } from "react-native-svg";
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import Svg, { G, Circle } from 'react-native-svg';
 
 import BookDetails from '../components/BookDetails';
 
 import { connect } from 'react-redux';
 
 const ProfileScreen = (props) => {
-
   const radius = 80;
   const circleCircumference = 2 * Math.PI * radius;
   const coins = 77;
@@ -19,13 +18,14 @@ const ProfileScreen = (props) => {
   const restToHundred = 100 - points;
   const totalCoins = coins + restToHundred;
   const totalPoints = points + restToHundred;
-  const displacementCoins = circleCircumference - (circleCircumference * coins) / 100;
-  const displacementPoints = circleCircumference - (circleCircumference * points) / 100;
+  const displacementCoins =
+    circleCircumference - (circleCircumference * coins) / 100;
+  const displacementPoints =
+    circleCircumference - (circleCircumference * points) / 100;
 
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-
         <View style={styles.bothCharts}>
           <View style={styles.graphWrapper}>
             <Svg height="90" width="90" viewBox="0 0 180 180">
@@ -56,8 +56,7 @@ const ProfileScreen = (props) => {
                       strokeLinecap="round"
                     />
                   </>
-                )
-                }
+                )}
               </G>
             </Svg>
             <Text style={styles.label}>{coins} coins</Text>
@@ -67,7 +66,7 @@ const ProfileScreen = (props) => {
             <Text style={styles.username}>{props.username}</Text>
             <View style={styles.aligntop}>
               <Text style={styles.level}>Niveau </Text>
-              <Text style={styles.number}>  17 </Text>
+              <Text style={styles.number}> 17 </Text>
             </View>
           </View>
 
@@ -100,8 +99,7 @@ const ProfileScreen = (props) => {
                       strokeLinecap="round"
                     />
                   </>
-                )
-                }
+                )}
               </G>
             </Svg>
             <Text style={styles.label}>{points} / 100</Text>
@@ -124,7 +122,7 @@ const ProfileScreen = (props) => {
               onPress={() => {
                 props.navigation.navigate('AddBook');
               }}
-              style={{ color: '#252525' }}
+              style={{ color: '#252525', paddingLeft: 3 }}
             >
               Scan
             </Text>
@@ -144,7 +142,7 @@ const ProfileScreen = (props) => {
               onPress={() =>
                 props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
-              style={{ color: "#fff", marginLeft: 5 }}
+              style={{ color: '#252525', paddingLeft: 3 }}
             >
               Messages
             </Text>
@@ -165,7 +163,7 @@ const ProfileScreen = (props) => {
               onPress={() => {
                 props.navigation.navigate('Store');
               }}
-              style={{ color: '#252525' }}
+              style={{ color: '#252525', paddingLeft: 3 }}
             >
               My Card
             </Text>
@@ -256,10 +254,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   username: {
-    color: "#ED610C",
+    color: '#ED610C',
     fontSize: 35,
     fontWeight: 'bold',
-    textShadowColor: "#000",
+    textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
     textAlign: 'center',
@@ -270,19 +268,19 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   level: {
-    color: "#FFF",
+    color: '#FFF',
     fontSize: 27,
-    fontStyle: "italic",
+    fontStyle: 'italic',
     textAlign: 'center',
-    textShadowColor: "#000",
+    textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   number: {
-    color: "#EC8D05",
+    color: '#EC8D05',
     fontSize: 27,
     fontWeight: 'bold',
-    textShadowColor: "#000",
+    textShadowColor: '#000',
     textShadowOffset: { width: -2, height: 2 },
     textShadowRadius: 10,
   },
@@ -319,20 +317,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   graphWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   label: {
     color: '#000',
-    position: "absolute",
+    position: 'absolute',
     fontSize: 15,
   },
   bothCharts: {
     flexDirection: 'row',
     margin: 5,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  }
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
   // containerFavorites: {
   //   justifyContent: 'center',
   // },
