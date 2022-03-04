@@ -16,21 +16,15 @@ function HomeScreen(props) {
     props.navigation.navigate('BottomNavigator', { screen: 'Search' });
   };
 
-  // isConnected = false;
-  // let logout;
-  // if (isConnected) {
-  //   logout = <Text style={styles.logout}>Déconnexion</Text>
-  // } else {
-  //   logout = <Text style={styles.login}>Connexion</Text>;
-  // }
-  let logout = (
-    <Text
-      style={styles.login}
-      onPress={() => props.navigation.navigate('SignIn', { screen: 'SignIn' })}
-    >
-      Connexion
-    </Text>
-  );
+
+   let log = (
+      <Text
+        style={styles.login}
+        onPress={() => props.navigation.navigate('SignIn', { screen: 'SignIn' })}
+      >
+        Connexion
+      </Text>);
+   
 
   const BookDetailsCard = () => {
     return (
@@ -39,7 +33,6 @@ function HomeScreen(props) {
           onPress={() => props.navigation.navigate('BookScreen')}
           style={styles.imageBook}
           resizeMode="cover"
-          s
           source={require('../assets/nicolas.jpg')}
         />
         <Text style={styles.titleCard}>Title</Text>
@@ -58,7 +51,7 @@ function HomeScreen(props) {
           <Text style={{ color: '#252525', fontWeight: 'bold', fontSize: 30 }}>
             GachaBook
           </Text>
-          {logout}
+          {log}
         </View>
         <View
           style={{
@@ -103,9 +96,11 @@ function HomeScreen(props) {
           </ScrollView>
         </View>
         <View>
-          <Text style={styles.title}>Prêt de chez vous :</Text>
+          <Text style={styles.title}>Près de chez vous :</Text>
           <ScrollView horizontal={true}>
             <View style={styles.sliderHorizontal}>
+              <BookDetailsCard />
+              <BookDetailsCard />
               <BookDetailsCard />
               <BookDetailsCard />
               <BookDetailsCard />
@@ -190,8 +185,16 @@ const styles = StyleSheet.create({
   },
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
+  };
+}
+
 function mapStateToProps(state) {
   return { token: state.token };
 }
 
-export default connect(mapStateToProps, null)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -18,14 +18,13 @@ function SignIn(props) {
     const data = await fetch('http://192.168.10.124:3000/sign-in', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}&token=${token}`,
+      body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`,
     });
 
     const body = await data.json();
     if (body.result == true) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
-      console.log(body.user.username);
       setUserExists(true);
       props.navigation.navigate('Profile');
     } else {

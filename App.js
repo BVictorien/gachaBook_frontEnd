@@ -72,8 +72,8 @@ const BottomNavigator = () => {
         },
       }}
     >
-      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen
         name="Profile"
         component={StackNav}

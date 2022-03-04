@@ -144,7 +144,7 @@ const ProfileScreen = (props) => {
               onPress={() =>
                 props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
-              style={{ color: "#fff", marginLeft: 5 }}
+              style={{ color: "#252525", marginLeft: 5 }}
             >
               Messages
             </Text>

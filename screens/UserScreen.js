@@ -58,7 +58,7 @@ const UserScreen = (props) => {
         <Button
           buttonStyle={styles.buttonSend}
           title="Contacter le vendeur"
-          onPress={() => props.navigation.navigate('UserScreen')}
+          onPress={() => props.navigation.navigate('Chat')}
           icon={{
             name: 'envelope',
             type: 'font-awesome',
@@ -72,8 +72,8 @@ const UserScreen = (props) => {
             <CustomSwitch
               selectionMode={1}
               roundCorner={true}
-              option1={'Favories'}
-              option2={'Livre en Vente'}
+              option1={'Souhaits'}
+              option2={'Livres en vente'}
               onSelectSwitch={onSelectSwitch}
               selectionColor={'white'}
             />

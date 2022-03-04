@@ -16,14 +16,15 @@ const [userExists, setUserExists] = useState(false);
 const [listErrorsSignUp, setErrorsSignUp] = useState([]);
 
 const handleSubmitSignUp = async () => {
-  const data = await fetch('http://192.168.10.117:3000/sign-up', {
+  const data = await fetch('http://192.168.10.124:3000/sign-up', {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
+    body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&token=${token}`
   })
   const body = await data.json()
   if(body.result == true){
     props.addToken(body.token)
+    console.log(body.token)
     setUserExists(true)
     props.navigation.navigate('SignIn')
   } else {
