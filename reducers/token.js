@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export default function (token = "", action) {
   if (action.type == "addToken") {
     return action.token;
@@ -8,13 +7,3 @@ export default function (token = "", action) {
     return token;
   }
 }
-=======
-export default function(token = "", action){
-    if(action.type == 'addToken'){
-        console.log(token)
-        return action.token
-    } else {
-        return token
-    }
-}
->>>>>>> chatScreenVendredi

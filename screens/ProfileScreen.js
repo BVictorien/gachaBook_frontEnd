@@ -192,11 +192,7 @@ const displacementPoints =
               onPress={() =>
                 props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
-<<<<<<< HEAD
-              style={{ color: '#252525', paddingLeft: 3 }}
-=======
               style={{ color: "#252525", marginLeft: 5 }}
->>>>>>> chatScreenVendredi
             >
               Messages
             </Text>

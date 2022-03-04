@@ -21,34 +21,6 @@ function HomeScreen(props) {
     props.navigation.navigate("BottomNavigator", { screen: "Search" });
   };
 
-<<<<<<< HEAD
-  // isConnected = false;
-  // let logout;
-  // if (isConnected) {
-  //   logout = <Text style={styles.logout}>Déconnexion</Text>
-  // } else {
-  //   logout = <Text style={styles.login}>Connexion</Text>;
-  // }
-  logout = (
-    <Text
-      style={styles.login}
-      onPress={() => props.navigation.navigate("SignIn", { screen: "SignIn" })}
-    >
-      Connexion
-    </Text>
-  );
-=======
-
-   let log = (
-      <Text
-        style={styles.login}
-        onPress={() => props.navigation.navigate('SignIn', { screen: 'SignIn' })}
-      >
-        Connexion
-      </Text>);
-   
->>>>>>> chatScreenVendredi
-
   const BookDetailsCard = () => {
     return (
       <View style={styles.homeBook}>
@@ -56,12 +28,7 @@ function HomeScreen(props) {
           onPress={() => props.navigation.navigate("BookScreen")}
           style={styles.imageBook}
           resizeMode="cover"
-<<<<<<< HEAD
-          s
-          source={require("../assets/nicolas.jpg")}
-=======
           source={require('../assets/nicolas.jpg')}
->>>>>>> chatScreenVendredi
         />
         <Text style={styles.titleCard}>Title</Text>
         <View style={styles.descriptionCard}>
@@ -107,7 +74,7 @@ function HomeScreen(props) {
           <Text style={{ color: "#252525", fontWeight: "bold", fontSize: 30 }}>
             GachaBook
           </Text>
-          {log}
+          {logout}
         </View>
         <View
           style={{
@@ -239,20 +206,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-<<<<<<< HEAD
-/////////////////////////////////////Redux////////////////////////////////////////////
-/*---------------------------------------------*/
-=======
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addToken: function (token) {
-      dispatch({ type: 'addToken', token: token });
-    },
-  };
-}
-
->>>>>>> chatScreenVendredi
 function mapStateToProps(state) {
   return {
     token: state.token,
@@ -260,7 +214,6 @@ function mapStateToProps(state) {
     username: state.username,
   };
 }
-<<<<<<< HEAD
 /*---------------------------------------------*/
 function mapDispatchToProps(dispatch) {
   return {
@@ -275,9 +228,9 @@ function mapDispatchToProps(dispatch) {
         type: "disconnect3",
       });
     },
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
   };
 }
-=======
-
->>>>>>> chatScreenVendredi
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
