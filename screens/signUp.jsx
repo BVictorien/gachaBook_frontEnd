@@ -8,29 +8,7 @@ import { connect } from 'react-redux';
 
 ///////////////////////////////////Function//////////////////////////////////////////////////
 function SignUp(props) {
-  const [signUpEmail, setSignUpEmail] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
-  const [signUpUsername, setSignUpUsername] = useState('');
-  const [userExists, setUserExists] = useState(false);
-  const [listErrorsSignUp, setErrorsSignUp] = useState([]);
 
-<<<<<<< HEAD
-  const handleSubmitSignUp = async () => {
-    const data = await fetch('http://192.168.10.115:3000/sign-up', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
-    });
-    const body = await data.json();
-    if (body.result == true) {
-      props.addToken(body.token);
-      setUserExists(true);
-      props.navigation.navigate('SignIn');
-    } else {
-      setErrorsSignUp(body.error);
-    }
-  };
-=======
 const [signUpEmail, setSignUpEmail] = useState('');
 const [signUpPassword, setSignUpPassword] = useState('');
 const [signUpUsername, setSignUpUsername] = useState('');
@@ -52,7 +30,6 @@ const handleSubmitSignUp = async () => {
     setErrorsSignUp(body.error)
   }
 }
->>>>>>> chatScreenJeudi
 
   let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
     return <Text style={styles.error}>{error}</Text>;
