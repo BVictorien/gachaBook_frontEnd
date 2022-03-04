@@ -32,11 +32,11 @@ function SearchScreen(props) {
           placeholder="   Cherchez un livre..."
           onChangeText={updateSearch}
           inputContainerStyle={{ borderBottomWidth: 0 }}
-          rightIcon={<Icon name="search" size={45} color="#F5960D" />}
+          rightIcon={<Icon name="search" size={30} color="#252525" />}
         />
       </View>
       <MapView
-        style={{ width: '100%', height: '35%' }}
+        style={{ width: '100%', height: '45%' }}
         // style={{ flex: 1 }}
         initialRegion={{
           latitude: 48.866667,
@@ -45,7 +45,9 @@ function SearchScreen(props) {
           longitudeDelta: 0.0421,
         }}
       />
-      <Text style={styles.title}>Around Me</Text>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={styles.title}>Around Me</Text>
+      </View>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
         <View style={styles.container}>
           <BookDetails
@@ -76,23 +78,24 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E202A',
+    backgroundColor: '#DBE6E7',
     justifyContent: 'center',
     width: '100%',
     height: '100%',
+    // justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    color: '#ffff',
+    color: '#252525',
     margin: 10,
     fontSize: 20,
+    fontWeight: 'bold',
   },
   search: {
     backgroundColor: 'white',
-    // width: '90%',
+    width: '90%',
     height: 50,
-    // marginLeft: 15,
-    // marginRight: 15,
-    // marginTop: 30,
+
     margin: 10,
     marginTop: 40,
     borderRadius: 30,

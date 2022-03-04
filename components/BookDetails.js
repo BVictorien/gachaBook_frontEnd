@@ -13,22 +13,22 @@ export default class BookDetails extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={styles.bookItem}
+        style={[styles.bookItem, styles.shadowCard]}
         onPress={() => this.props.navigation.navigate('BookScreen')}
       >
         <Card.Divider />
         <Image
           style={styles.image}
           resizeMode="cover"
-          source={require('../assets/favicon.png')}
+          source={require('../assets/nicolas.jpg')}
         />
         <View>
           <Text style={styles.name}>Titre</Text>
           <Text style={styles.description}>Descriptions du livre</Text>
         </View>
         <View style={styles.icons}>
-          <Ionicons name={(iconName = 'heart')} size={25} color={'#F5960D'} />
-          <Ionicons name={(iconName = 'basket')} size={25} color={'#fff'} />
+          <Ionicons name={(iconName = 'basket')} size={20} color={'#252525'} />
+          <Ionicons name={(iconName = 'heart')} size={20} color={'red'} />
         </View>
         <Card.Divider />
       </TouchableOpacity>
@@ -38,24 +38,39 @@ export default class BookDetails extends Component {
 //////////////////////////////////////Styles///////////////////////////////////////////////
 const styles = StyleSheet.create({
   bookItem: {
-    backgroundColor: '#1E202A',
+    backgroundColor: '#CADCE6',
     flexDirection: 'row',
     marginBottom: 6,
-    padding: 10,
+    // padding: 10,
+    borderBottomLeftRadius: 50,
+    borderTopLeftRadius: 50,
+    width: '95%',
   },
   name: {
-    color: '#fff',
+    color: '#252525',
+    padding: 5,
+    fontWeight: 'bold',
   },
   description: {
-    color: '#fff',
+    color: '#252525',
+    paddingLeft: 5,
   },
   icons: {
     marginLeft: 'auto',
-    color: '#fff',
+    color: '#252525',
+    flexDirection: 'row',
+    padding: 5,
   },
   image: {
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
     marginRight: 10,
+    borderRadius: 50,
+  },
+  shadowCard: {
+    shadowColor: '#171717',
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 });

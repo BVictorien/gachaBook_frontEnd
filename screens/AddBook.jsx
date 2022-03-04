@@ -1,33 +1,33 @@
 //////////////////////////////////////////IMPORT//////////////////////////////////////////////////
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { View, Image, StyleSheet, ScrollView } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
-import { connect } from "react-redux";
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 //////////////////////////////////////////Function//////////////////////////////////////////////////
 
 function AddBook(props) {
   ///////////////////////////////State declaration, VARS /////////////////////////
-  const [titre, setTitre] = useState("");
-  const [auteur, setAuteur] = useState("");
-  const [description, setDescription] = useState("");
-  const [langue, setLangue] = useState("");
-  const [nbPages, setNbPages] = useState("");
-  const [editeur, setEditeur] = useState("");
-  const [annee, setAnnee] = useState("");
-  const [codeBarre, setCodeBarre] = useState("");
+  const [titre, setTitre] = useState('');
+  const [auteur, setAuteur] = useState('');
+  const [description, setDescription] = useState('');
+  const [langue, setLangue] = useState('');
+  const [nbPages, setNbPages] = useState('');
+  const [editeur, setEditeur] = useState('');
+  const [annee, setAnnee] = useState('');
+  const [codeBarre, setCodeBarre] = useState('');
   const [disponibilite, setDisponibilite] = useState(true);
-  const [condition, setCondition] = useState("");
-  const [prix, setPrix] = useState("");
+  const [condition, setCondition] = useState('');
+  const [prix, setPrix] = useState('');
 
   //////////////////////////////Methods //////////////////////////////////////
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch("http://192.168.10.132:3000/save-book", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    let response = await fetch('http://192.168.10.132:3000/save-book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}`,
     });
   }
@@ -49,93 +49,96 @@ function AddBook(props) {
       <Text
         style={styles.backText}
         onPress={() => {
-          props.navigation.navigate("BottomNavigator");
+          props.navigation.navigate('BottomNavigator');
         }}
       >
         back
       </Text>
       <ScrollView>
-        <View style={styles.barreButton}>
-          <Text style={styles.ajoutText}>Ajouter un Livre</Text>
+        <View style={styles.logo}>
           <Image
-            style={{ width: "90%" }}
-            source={require("../assets/code-barre.png")}
+            style={styles.imagelogo}
+            source={require('../assets/pic4.png')}
           />
+        </View>
+        <View style={styles.barreButton}>
+          {/* <Text style={styles.ajoutText}>Ajouter un Livre</Text> */}
+          <Image style={styles.image} source={require('../assets/giphy.gif')} />
           <Button
             buttonStyle={styles.button}
             title="Scanner le Livre"
-            onPress={() => props.navigation.navigate("ScanCode")}
+            onPress={() => props.navigation.navigate('ScanCode')}
           />
         </View>
-        <View style={{ marginTop: 19 }}>
+        <View style={styles.containerInput}>
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Titre"
+            placeholder="   Titre"
             value={titre}
             onChangeText={(x) => setTitre(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Auteur"
+            placeholder="   Auteur"
             value={auteur}
             onChangeText={(x) => setAuteur(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Description"
+            placeholder="   Description"
             value={description}
             onChangeText={(x) => setDescription(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Langue"
+            placeholder="   Langue"
             value={langue}
             onChangeText={(x) => setLangue(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Nombre de pages"
+            placeholder="   Nombre de pages"
             value={nbPages}
             onChangeText={(x) => setNbPages(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Editeur"
+            placeholder="   Editeur"
             value={editeur}
             onChangeText={(x) => setEditeur(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Annee"
+            placeholder="   Annee"
             value={annee}
             onChangeText={(x) => setAnnee(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Code-barre"
+            placeholder="   Code-barre"
             value={codeBarre}
             onChangeText={(x) => setCodeBarre(x)}
           />
 
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Etat du livre"
+            placeholder="   Etat du livre"
             value={condition}
             onChangeText={(x) => setCondition(x)}
           />
           <Input
-            containerStyle={{ width: 370 }}
+            containerStyle={{ width: 350 }}
             inputStyle={styles.input}
-            placeholder="Prix"
+            placeholder="   Prix"
             value={prix}
             onChangeText={(x) => setPrix(x)}
           />
@@ -158,44 +161,65 @@ function AddBook(props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#1E202A",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    marginTop: 30,
+    backgroundColor: '#DBE6E7',
+    justifyContent: 'center',
+    // marginTop: 30,
+    width: '100%',
+    height: '100%',
   },
   backText: {
     marginTop: 15,
-    color: "#F5960D",
-    marginRight: "auto",
-    marginLeft: 30,
-    marginBottom: 15,
+    color: '#007576',
+    marginTop: 50,
+    marginRight: 'auto',
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   ajoutText: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   barreButton: {
-    backgroundColor: "white",
-    alignItems: "center",
-
+    backgroundColor: '#F2F2F2',
+    alignItems: 'center',
+    // width: '90%',
     borderRadius: 5,
+    // alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: 150,
+    height: 120,
   },
   button: {
-    backgroundColor: "#F5960D",
+    backgroundColor: '#007576',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   input: {
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   photoButton: {
-    backgroundColor: "#F5960D",
+    backgroundColor: '#007576',
     borderRadius: 50,
     width: 350,
     marginBottom: 20,
     marginLeft: 10,
+  },
+  logo: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+    width: '100%',
+  },
+  containerInput: {
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
