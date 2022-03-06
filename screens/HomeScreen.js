@@ -10,12 +10,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function HomeScreen(props) {
   /////////////////////////////////////States and var///////////////////////////////////////
   let logout;
+  let lastBooks = [];
   const [search, setSearch] = useState("");
+  const [last, setLast] = useState([]);
+
+  /////////////////////////////////////Methods///////////////////////////////////
+  /*--------------------------------------------------*/
   const updateSearch = (search) => {
     setSearch(search);
   };
-  /////////////////////////////////////Methods///////////////////////////////////
-  /*--------------------------------------------------*/
   const handleSearch = () => {
     // console.log('Test réussi')
     props.navigation.navigate("BottomNavigator", { screen: "Search" });
@@ -37,17 +40,18 @@ function HomeScreen(props) {
     </Text>
   );
 
-  const BookDetailsCard = () => {
+  const BookDetailsCard = (x, y) => {
     return (
       <View style={styles.homeBook}>
         <Image
           onPress={() => props.navigation.navigate("BookScreen")}
           style={styles.imageBook}
           resizeMode="cover"
-          s
-          source={require("../assets/nicolas.jpg")}
+          source={{
+            uri: x,
+          }}
         />
-        <Text style={styles.titleCard}>Title</Text>
+        <Text style={styles.titleCard}>{y}</Text>
         <View style={styles.descriptionCard}>
           <Text style={styles.priceCard}>$19.99</Text>
           <Text style={styles.kmCard}>7km</Text>
@@ -82,6 +86,22 @@ function HomeScreen(props) {
       </Text>
     );
   }
+  /*--------------------------------------------------*/
+  useEffect(() => {
+    let fechedLastBooks = async () => {
+      let data = await fetch(`http:/192.168.1.169:3000/latest-books`);
+      lastBooks = await data.json();
+
+      console.log("LAST BOOKS", lastBooks);
+    };
+    fechedLastBooks();
+  }, []);
+  /*--------------------------------------------------*/
+  const viw = () => {
+    for (let i = 0; i < lastBooks.length; i++) {
+      BookDetailsCard(lastBooks.title, lastBooks.image);
+    }
+  };
   /*--------------------------------------------------*/
   /////////////////////////////////////Return/////////////////////////////////////
   return (
@@ -127,22 +147,30 @@ function HomeScreen(props) {
           <Text style={styles.title}>Livres en ventes :</Text>
           <ScrollView horizontal={true}>
             <View style={styles.sliderHorizontal}>
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
+              {lastBooks.map((x) => {
+                <View style={styles.homeBook}>
+                  <Image
+                    onPress={() => props.navigation.navigate("BookScreen")}
+                    style={styles.imageBook}
+                    resizeMode="cover"
+                    source={{
+                      uri: x.image,
+                    }}
+                  />
+                  <Text style={styles.titleCard}>{x.title}</Text>
+                  <View style={styles.descriptionCard}>
+                    <Text style={styles.priceCard}>$19.99</Text>
+                    <Text style={styles.kmCard}>7km</Text>
+                  </View>
+                </View>;
+              })}
             </View>
           </ScrollView>
         </View>
         <View>
           <Text style={styles.title}>Prêt de chez vous :</Text>
           <ScrollView horizontal={true}>
-            <View style={styles.sliderHorizontal}>
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-            </View>
+            <View style={styles.sliderHorizontal}></View>
           </ScrollView>
         </View>
       </View>

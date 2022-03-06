@@ -26,7 +26,7 @@ function AddBook(props) {
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch("http://192.168.10.174:3000/save-book", {
+    let response = await fetch("http://192.168.1.169:3000/save-book", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,
