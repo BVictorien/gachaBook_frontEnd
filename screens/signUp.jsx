@@ -14,21 +14,22 @@ function SignUp(props) {
   const [userExists, setUserExists] = useState(false);
   const [listErrorsSignUp, setErrorsSignUp] = useState([]);
 
-  const handleSubmitSignUp = async () => {
-    const data = await fetch('http://192.168.10.107:3000/sign-up', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
-    });
-    const body = await data.json();
-    if (body.result == true) {
-      props.addToken(body.token);
-      setUserExists(true);
-      props.navigation.navigate('SignIn');
-    } else {
-      setErrorsSignUp(body.error);
-    }
-  };
+const handleSubmitSignUp = async () => {
+  const data = await fetch('http://192.168.10.132:3000/sign-up', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&token=${token}`
+  })
+  const body = await data.json()
+  if(body.result == true){
+    props.addToken(body.token)
+    console.log(body.token)
+    setUserExists(true)
+    props.navigation.navigate('SignIn')
+  } else {
+    setErrorsSignUp(body.error)
+  }
+}
 
   let tabErrorSignUp = listErrorsSignUp.map((error, i) => {
     return <Text style={styles.error}>{error}</Text>;

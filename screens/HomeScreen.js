@@ -21,22 +21,6 @@ function HomeScreen(props) {
     props.navigation.navigate("BottomNavigator", { screen: "Search" });
   };
 
-  // isConnected = false;
-  // let logout;
-  // if (isConnected) {
-  //   logout = <Text style={styles.logout}>Déconnexion</Text>
-  // } else {
-  //   logout = <Text style={styles.login}>Connexion</Text>;
-  // }
-  logout = (
-    <Text
-      style={styles.login}
-      onPress={() => props.navigation.navigate("SignIn", { screen: "SignIn" })}
-    >
-      Connexion
-    </Text>
-  );
-
   const BookDetailsCard = () => {
     return (
       <View style={styles.homeBook}>
@@ -44,8 +28,7 @@ function HomeScreen(props) {
           onPress={() => props.navigation.navigate("BookScreen")}
           style={styles.imageBook}
           resizeMode="cover"
-          s
-          source={require("../assets/nicolas.jpg")}
+          source={require('../assets/nicolas.jpg')}
         />
         <Text style={styles.titleCard}>Title</Text>
         <View style={styles.descriptionCard}>
@@ -136,9 +119,11 @@ function HomeScreen(props) {
           </ScrollView>
         </View>
         <View>
-          <Text style={styles.title}>Prêt de chez vous :</Text>
+          <Text style={styles.title}>Près de chez vous :</Text>
           <ScrollView horizontal={true}>
             <View style={styles.sliderHorizontal}>
+              <BookDetailsCard />
+              <BookDetailsCard />
               <BookDetailsCard />
               <BookDetailsCard />
               <BookDetailsCard />
@@ -221,8 +206,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-/////////////////////////////////////Redux////////////////////////////////////////////
-/*---------------------------------------------*/
+
 function mapStateToProps(state) {
   return {
     token: state.token,
@@ -243,6 +227,9 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "disconnect3",
       });
+    },
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
     },
   };
 }
