@@ -1,47 +1,48 @@
 //////////////////////////////////////////IMPORT//////////////////////////////////////////////////
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
-import { View, Image, StyleSheet, ScrollView } from "react-native";
-import { Button, Input, Text } from "react-native-elements";
-import { connect } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //////////////////////////////////////////Function//////////////////////////////////////////////////
 
 function AddBook(props) {
   ///////////////////////////////State declaration, VARS /////////////////////////
-  const [titre, setTitre] = useState("");
-  const [auteur, setAuteur] = useState("");
-  const [description, setDescription] = useState("");
-  const [langue, setLangue] = useState("");
-  const [nbPages, setNbPages] = useState("");
-  const [editeur, setEditeur] = useState("");
-  const [annee, setAnnee] = useState("");
-  const [codeBarre, setCodeBarre] = useState("");
+  const [titre, setTitre] = useState('');
+  const [auteur, setAuteur] = useState('');
+  const [description, setDescription] = useState('');
+  const [langue, setLangue] = useState('');
+  const [nbPages, setNbPages] = useState('');
+  const [editeur, setEditeur] = useState('');
+  const [annee, setAnnee] = useState('');
+  const [codeBarre, setCodeBarre] = useState('');
   const [disponibilite, setDisponibilite] = useState(true);
-  const [condition, setCondition] = useState("");
-  const [prix, setPrix] = useState("");
-  const [imageLink, setImagelink] = useState("");
+  const [condition, setCondition] = useState('');
+  const [prix, setPrix] = useState('');
+  const [imageLink, setImagelink] = useState('');
 
   //////////////////////////////Methods //////////////////////////////////////
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch("http://192.168.10.144:3000/save-book", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    let response = await fetch('http://192.168.10.144:3000/save-book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,
     });
-    setTitre("");
-    setAuteur("");
-    setDescription("");
-    setLangue("");
-    setNbPages("");
-    setEditeur("");
-    setAnnee("");
-    setCodeBarre("");
-    setCondition("");
-    setPrix("");
-    setImagelink("");
+    setTitre('');
+    setAuteur('');
+    setDescription('');
+    setLangue('');
+    setNbPages('');
+    setEditeur('');
+    setAnnee('');
+    setCodeBarre('');
+    setCondition('');
+    setPrix('');
+    setImagelink('');
 
     const hihi = async () => {
       let fechedUserBooks = await fetch(
@@ -49,24 +50,24 @@ function AddBook(props) {
       );
       let userBooks = await fechedUserBooks.json();
 
-      AsyncStorage.setItem("userBooks", JSON.stringify(userBooks));
-      props.navigation.navigate("BottomNavigator");
+      AsyncStorage.setItem('userBooks', JSON.stringify(userBooks));
+      props.navigation.navigate('BottomNavigator');
     };
     hihi();
   }
   /*------------------------------------------------------*/
   useEffect(() => {
-    setTitre("");
-    setAuteur("");
-    setDescription("");
-    setLangue("");
-    setNbPages("");
-    setEditeur("");
-    setAnnee("");
-    setCodeBarre("");
-    setCondition("");
-    setPrix("");
-    setImagelink("");
+    setTitre('');
+    setAuteur('');
+    setDescription('');
+    setLangue('');
+    setNbPages('');
+    setEditeur('');
+    setAnnee('');
+    setCodeBarre('');
+    setCondition('');
+    setPrix('');
+    setImagelink('');
 
     if (props.bookDetails[0] != undefined) {
       setTitre(props.bookDetails[0].title);
@@ -82,28 +83,29 @@ function AddBook(props) {
   ///////////////////////////////Return////////////////////////////////////////
   return (
     <View style={styles.background}>
-      <Text
-        style={styles.backText}
+      <Ionicons
         onPress={() => {
-          props.navigation.navigate("BottomNavigator");
+          props.navigation.navigate('BottomNavigator');
         }}
-      >
-        back
-      </Text>
+        name={(iconName = 'arrow-back')}
+        size={20}
+        color={'#007576'}
+        style={styles.backText}
+      />
       <ScrollView>
         <View style={styles.logo}>
           <Image
             style={styles.imagelogo}
-            source={require("../assets/pic4.png")}
+            source={require('../assets/pic4.png')}
           />
         </View>
         <View style={styles.barreButton}>
           {/* <Text style={styles.ajoutText}>Ajouter un Livre</Text> */}
-          <Image style={styles.image} source={require("../assets/giphy.gif")} />
+          <Image style={styles.image} source={require('../assets/giphy.gif')} />
           <Button
             buttonStyle={styles.button}
             title="Scanner le Livre"
-            onPress={() => props.navigation.navigate("ScanCode")}
+            onPress={() => props.navigation.navigate('ScanCode')}
           />
         </View>
         <View style={styles.containerInput}>
@@ -187,7 +189,7 @@ function AddBook(props) {
             buttonStyle={styles.photoButton}
             title="Ajouter le Livre"
             onPress={() => {
-              saveBook();
+              saveBook(), props.navigation.navigate('BottomNavigator');
             }}
           />
         </View>
@@ -200,65 +202,65 @@ function AddBook(props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#DBE6E7",
-    justifyContent: "center",
+    backgroundColor: '#DBE6E7',
+    justifyContent: 'center',
     // marginTop: 30,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   backText: {
     marginTop: 15,
-    color: "#007576",
+    color: '#007576',
     marginTop: 50,
-    marginRight: "auto",
+    marginRight: 'auto',
     marginLeft: 20,
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   ajoutText: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   barreButton: {
-    backgroundColor: "#F2F2F2",
-    alignItems: "center",
+    backgroundColor: '#F2F2F2',
+    alignItems: 'center',
     // width: '90%',
     borderRadius: 5,
     // alignItems: 'center',
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   image: {
     width: 150,
     height: 120,
   },
   button: {
-    backgroundColor: "#007576",
+    backgroundColor: '#007576',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   input: {
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   photoButton: {
-    backgroundColor: "#007576",
+    backgroundColor: '#007576',
     borderRadius: 50,
     width: 350,
     marginBottom: 20,
     marginLeft: 10,
   },
   logo: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,
-    width: "100%",
+    width: '100%',
   },
   containerInput: {
     marginTop: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
