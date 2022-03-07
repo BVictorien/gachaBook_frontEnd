@@ -39,6 +39,17 @@ function SignIn(props) {
         AsyncStorage.setItem("userBooks", JSON.stringify(userBooks));
       };
       hihi();
+
+      const haha = async () => {
+        let fechedUserWishlist = await fetch(
+          `http://192.168.10.144:3000/user-wishList?userId=${body.userId}`
+        );
+        let userWishList = await fechedUserWishlist.json();
+
+        AsyncStorage.setItem("userWishList", JSON.stringify(userWishList));
+      };
+      haha();
+
       props.navigation.navigate("BottomNavigator");
     } else {
       setErrorsSignIn(body.error);

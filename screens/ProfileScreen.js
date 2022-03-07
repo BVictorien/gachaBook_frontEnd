@@ -1,8 +1,16 @@
 /////////////////////////////////////IMPORTS//////////////////////////////////////////////////////////
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
-import { Input } from "react-native-elements";
+import { Input, Card } from "react-native-elements";
 
+import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import Svg, { G, Circle } from "react-native-svg";
@@ -28,18 +36,10 @@ const ProfileScreen = (props) => {
   const displacementPoints =
     circleCircumference - (circleCircumference * points) / 100;
 
-  var myImage;
-
-  var array = [];
-  var arrayTest = [
-    { text: "ahhahahahah" },
-    { text: "ahhahahahah" },
-    { text: "ahhahahahah" },
-    { text: "ahhahahahah" },
-  ];
   /////////////////////////////////////State declarations//////////////////////////////
   const [refresh, setRefresh] = useState(false);
   const [myBooks, setMyBooks] = useState([]);
+  const [wishList, setWishList] = useState([]);
 
   /////////////////////////////////////Methodes/////////////////////////////////////////
   /*-------------------------------------------------------*/
@@ -48,7 +48,21 @@ const ProfileScreen = (props) => {
       let booklist = JSON.parse(data);
       setMyBooks(booklist);
     });
-    console.log(myBooks);
+
+    const haha = async () => {
+      let fechedUserWishlist = await fetch(
+        `http://192.168.10.144:3000/user-wishList?userId=${props.userId}`
+      );
+      let userWishList = await fechedUserWishlist.json();
+
+      AsyncStorage.setItem("userWishList", JSON.stringify(userWishList));
+    };
+    haha();
+
+    AsyncStorage.getItem("userWishList", function (error, data) {
+      let userWishList = JSON.parse(data);
+      setWishList(userWishList);
+    });
   }, [refresh]);
   /*-------------------------------------------------------*/
   const view = myBooks.map((x, i) => {
@@ -65,24 +79,31 @@ const ProfileScreen = (props) => {
     );
   });
   /*-------------------------------------------------------*/
-  // useEffect(() => {
-  //   const fetchBook = async () => {
-  //     let userBooks = await fetch(
-  //       `http://192.168.1.169:3000/get-user-books?userId=${props.userId}`
-  //     );
-  //     setMyBooks(await userBooks.json());
-  //   };
-  //   fetchBook();
-  //   AsyncStorage.getItem("userBooks", function (error, data) {
-  //     console.log("STATE myBOoks", myBooks);
-  //     setMybookList(JSON.parse(data));
-  //   });
-  //   console.log("asyncSTO", myBookList);
-  //   // setListView(
-
-  //   // );
-  // }, [refresh]);
-
+  const view2 = wishList.map((x, i) => {
+    return (
+      <TouchableOpacity
+        key={i}
+        style={[styles.bookItem, styles.shadowCard]}
+        onPress={() => props.navigation.navigate("BookScreen")}
+      >
+        <Card.Divider />
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: x.image }}
+        />
+        <View>
+          <Text style={styles.name}>{x.title}</Text>
+          <Text style={styles.description}>{x.author}</Text>
+        </View>
+        <View style={styles.icons}>
+          <Ionicons name={(iconName = "basket")} size={20} color={"#252525"} />
+          <Ionicons name={(iconName = "heart")} size={20} color={"red"} />
+        </View>
+        <Card.Divider />
+      </TouchableOpacity>
+    );
+  });
   //   /*-------------------------------------------------------*/
 
   /////////////////////////////////////Return///////////////////////////////////////////////////////////
@@ -246,24 +267,7 @@ const ProfileScreen = (props) => {
           <View style={styles.sliderHorizontal}>{view}</View>
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
-        <View style={styles.containerFavorites}>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
-          ></BookDetails>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
-          ></BookDetails>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
-          ></BookDetails>
-          <BookDetails
-            navigation={props.navigation}
-            style={{ width: "100%", height: "25%" }}
-          ></BookDetails>
-        </View>
+        <View style={styles.containerFavorites}>{view2}</View>
       </ScrollView>
     </View>
   );
@@ -366,6 +370,12 @@ const styles = StyleSheet.create({
     margin: 5,
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+  image: {
+    width: 60,
+    height: 60,
+    marginRight: 10,
+    borderRadius: 50,
   },
   // containerFavorites: {
   //   justifyContent: 'center',

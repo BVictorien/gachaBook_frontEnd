@@ -6,107 +6,14 @@ import LatestBooks from "../components/LatestBooks";
 import NearestBooks from "../components/NearestBooks";
 import { connect } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { FontAwesome } from "@expo/vector-icons";
 function HomeScreen(props) {
   /////////////////////////////////////States and var///////////////////////////////////////
   let logout;
-  
+
   const [search, setSearch] = useState("");
   const [last, setLast] = useState([]);
-  var arrayTest = [
-    {
-      __v: 0,
-      _id: "62223cf602fb57ba75864bc5",
-      author: "Lucien Febvre",
-      barcode: "9782130418795",
-      condition: "",
-      description: "",
-      disponibility: true,
-      editor: "Presses Universitaires de France - PUF",
-      image:
-        "http://books.google.com/books/content?id=vWwpAQAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      importDate: "2022-03-04T16:23:18.659Z",
-      language: "fr",
-      nb_pages: "210",
-      price: "",
-      sellerID: ["621f8666029586e9aebc8ad9"],
-      title: "Martin Luther, un destin",
-      year: "",
-    },
-    {
-      __v: 0,
-      _id: "6220dd156529d6f89749e6a7",
-      author: "Brad Feld",
-      barcode: "9781119594826",
-      condition: "",
-      description: "",
-      disponibility: true,
-      editor: "John Wiley ",
-      image:
-        "http://books.google.com/books/content?id=1jejDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      language: "en",
-      nb_pages: "368",
-      price: "",
-      sellerID: ["621f8666029586e9aebc8ad9"],
-      title: "Venture Deals",
-      year: "",
-    },
-    {
-      __v: 0,
-      _id: "6220dd216529d6f89749e6aa",
-      author: "Olivier Andrieu",
-      barcode: "9782212143614",
-      condition: "",
-      description: "",
-      disponibility: true,
-      editor: "Editions Eyrolles",
-      image:
-        "http://books.google.com/books/content?id=R-dhDAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      language: "fr",
-      nb_pages: "675",
-      price: "",
-      sellerID: ["621f8666029586e9aebc8ad9"],
-      title: "Réussir son référencement web",
-      year: "",
-    },
-    {
-      __v: 0,
-      _id: "6220dd316529d6f89749e6ad",
-      author: "Ilia Alshanetsky",
-      barcode: "9780973862102",
-      condition: "",
-      description: "",
-      disponibility: true,
-      editor: "php/architect NanoBooks",
-      image:
-        "http://books.google.com/books/content?id=qNKbAAAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      language: "en",
-      nb_pages: "197",
-      price: "",
-      sellerID: ["621f8666029586e9aebc8ad9"],
-      title: "PHP Architect's Guide to PHP Security",
-      year: "",
-    },
-    {
-      __v: 0,
-      _id: "6220de546529d6f89749e6ba",
-      author: "E. L. Bisson",
-      barcode: "9781645702238",
-      condition: "",
-      description: "",
-      disponibility: true,
-      editor: "Tamarind Hill Press",
-      image:
-        "http://books.google.com/books/content?id=d9dKxQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      language: "en",
-      nb_pages: "154",
-      price: "",
-      sellerID: ["621f86a0029586e9aebc8add"],
-      title: "Windmills and Wishes",
-      year: "",
-    },
-  ];
-  var array = [];
+  const [refresh, setRefresh] = useState(false);
 
   /////////////////////////////////////Methods///////////////////////////////////
   /*--------------------------------------------------*/
@@ -119,22 +26,6 @@ function HomeScreen(props) {
     props.navigation.navigate("BottomNavigator", { screen: "Search" });
   };
 
-  // isConnected = false;
-  // let logout;
-  // if (isConnected) {
-  //   logout = <Text style={styles.logout}>Déconnexion</Text>
-  // } else {
-  //   logout = <Text style={styles.login}>Connexion</Text>;
-  // }
-  /*--------------------------------------------------*/
-  logout = (
-    <Text
-      style={styles.login}
-      onPress={() => props.navigation.navigate("SignIn", { screen: "SignIn" })}
-    >
-      Connexion
-    </Text>
-  );
   /*--------------------------------------------------*/
   const BookDetailsCard = (x, y) => {
     return (
@@ -190,7 +81,7 @@ function HomeScreen(props) {
       console.log("ARRRRRRAAAYYYYYY", lastBooks);
     };
     fechedLastBooks();
-  }, []);
+  }, [refresh]);
   /*--------------------------------------------------*/
   const viw = last.map((lastbook, i) => {
     return (
@@ -251,7 +142,15 @@ function HomeScreen(props) {
         <View style={styles.logo}>
           <Image style={styles.image} source={require("../assets/pic1.png")} />
         </View>
-
+        <View>
+          <FontAwesome
+            name="refresh"
+            size={35}
+            color="#FFF"
+            style={{ marginRight: 35, marginTop: 5 }}
+            onPress={() => setRefresh(!refresh)}
+          />
+        </View>
         <View>
           <Text style={styles.title}>Livres en ventes :</Text>
           <ScrollView horizontal={true}>

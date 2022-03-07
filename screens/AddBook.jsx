@@ -50,6 +50,7 @@ function AddBook(props) {
       let userBooks = await fechedUserBooks.json();
 
       AsyncStorage.setItem("userBooks", JSON.stringify(userBooks));
+      props.navigation.navigate("BottomNavigator");
     };
     hihi();
   }
@@ -186,7 +187,7 @@ function AddBook(props) {
             buttonStyle={styles.photoButton}
             title="Ajouter le Livre"
             onPress={() => {
-              saveBook(), props.navigation.navigate("BottomNavigator");
+              saveBook();
             }}
           />
         </View>
