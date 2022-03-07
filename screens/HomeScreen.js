@@ -106,7 +106,7 @@ function HomeScreen(props) {
         <Text style={styles.titleCard}>{lastbook.title}</Text>
         <View style={styles.descriptionCard}>
           <Text style={styles.priceCard}>$19.99</Text>
-          <Text style={styles.kmCard}>7km</Text>
+          <Text style={styles.kmCard}></Text>
         </View>
       </View>
     );
@@ -161,7 +161,7 @@ function HomeScreen(props) {
           />
         </View>
         <View>
-          <Text style={styles.title}>Livres en ventes :</Text>
+          <Text style={styles.title}>Dernier livres mise en ventes :</Text>
           <ScrollView horizontal={true}>
             <View style={styles.sliderHorizontal}>{viw}</View>
           </ScrollView>
