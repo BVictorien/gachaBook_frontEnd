@@ -10,7 +10,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { connect} from 'react-redux';
 
 import socketIOClient from "socket.io-client";
-var socket = socketIOClient("http://192.168.10.124:3000");
+var socket = socketIOClient("http://192.168.10.132:3000");
 
 const ChatScreen = (props) => {
 
