@@ -9,12 +9,8 @@ import { Input, Text, Icon, ListItem } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import { GiftedChat, InputToolbar, Bubble } from 'react-native-gifted-chat';
 
-<<<<<<< HEAD
 import socketIOClient from 'socket.io-client';
 var socket = socketIOClient('http://192.168.10.107:3000');
-=======
-var socket = socketIOClient("http://192.168.10.17:3000");
->>>>>>> book-thumb-dina
 
 const ChatScreen = (props) => {
   /* const [currentMessage, setCurrentMessage] = useState();

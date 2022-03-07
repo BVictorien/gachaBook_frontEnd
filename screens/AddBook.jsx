@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, ScrollView } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
 
 //////////////////////////////////////////Function//////////////////////////////////////////////////
 
@@ -18,44 +19,44 @@ function AddBook(props) {
   const [annee, setAnnee] = useState('');
   const [codeBarre, setCodeBarre] = useState('');
   const [disponibilite, setDisponibilite] = useState(true);
-  const [condition, setCondition] = useState("");
-  const [prix, setPrix] = useState("");
-  const [imageLink, setImagelink] = useState("");
+  const [condition, setCondition] = useState('');
+  const [prix, setPrix] = useState('');
+  const [imageLink, setImagelink] = useState('');
 
   //////////////////////////////Methods //////////////////////////////////////
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch("http://192.168.10.174:3000/save-book", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    let response = await fetch('http://192.168.10.174:3000/save-book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,
     });
-    setTitre("");
-    setAuteur("");
-    setDescription("");
-    setLangue("");
-    setNbPages("");
-    setEditeur("");
-    setAnnee("");
-    setCodeBarre("");
-    setCondition("");
-    setPrix("");
-    setImagelink("");
+    setTitre('');
+    setAuteur('');
+    setDescription('');
+    setLangue('');
+    setNbPages('');
+    setEditeur('');
+    setAnnee('');
+    setCodeBarre('');
+    setCondition('');
+    setPrix('');
+    setImagelink('');
   }
   /*------------------------------------------------------*/
   useEffect(() => {
-    setTitre("");
-    setAuteur("");
-    setDescription("");
-    setLangue("");
-    setNbPages("");
-    setEditeur("");
-    setAnnee("");
-    setCodeBarre("");
-    setCondition("");
-    setPrix("");
-    setImagelink("");
+    setTitre('');
+    setAuteur('');
+    setDescription('');
+    setLangue('');
+    setNbPages('');
+    setEditeur('');
+    setAnnee('');
+    setCodeBarre('');
+    setCondition('');
+    setPrix('');
+    setImagelink('');
 
     if (props.bookDetails[0] != undefined) {
       setTitre(props.bookDetails[0].title);
@@ -71,14 +72,15 @@ function AddBook(props) {
   ///////////////////////////////Return////////////////////////////////////////
   return (
     <View style={styles.background}>
-      <Text
-        style={styles.backText}
+      <Ionicons
         onPress={() => {
           props.navigation.navigate('BottomNavigator');
         }}
-      >
-        back
-      </Text>
+        name={(iconName = 'arrow-back')}
+        size={20}
+        color={'#007576'}
+        style={styles.backText}
+      />
       <ScrollView>
         <View style={styles.logo}>
           <Image
@@ -176,7 +178,7 @@ function AddBook(props) {
             buttonStyle={styles.photoButton}
             title="Ajouter le Livre"
             onPress={() => {
-              saveBook(), props.navigation.navigate("BottomNavigator");
+              saveBook(), props.navigation.navigate('BottomNavigator');
             }}
           />
         </View>

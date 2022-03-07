@@ -1,58 +1,72 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Image, Button } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 function BookScreen(props) {
   return (
     <View style={styles.container}>
-      <View style={styles.containerBook}>
-        <Text
+      <View style={styles.headNavigation}>
+        <Ionicons
           onPress={() => {
             props.navigation.navigate('BottomNavigator');
           }}
+          name={(iconName = 'arrow-back')}
+          size={30}
+          color={'#007576'}
           style={styles.textBack}
-        >
-          back
-        </Text>
-        <View style={styles.imageView}>
-          <Image>
-            <Image
-              style={styles.image}
-              resizeMode="cover"
-              source={require('../assets/favicon.png')}
-            />
-          </Image>
-        </View>
-        <View style={styles.navigation}>
-          <View style={styles.link}>
-            <Text style={{ color: '#fff' }}>Propre</Text>
-            <Text style={{ color: 'rgba(192, 195, 219,0.24)' }}>Etat</Text>
-          </View>
-          <Text style={styles.barre}>|</Text>
-          <View style={styles.link}>
-            <Text style={{ color: '#fff' }}>400</Text>
-            <Text style={{ color: 'rgba(192, 195, 219,0.24)' }}>
-              Nombre de page
-            </Text>
-          </View>
-          <Text style={styles.barre}>|</Text>
-          <View style={styles.link}>
-            <Text style={{ color: '#fff' }}>Fr</Text>
-            <Text style={{ color: 'rgba(192, 195, 219,0.24)' }}>Langage</Text>
-          </View>
-          <Text style={styles.barre}>|</Text>
-          <View style={styles.link}>
-            <Text style={{ color: '#fff' }}>5</Text>
-            <Text style={{ color: 'rgba(192, 195, 219,0.24)' }}>Points</Text>
-          </View>
-        </View>
+        />
+        <Ionicons
+          style={styles.heart}
+          name={(iconName = 'heart')}
+          size={30}
+          color={'red'}
+        />
       </View>
+      <View style={styles.containerBook}>
+        <Image>
+          <Image
+            style={styles.image}
+            resizeMode="cover"
+            source={require('../assets/pillars.png')}
+          />
+        </Image>
+      </View>
+      <View style={styles.containerbois}>
+        <Image
+          style={styles.imageBois}
+          resizeMode="cover"
+          source={require('../assets/bois.png')}
+        />
+      </View>
+      <View style={styles.imageView}></View>
       <View style={styles.containerDetails}>
-        <View>
+        <View style={styles.bookdetails}>
           <Text style={styles.name}>Titre</Text>
           <Text style={styles.author}>Author</Text>
+          <View style={styles.navigation}>
+            <View style={styles.link}>
+              <Text style={{ color: '#949494' }}>Propre</Text>
+              <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Etat</Text>
+            </View>
+            <Text style={styles.barre}>|</Text>
+            <View style={styles.link}>
+              <Text style={{ color: '#949494' }}>400</Text>
+              <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>
+                Nombre de page
+              </Text>
+            </View>
+            <Text style={styles.barre}>|</Text>
+            <View style={styles.link}>
+              <Text style={{ color: '#949494' }}>Fr</Text>
+              <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Langage</Text>
+            </View>
+            <Text style={styles.barre}>|</Text>
+            <View style={styles.link}>
+              <Text style={{ color: '#949494' }}>5</Text>
+              <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Points</Text>
+            </View>
+          </View>
           <Text style={styles.description}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
             amet perferendis nobis, nesciunt voluptas aut quasi veritatis
@@ -67,7 +81,6 @@ function BookScreen(props) {
         </View>
 
         <View style={styles.icons}>
-          <Ionicons name={(iconName = 'heart')} size={25} color={'red'} />
           <Ionicons name={(iconName = 'basket')} size={25} color={'grey'} />
         </View>
       </View>
@@ -81,55 +94,64 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#DBE6E7',
-    // backgroundColor: 'rgba(192, 195, 219,0.24)',
 
     color: '#fff',
-    // justifyContent: 'center',
-    // marginTop: 30,
-    width: '100%',
     height: '100%',
   },
-  containerBook: {
-    backgroundColor: '#1E202A',
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+  headNavigation: {
+    flexDirection: 'row',
   },
-  // buttonBack: {
-  //   color: '#F5960D',
-  //   margin: 10,
-  // },
+  heart: {
+    marginTop: 15,
+    marginRight: 20,
+    marginLeft: 'auto',
+    paddingTop: 30,
+  },
+  containerBook: {
+    alignItems: 'center',
+    marginTop: 15,
+    justifyContent: 'center',
+  },
+  containerbois: {},
   imageView: {
     alignItems: 'center',
     margin: 20,
   },
   image: {
     width: 200,
-    height: 200,
-    marginRight: 10,
+    height: 300,
+  },
+  imageBois: {
+    alignItems: 'center',
+    padding: 20,
   },
   navigation: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(192, 195, 219,0.24)',
+    backgroundColor: 'rgba(245, 245, 245,0.53)',
     padding: 15,
     marginBottom: 20,
     margin: 25,
     borderRadius: 20,
   },
   link: {
-    // flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
   },
 
   containerDetails: {
     margin: 10,
+    marginTop: -10,
     flexDirection: 'row',
   },
-
+  bookdetails: {
+    alignItems: 'center',
+  },
   name: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 21,
   },
   author: {
     color: 'grey',
@@ -148,6 +170,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: 10,
     alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   barre: {
     backgroundColor: 'black',
