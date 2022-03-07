@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text, Card } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 
 const BookDetailsCard = () => {
   return (
@@ -32,14 +33,15 @@ const BookDetailsCard = () => {
 function PaymentEnCours(props) {
   return (
     <View style={styles.background}>
-      <Text
+      <Ionicons
         onPress={() => {
           props.navigation.navigate('BottomNavigator');
         }}
+        name={(iconName = 'arrow-back')}
+        size={20}
+        color={'#007576'}
         style={styles.textBack}
-      >
-        back
-      </Text>
+      />
       <View style={styles.logo}>
         <Image style={styles.image} source={require('../assets/pic7.png')} />
         {/* <Text style={styles.title}>Inscription</Text> */}

@@ -2,27 +2,34 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 
 //////////////////////////////////////Function///////////////////////////////////////////////
 function PaymentCard(props) {
   return (
     <View style={styles.background}>
-      <Text
+      {/* <Text
         onPress={() => {
           props.navigation.navigate('Store');
         }}
         style={styles.textBack}
       >
         back
-      </Text>
+      </Text> */}
+      <Ionicons
+        onPress={() => {
+          props.navigation.navigate('Store');
+        }}
+        name={(iconName = 'arrow-back')}
+        size={20}
+        color={'#007576'}
+        style={styles.textBack}
+      />
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image style={styles.image} source={require('../assets/pic6.png')} />
         </View>
-        {/* <Image
-          style={styles.image}
-          source={require('../assets/credit-card-payment-bank.png')}
-        /> */}
+
         <Input
           containerStyle={{ width: 370 }}
           inputStyle={styles.input}

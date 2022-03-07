@@ -2,19 +2,21 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 
 //////////////////////////////////////Function///////////////////////////////////////////////
 function Store(props) {
   return (
     <View style={styles.background}>
-      <Text
+      <Ionicons
         onPress={() => {
           props.navigation.navigate('BottomNavigator');
         }}
+        name={(iconName = 'arrow-back')}
+        size={20}
+        color={'#007576'}
         style={styles.backButton}
-      >
-        back
-      </Text>
+      />
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image style={styles.image} source={require('../assets/pic5.png')} />
