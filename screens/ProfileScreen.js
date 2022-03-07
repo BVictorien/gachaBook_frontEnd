@@ -14,8 +14,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 
 /////////////////////////////////////Functions//////////////////////////////////////////////////////////
-////////////////////////////////////Variable//////////////////////////////
 const ProfileScreen = (props) => {
+  ////////////////////////////////////Variable//////////////////////////////
   const radius = 80;
   const circleCircumference = 2 * Math.PI * radius;
   const coins = 77;
@@ -29,7 +29,7 @@ const ProfileScreen = (props) => {
     circleCircumference - (circleCircumference * points) / 100;
 
   var myImage;
-  var booklist = [];
+
   var array = [];
   var arrayTest = [
     { text: "ahhahahahah" },
@@ -40,19 +40,30 @@ const ProfileScreen = (props) => {
   /////////////////////////////////////State declarations//////////////////////////////
   const [refresh, setRefresh] = useState(false);
   const [myBooks, setMyBooks] = useState([]);
-  
 
   /////////////////////////////////////Methodes/////////////////////////////////////////
   /*-------------------------------------------------------*/
   useEffect(() => {
     AsyncStorage.getItem("userBooks", function (error, data) {
-      booklist = JSON.parse(data);
-      array = Object.keys(booklist).map(function (key) {
-        return booklist[key];
-      });
-      console.log(booklist);
+      let booklist = JSON.parse(data);
+      setMyBooks(booklist);
     });
+    console.log(myBooks);
   }, [refresh]);
+  /*-------------------------------------------------------*/
+  const view = myBooks.map((x, i) => {
+    return (
+      <Image
+        key={i}
+        source={{
+          uri: x.image,
+        }}
+        onPress={() => props.navigation.navigate("BookScreen")}
+        style={styles.imageBook}
+        resizeMode="cover"
+      />
+    );
+  });
   /*-------------------------------------------------------*/
   // useEffect(() => {
   //   const fetchBook = async () => {
@@ -232,19 +243,7 @@ const ProfileScreen = (props) => {
         </View>
         <Text style={styles.title}>Mes livres en ventes :</Text>
         <ScrollView horizontal={true}>
-          <View style={styles.sliderHorizontal}>
-            {arrayTest.map((x) => {
-              <Image
-                source={{
-                  uri: "http://books.google.com/books/content?id=1jejDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-                }}
-                onPress={() => props.navigation.navigate("BookScreen")}
-                style={styles.imageBook}
-                resizeMode="cover"
-              />;
-              <Text>{x.text}</Text>
-            })}
-          </View>
+          <View style={styles.sliderHorizontal}>{view}</View>
         </ScrollView>
         <Text style={styles.title}>Mes Favoris :</Text>
         <View style={styles.containerFavorites}>
