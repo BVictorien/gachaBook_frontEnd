@@ -6,31 +6,39 @@ import LatestBooks from "../components/LatestBooks";
 import NearestBooks from "../components/NearestBooks";
 import { connect } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { FontAwesome } from "@expo/vector-icons";
 function HomeScreen(props) {
   /////////////////////////////////////States and var///////////////////////////////////////
   let logout;
+
   const [search, setSearch] = useState("");
+  const [last, setLast] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+  /////////////////////////////////////Methods///////////////////////////////////
+  /*--------------------------------------------------*/
   const updateSearch = (search) => {
     setSearch(search);
   };
-  /////////////////////////////////////Methods///////////////////////////////////
   /*--------------------------------------------------*/
   const handleSearch = () => {
     // console.log('Test réussi')
     props.navigation.navigate("BottomNavigator", { screen: "Search" });
   };
 
-  const BookDetailsCard = () => {
+  /*--------------------------------------------------*/
+  const BookDetailsCard = (x, y) => {
     return (
       <View style={styles.homeBook}>
         <Image
           onPress={() => props.navigation.navigate("BookScreen")}
           style={styles.imageBook}
           resizeMode="cover"
-          source={require('../assets/nicolas.jpg')}
+          source={{
+            uri: x,
+          }}
         />
-        <Text style={styles.titleCard}>Title</Text>
+        <Text style={styles.titleCard}>{y}</Text>
         <View style={styles.descriptionCard}>
           <Text style={styles.priceCard}>$19.99</Text>
           <Text style={styles.kmCard}>7km</Text>
@@ -38,8 +46,6 @@ function HomeScreen(props) {
       </View>
     );
   };
-
-  // props.navigation.navigate("BottomNavigator", { screen: "Search" });
 
   /*--------------------------------------------------*/
   const disconnect = () => {
@@ -65,6 +71,36 @@ function HomeScreen(props) {
       </Text>
     );
   }
+  /*--------------------------------------------------*/
+  useEffect(() => {
+    let fechedLastBooks = async () => {
+      let data = await fetch(`http:/192.168.10.144:3000/latest-books`);
+
+      let lastBooks = await data.json();
+      setLast(lastBooks);
+    };
+    fechedLastBooks();
+  }, [refresh]);
+  /*--------------------------------------------------*/
+  const viw = last.map((lastbook, i) => {
+    return (
+      <View style={styles.homeBook} key={i}>
+        <Image
+          onPress={() => props.navigation.navigate("BookScreen")}
+          style={styles.imageBook}
+          resizeMode="cover"
+          source={{
+            uri: lastbook.image,
+          }}
+        />
+        <Text style={styles.titleCard}>{lastbook.title}</Text>
+        <View style={styles.descriptionCard}>
+          <Text style={styles.priceCard}>$19.99</Text>
+          <Text style={styles.kmCard}>7km</Text>
+        </View>
+      </View>
+    );
+  });
   /*--------------------------------------------------*/
   /////////////////////////////////////Return/////////////////////////////////////
   return (
@@ -105,29 +141,25 @@ function HomeScreen(props) {
         <View style={styles.logo}>
           <Image style={styles.image} source={require("../assets/pic1.png")} />
         </View>
-
+        <View>
+          <FontAwesome
+            name="refresh"
+            size={35}
+            color="#FFF"
+            style={{ marginRight: 35, marginTop: 5 }}
+            onPress={() => setRefresh(!refresh)}
+          />
+        </View>
         <View>
           <Text style={styles.title}>Livres en ventes :</Text>
           <ScrollView horizontal={true}>
-            <View style={styles.sliderHorizontal}>
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-            </View>
+            <View style={styles.sliderHorizontal}>{viw}</View>
           </ScrollView>
         </View>
         <View>
           <Text style={styles.title}>Près de chez vous :</Text>
           <ScrollView horizontal={true}>
-            <View style={styles.sliderHorizontal}>
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-              <BookDetailsCard />
-            </View>
+            <View style={styles.sliderHorizontal}></View>
           </ScrollView>
         </View>
       </View>
@@ -229,7 +261,7 @@ function mapDispatchToProps(dispatch) {
       });
     },
     addToken: function (token) {
-      dispatch({ type: 'addToken', token: token });
+      dispatch({ type: "addToken", token: token });
     },
   };
 }
