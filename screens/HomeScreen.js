@@ -80,6 +80,16 @@ function HomeScreen(props) {
       setLast(lastBooks);
     };
     fechedLastBooks();
+
+    AsyncStorage.getItem("userId", function (error, data) {
+      let userId = JSON.parse(data);
+      props.getUserId(userId);
+    });
+    AsyncStorage.getItem("userName", function (error, data) {
+      let userName = JSON.parse(data);
+      props.addUsername(userName);
+    });
+    
   }, [refresh]);
   /*--------------------------------------------------*/
   const viw = last.map((lastbook, i) => {
@@ -262,6 +272,12 @@ function mapDispatchToProps(dispatch) {
     },
     addToken: function (token) {
       dispatch({ type: "addToken", token: token });
+    },
+    getUserId: function (userId) {
+      dispatch({ type: "getUserId", userId: userId });
+    },
+    addUsername: function (username) {
+      dispatch({ type: "addUsername", username: username });
     },
   };
 }

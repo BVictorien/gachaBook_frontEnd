@@ -28,7 +28,7 @@ function SignIn(props) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
       props.getUserId(body.user._id);
-      console.log(body.user._id)
+      console.log(body.user._id);
       setUserExists(true);
 
       const hihi = async () => {
@@ -50,6 +50,10 @@ function SignIn(props) {
         AsyncStorage.setItem("userWishList", JSON.stringify(userWishList));
       };
       haha();
+
+      AsyncStorage.setItem("userId", JSON.stringify(body.userId));
+
+      AsyncStorage.setItem("userName", JSON.stringify(body.user.username));
 
       props.navigation.navigate("BottomNavigator");
     } else {
