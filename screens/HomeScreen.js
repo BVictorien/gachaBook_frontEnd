@@ -1,19 +1,31 @@
 /////////////////////////////////////Import//////////////////////////////////////////////
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  SafeAreaView,
+  RefreshControl,
+} from 'react-native';
 import { Input, Text, Icon, Button } from 'react-native-elements';
 import LatestBooks from '../components/LatestBooks';
 import NearestBooks from '../components/NearestBooks';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
+
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
+
 function HomeScreen(props) {
   /////////////////////////////////////States and var///////////////////////////////////////
   let logout;
 
   const [search, setSearch] = useState('');
   const [last, setLast] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   /////////////////////////////////////Methods///////////////////////////////////
   /*--------------------------------------------------*/
@@ -74,7 +86,7 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   useEffect(() => {
     let fechedLastBooks = async () => {
-      let data = await fetch(`http:/192.168.10.144:3000/latest-books`);
+      let data = await fetch(`http:/192.168.10.106:3000/latest-books`);
 
       let lastBooks = await data.json();
       setLast(lastBooks);
@@ -89,20 +101,24 @@ function HomeScreen(props) {
       let userName = JSON.parse(data);
       props.addUsername(userName);
     });
-  }, [refresh]);
+  }, [refreshing]);
   /*--------------------------------------------------*/
   const viw = last.map((lastbook, i) => {
     return (
       <View style={styles.homeBook} key={i}>
         <Image
-          onPress={() => props.navigation.navigate('BookScreen')}
           style={styles.imageBook}
           resizeMode="cover"
           source={{
             uri: lastbook.image,
           }}
         />
-        <Text style={styles.titleCard}>{lastbook.title}</Text>
+        <Text
+          style={styles.titleCard}
+          onPress={() => props.navigation.navigate('BookScreen')}
+        >
+          {lastbook.title}
+        </Text>
         <View style={styles.descriptionCard}>
           <Text style={styles.priceCard}>$19.99</Text>
           <Text style={styles.kmCard}></Text>
@@ -110,69 +126,88 @@ function HomeScreen(props) {
       </View>
     );
   });
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
   /*--------------------------------------------------*/
   /////////////////////////////////////Return/////////////////////////////////////
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.search}>
-          <Text style={{ color: '#252525', fontWeight: 'bold', fontSize: 30 }}>
-            GachaBook
-          </Text>
-          {logout}
-        </View>
-        <View
-          style={{
-            backgroundColor: 'white',
-            width: '90%',
-            height: 50,
-            marginLeft: 15,
-            marginRight: 15,
-            marginTop: 30,
-            borderRadius: 30,
-          }}
-        >
-          <Input
-            placeholder="   Cherchez un livre..."
-            onChangeText={updateSearch}
-            inputContainerStyle={{ borderBottomWidth: 0 }}
-            rightIcon={
-              <Icon
-                name="search"
-                size={30}
-                color="#E9940A"
-                onPress={() => handleSearch()}
-              />
-            }
-          />
-        </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <View style={styles.container}>
+          <View style={styles.search}>
+            <Text
+              style={{ color: '#252525', fontWeight: 'bold', fontSize: 30 }}
+            >
+              GachaBook
+            </Text>
+            {logout}
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 50,
+              marginLeft: 15,
+              marginRight: 15,
+              marginTop: 30,
+              borderRadius: 30,
+            }}
+          >
+            <Input
+              placeholder="   Cherchez un livre..."
+              onChangeText={updateSearch}
+              inputContainerStyle={{ borderBottomWidth: 0 }}
+              rightIcon={
+                <Icon
+                  name="search"
+                  size={30}
+                  color="#007576"
+                  onPress={() => handleSearch()}
+                />
+              }
+            />
+          </View>
 
-        <View style={styles.logo}>
-          <Image style={styles.image} source={require('../assets/pic1.png')} />
+          <View style={styles.logo}>
+            <Image
+              style={styles.image}
+              source={require('../assets/pic1.png')}
+            />
+          </View>
+          {/* <View style={styles.refreshcontainer}>
+            <Text style={{ padding: 5 }}>Raffraichir la page</Text>
+            <FontAwesome
+              name="refresh"
+              size={20}
+              color="black"
+              style={styles.refreshbutton}
+              // style={{ marginLeft: 35, marginTop: 5 }}
+              onPress={() => setRefresh(!refresh)}
+            />
+          </View> */}
+          <View>
+            <Text style={styles.title}>Dernier livres mise en ventes :</Text>
+            <ScrollView horizontal={true}>
+              <View style={styles.sliderHorizontal}>{viw}</View>
+            </ScrollView>
+          </View>
+          <View>
+            <Text style={styles.title}>Près de chez vous :</Text>
+            <ScrollView horizontal={true}>
+              <View style={styles.sliderHorizontal}></View>
+            </ScrollView>
+          </View>
         </View>
-        <View>
-          <FontAwesome
-            name="refresh"
-            size={35}
-            color="#FFF"
-            style={{ marginRight: 35, marginTop: 5 }}
-            onPress={() => setRefresh(!refresh)}
-          />
-        </View>
-        <View>
-          <Text style={styles.title}>Dernier livres mise en ventes :</Text>
-          <ScrollView horizontal={true}>
-            <View style={styles.sliderHorizontal}>{viw}</View>
-          </ScrollView>
-        </View>
-        <View>
-          <Text style={styles.title}>Près de chez vous :</Text>
-          <ScrollView horizontal={true}>
-            <View style={styles.sliderHorizontal}></View>
-          </ScrollView>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
@@ -245,6 +280,15 @@ const styles = StyleSheet.create({
   },
   titleCard: {
     fontWeight: 'bold',
+  },
+  refreshcontainer: {
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  refreshbutton: {
+    // paddingRight: 5,
   },
 });
 

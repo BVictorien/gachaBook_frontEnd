@@ -45,26 +45,26 @@ function SearchScreen(props) {
           longitudeDelta: 0.0421,
         }}
       />
-      <View style={{ alignItems: 'center' }}>
-        <Text style={styles.title}>Around Me</Text>
-      </View>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
-        <View style={styles.container}>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.title}>Autour de moi :</Text>
+        </View>
+        <View style={styles.containerBook}>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            // style={{ width: '100%', height: '25%' }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            // style={{ width: '100%', height: '25%' }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            // style={{ width: '100%', height: '25%' }}
           ></BookDetails>
           <BookDetails
             navigation={props.navigation}
-            style={{ width: '100%', height: '25%' }}
+            // style={{ width: '100%', height: '25%' }}
           ></BookDetails>
         </View>
       </ScrollView>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#DBE6E7',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     width: '100%',
     height: '100%',
     // justifyContent: 'center',

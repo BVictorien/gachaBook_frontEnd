@@ -48,7 +48,7 @@ const CustomSwitch = ({
         >
           <Text
             style={{
-              color: getSelectionMode == 1 ? '#F5960D' : selectionColor,
+              color: getSelectionMode == 1 ? '#007576' : selectionColor,
             }}
           >
             {option1}
@@ -69,7 +69,7 @@ const CustomSwitch = ({
         >
           <Text
             style={{
-              color: getSelectionMode == 2 ? '#F5960D' : selectionColor,
+              color: getSelectionMode == 2 ? '#007576' : selectionColor,
             }}
           >
             {option2}

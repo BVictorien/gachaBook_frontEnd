@@ -6,20 +6,26 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { Input, Card } from "react-native-elements";
+  SafeAreaView,
+  RefreshControl,
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Input, Card } from 'react-native-elements';
 
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import Svg, { G, Circle } from "react-native-svg";
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import Svg, { G, Circle } from 'react-native-svg';
 
-import BookDetails from "../components/BookDetails";
-import { EvilIcons } from "@expo/vector-icons";
+import BookDetails from '../components/BookDetails';
+import { EvilIcons } from '@expo/vector-icons';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { connect } from "react-redux";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { connect } from 'react-redux';
+
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 /////////////////////////////////////Functions//////////////////////////////////////////////////////////
 const ProfileScreen = (props) => {
@@ -37,34 +43,32 @@ const ProfileScreen = (props) => {
     circleCircumference - (circleCircumference * points) / 100;
 
   /////////////////////////////////////State declarations//////////////////////////////
-  const [refresh, setRefresh] = useState(false);
   const [myBooks, setMyBooks] = useState([]);
   const [wishList, setWishList] = useState([]);
- 
-
+  const [refreshing, setRefreshing] = React.useState(false);
   /////////////////////////////////////Methodes/////////////////////////////////////////
   /*-------------------------------------------------------*/
   useEffect(() => {
-    AsyncStorage.getItem("userBooks", function (error, data) {
+    AsyncStorage.getItem('userBooks', function (error, data) {
       let booklist = JSON.parse(data);
       setMyBooks(booklist);
     });
 
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.144:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.106:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
-      AsyncStorage.setItem("userWishList", JSON.stringify(userWishList));
+      AsyncStorage.setItem('userWishList', JSON.stringify(userWishList));
     };
     haha();
 
-    AsyncStorage.getItem("userWishList", function (error, data) {
+    AsyncStorage.getItem('userWishList', function (error, data) {
       let userWishList = JSON.parse(data);
       setWishList(userWishList);
     });
-  }, [refresh]);
+  }, [refreshing]);
   /*-------------------------------------------------------*/
   const view = myBooks.map((x, i) => {
     return (
@@ -73,7 +77,7 @@ const ProfileScreen = (props) => {
         source={{
           uri: x.image,
         }}
-        onPress={() => props.navigation.navigate("BookScreen")}
+        onPress={() => props.navigation.navigate('BookScreen')}
         style={styles.imageBook}
         resizeMode="cover"
       />
@@ -85,7 +89,7 @@ const ProfileScreen = (props) => {
       <TouchableOpacity
         key={i}
         style={[styles.bookItem, styles.shadowCard]}
-        onPress={() => props.navigation.navigate("BookScreen")}
+        onPress={() => props.navigation.navigate('BookScreen')}
       >
         <Card.Divider />
         <Image
@@ -98,99 +102,108 @@ const ProfileScreen = (props) => {
           <Text style={styles.description}>{x.author}</Text>
         </View>
         <View style={styles.icons}>
-          <Ionicons name={(iconName = "basket")} size={20} color={"#252525"} />
-          <Ionicons name={(iconName = "heart")} size={20} color={"red"} />
+          <Ionicons name={(iconName = 'basket')} size={20} color={'#252525'} />
+          <Ionicons name={(iconName = 'heart')} size={20} color={'red'} />
         </View>
         <Card.Divider />
       </TouchableOpacity>
     );
   });
   //   /*-------------------------------------------------------*/
-
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
   /////////////////////////////////////Return///////////////////////////////////////////////////////////
   return (
-    <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <View style={styles.bothCharts}>
-          <View style={styles.graphWrapper}>
-            <Svg height="90" width="90" viewBox="0 0 180 180">
-              <G rotation={-90} originX="90" originY="90">
-                {totalCoins === 0 ? (
-                  <Circle
-                    cx="50%"
-                    cy="50%"
-                    r={radius}
-                    stroke="#F1F6F9"
-                    fill="transparent"
-                    strokeWidth="40"
-                  />
-                ) : (
-                  <>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <View style={styles.topContainer}>
+          <View style={styles.bothCharts}>
+            <View style={styles.graphWrapper}>
+              <Svg height="90" width="90" viewBox="0 0 180 180">
+                <G rotation={-90} originX="90" originY="90">
+                  {totalCoins === 0 ? (
                     <Circle
                       cx="50%"
                       cy="50%"
                       r={radius}
-                      stroke="#0AC3B4"
+                      stroke="#F1F6F9"
                       fill="transparent"
-                      strokeWidth="15"
-                      strokeDasharray={circleCircumference}
-                      strokeDashoffset={displacementCoins}
-                      rotation={0}
-                      originX="90"
-                      originY="90"
-                      strokeLinecap="round"
+                      strokeWidth="40"
                     />
-                  </>
-                )}
-              </G>
-            </Svg>
-            <Text style={styles.label}>{coins} coins</Text>
-          </View>
+                  ) : (
+                    <>
+                      <Circle
+                        cx="50%"
+                        cy="50%"
+                        r={radius}
+                        stroke="#0AC3B4"
+                        fill="transparent"
+                        strokeWidth="15"
+                        strokeDasharray={circleCircumference}
+                        strokeDashoffset={displacementCoins}
+                        rotation={0}
+                        originX="90"
+                        originY="90"
+                        strokeLinecap="round"
+                      />
+                    </>
+                  )}
+                </G>
+              </Svg>
+              <Text style={styles.label}>{coins} coins</Text>
+            </View>
 
-          <View>
-            <Text style={styles.username}>{props.username}</Text>
-            <View style={styles.aligntop}>
-              <Text style={styles.level}>Niveau </Text>
-              <Text style={styles.number}> 17 </Text>
+            <View>
+              <Text style={styles.username}>{props.username}</Text>
+              <View style={styles.aligntop}>
+                <Text style={styles.level}>Niveau </Text>
+                <Text style={styles.number}> 17 </Text>
+              </View>
+            </View>
+
+            <View style={styles.graphWrapper}>
+              <Svg height="90" width="90" viewBox="0 0 180 180">
+                <G rotation={-90} originX="90" originY="90">
+                  {totalPoints === 0 ? (
+                    <Circle
+                      cx="50%"
+                      cy="50%"
+                      r={radius}
+                      stroke="#F1F6F9"
+                      fill="transparent"
+                      strokeWidth="40"
+                    />
+                  ) : (
+                    <>
+                      <Circle
+                        cx="50%"
+                        cy="50%"
+                        r={radius}
+                        stroke="#EC8D05"
+                        fill="transparent"
+                        strokeWidth="15"
+                        strokeDasharray={circleCircumference}
+                        strokeDashoffset={displacementPoints}
+                        rotation={0}
+                        originX="90"
+                        originY="90"
+                        strokeLinecap="round"
+                      />
+                    </>
+                  )}
+                </G>
+              </Svg>
+              <Text style={styles.label}>{points} / 100</Text>
             </View>
           </View>
-
-          <View style={styles.graphWrapper}>
-            <Svg height="90" width="90" viewBox="0 0 180 180">
-              <G rotation={-90} originX="90" originY="90">
-                {totalPoints === 0 ? (
-                  <Circle
-                    cx="50%"
-                    cy="50%"
-                    r={radius}
-                    stroke="#F1F6F9"
-                    fill="transparent"
-                    strokeWidth="40"
-                  />
-                ) : (
-                  <>
-                    <Circle
-                      cx="50%"
-                      cy="50%"
-                      r={radius}
-                      stroke="#EC8D05"
-                      fill="transparent"
-                      strokeWidth="15"
-                      strokeDasharray={circleCircumference}
-                      strokeDashoffset={displacementPoints}
-                      rotation={0}
-                      originX="90"
-                      originY="90"
-                      strokeLinecap="round"
-                    />
-                  </>
-                )}
-              </G>
-            </Svg>
-            <Text style={styles.label}>{points} / 100</Text>
-          </View>
-        </View>
-        <View>
+          {/* <View>
           <FontAwesome
             name="refresh"
             size={35}
@@ -198,79 +211,91 @@ const ProfileScreen = (props) => {
             style={{ marginRight: 35, marginTop: 5 }}
             onPress={() => setRefresh(!refresh)}
           />
-        </View>
-      </View>
-      <ScrollView style={{ flex: 1, marginTop: 10 }}>
-        <View style={styles.navigation}>
-          <View style={styles.link}>
-            <AntDesign
-              name="scan1"
-              size={24}
-              color="#6D7D8B"
-              style={{ marginRight: 5 }}
-              onPress={() => {
-                props.navigation.navigate("AddBook");
-              }}
-            />
-            <Text
-              onPress={() => {
-                props.navigation.navigate("AddBook");
-              }}
-              style={{ color: "#252525", paddingLeft: 3 }}
-            >
-              Scan
-            </Text>
-          </View>
-          <Text style={styles.barre}>|</Text>
-
-          <View style={styles.link}>
-            <AntDesign
-              onPress={() =>
-                props.navigation.navigate("Chat", { screen: "ChatScreen" })
-              }
-              name="message1"
-              size={24}
-              color="#6D7D8B"
-            />
-            <Text
-              onPress={() =>
-                props.navigation.navigate("Chat", { screen: "ChatScreen" })
-              }
-              style={{ color: "#252525", paddingLeft: 3 }}
-            >
-              Messages
-            </Text>
-          </View>
-          <Text style={styles.barre}>|</Text>
-
-          <View style={styles.link}>
+        </View> */}
+          <View style={styles.refreshcontainer}>
+            <Text style={{ padding: 5 }}>Raffraichir la page</Text>
             <FontAwesome
-              name="credit-card-alt"
-              size={24}
-              color="#6D7D8B"
-              style={{ marginRight: 5 }}
-              onPress={() => {
-                props.navigation.navigate("Store");
-              }}
+              name="refresh"
+              size={20}
+              color="black"
+              style={styles.refreshbutton}
+              // style={{ marginLeft: 35, marginTop: 5 }}
+              onPress={() => setRefresh(!refresh)}
             />
-            <Text
-              onPress={() => {
-                props.navigation.navigate("Store");
-              }}
-              style={{ color: "#252525", paddingLeft: 3 }}
-            >
-              My Card
-            </Text>
           </View>
         </View>
-        <Text style={styles.title}>Mes livres en ventes :</Text>
-        <ScrollView horizontal={true}>
-          <View style={styles.sliderHorizontal}>{view}</View>
+        <ScrollView style={{ flex: 1, marginTop: 10 }}>
+          <View style={styles.navigation}>
+            <View style={styles.link}>
+              <AntDesign
+                name="scan1"
+                size={24}
+                color="#6D7D8B"
+                style={{ marginRight: 5 }}
+                onPress={() => {
+                  props.navigation.navigate('AddBook');
+                }}
+              />
+              <Text
+                onPress={() => {
+                  props.navigation.navigate('AddBook');
+                }}
+                style={{ color: '#252525', paddingLeft: 3 }}
+              >
+                Scan
+              </Text>
+            </View>
+            <Text style={styles.barre}>|</Text>
+
+            <View style={styles.link}>
+              <AntDesign
+                onPress={() =>
+                  props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+                }
+                name="message1"
+                size={24}
+                color="#6D7D8B"
+              />
+              <Text
+                onPress={() =>
+                  props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+                }
+                style={{ color: '#252525', paddingLeft: 3 }}
+              >
+                Messages
+              </Text>
+            </View>
+            <Text style={styles.barre}>|</Text>
+
+            <View style={styles.link}>
+              <FontAwesome
+                name="credit-card-alt"
+                size={24}
+                color="#6D7D8B"
+                style={{ marginRight: 5 }}
+                onPress={() => {
+                  props.navigation.navigate('Store');
+                }}
+              />
+              <Text
+                onPress={() => {
+                  props.navigation.navigate('Store');
+                }}
+                style={{ color: '#252525', paddingLeft: 3 }}
+              >
+                My Card
+              </Text>
+            </View>
+          </View>
+          <Text style={styles.title}>Mes livres en ventes :</Text>
+          <ScrollView horizontal={true}>
+            <View style={styles.sliderHorizontal}>{view}</View>
+          </ScrollView>
+          <Text style={styles.title}>Mes Favoris :</Text>
+          <View style={styles.containerFavorites}>{view2}</View>
         </ScrollView>
-        <Text style={styles.title}>Mes Favoris :</Text>
-        <View style={styles.containerFavorites}>{view2}</View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 /////////////////////////////////////Redux//////////////////////////////////////////////////////////
@@ -283,64 +308,64 @@ export default connect(mapStateToProps, null)(ProfileScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#DBE6E7",
-    color: "#252525",
+    backgroundColor: '#DBE6E7',
+    color: '#252525',
     // alignItems: 'center',
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
   },
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
   },
   username: {
-    color: "#ED610C",
+    color: '#ED610C',
     fontSize: 35,
-    fontWeight: "bold",
-    textShadowColor: "#000",
+    fontWeight: 'bold',
+    textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
-    textAlign: "center",
+    textAlign: 'center',
   },
   aligntop: {
-    flexDirection: "row",
-    textAlign: "center",
+    flexDirection: 'row',
+    textAlign: 'center',
     paddingLeft: 5,
   },
   level: {
-    color: "#FFF",
+    color: '#FFF',
     fontSize: 27,
-    fontStyle: "italic",
-    textAlign: "center",
-    textShadowColor: "#000",
+    fontStyle: 'italic',
+    textAlign: 'center',
+    textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   number: {
-    color: "#EC8D05",
+    color: '#EC8D05',
     fontSize: 27,
-    fontWeight: "bold",
-    textShadowColor: "#000",
+    fontWeight: 'bold',
+    textShadowColor: '#000',
     textShadowOffset: { width: -2, height: 2 },
     textShadowRadius: 10,
   },
   navigation: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(192, 195, 219,0.24)",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(192, 195, 219,0.24)',
     padding: 10,
     margin: 20,
     borderRadius: 15,
   },
   link: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
-    color: "#252525",
+    color: '#252525',
     margin: 10,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 20,
   },
   imageBook: {
@@ -352,31 +377,40 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sliderHorizontal: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   containerFavorites: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   graphWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   label: {
-    color: "#000",
-    position: "absolute",
+    color: '#000',
+    position: 'absolute',
     fontSize: 15,
   },
   bothCharts: {
-    flexDirection: "row",
+    flexDirection: 'row',
     margin: 5,
-    flexDirection: "row",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   image: {
     width: 60,
     height: 60,
     marginRight: 10,
     borderRadius: 50,
+  },
+  refreshcontainer: {
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  refreshbutton: {
+    // paddingRight: 5,
   },
   // containerFavorites: {
   //   justifyContent: 'center',
