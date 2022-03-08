@@ -8,20 +8,20 @@ import {
   TouchableOpacity,
   SafeAreaView,
   RefreshControl,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Input, Card } from 'react-native-elements';
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Input, Card } from "react-native-elements";
 
-import { Ionicons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import Svg, { G, Circle } from 'react-native-svg';
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import Svg, { G, Circle } from "react-native-svg";
 
-import BookDetails from '../components/BookDetails';
-import { EvilIcons } from '@expo/vector-icons';
+import BookDetails from "../components/BookDetails";
+import { EvilIcons } from "@expo/vector-icons";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { connect } from 'react-redux';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { connect } from "react-redux";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -49,38 +49,55 @@ const ProfileScreen = (props) => {
   /////////////////////////////////////Methodes/////////////////////////////////////////
   /*-------------------------------------------------------*/
   useEffect(() => {
-    AsyncStorage.getItem('userBooks', function (error, data) {
-      let booklist = JSON.parse(data);
-      setMyBooks(booklist);
-    });
-
     const haha = async () => {
       let fechedUserWishlist = await fetch(
         `http://192.168.10.151:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
-      AsyncStorage.setItem('userWishList', JSON.stringify(userWishList));
+      AsyncStorage.setItem("userWishList", JSON.stringify(userWishList));
     };
     haha();
 
-    AsyncStorage.getItem('userWishList', function (error, data) {
+    AsyncStorage.getItem("userWishList", function (error, data) {
       let userWishList = JSON.parse(data);
       setWishList(userWishList);
+    });
+    AsyncStorage.getItem("userBooks", function (error, data) {
+      let booklist = JSON.parse(data);
+      setMyBooks(booklist);
     });
   }, [refreshing]);
   /*-------------------------------------------------------*/
   const view = myBooks.map((x, i) => {
     return (
-      <Image
+      <TouchableOpacity
         key={i}
-        source={{
-          uri: x.image,
+        onPress={() => {
+          props.navigation.navigate("BookScreen");
+          props.sendBookDetail(
+            x.title,
+            x.author,
+            x.language,
+            x.nb_pages,
+            x.barcode,
+            x.editor,
+            x.image,
+            x.description,
+            x.year,
+            x._id,
+            x.price
+          );
         }}
-        onPress={() => props.navigation.navigate('BookScreen')}
-        style={styles.imageBook}
-        resizeMode="cover"
-      />
+      >
+        <Image
+          source={{
+            uri: x.image,
+          }}
+          style={styles.imageBook}
+          resizeMode="cover"
+        />
+      </TouchableOpacity>
     );
   });
   /*-------------------------------------------------------*/
@@ -89,7 +106,22 @@ const ProfileScreen = (props) => {
       <TouchableOpacity
         key={i}
         style={[styles.bookItem, styles.shadowCard]}
-        onPress={() => props.navigation.navigate('BookScreen')}
+        onPress={() => {
+          props.navigation.navigate("BookScreen");
+          props.sendBookDetail(
+            x.title,
+            x.author,
+            x.language,
+            x.nb_pages,
+            x.barcode,
+            x.editor,
+            x.image,
+            x.description,
+            x.year,
+            x._id,
+            x.price
+          );
+        }}
       >
         <Card.Divider />
         <Image
@@ -102,8 +134,14 @@ const ProfileScreen = (props) => {
           <Text style={styles.description}>{x.author}</Text>
         </View>
         <View style={styles.icons}>
-          <Ionicons name={(iconName = 'basket')} size={20} color={'#252525'} />
-          <Ionicons name={(iconName = 'heart')} size={20} color={'red'} />
+          <Ionicons name={(iconName = "basket")} size={20} color={"#252525"} />
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate("SignIn", { screen: "SignIn" })
+            }
+          >
+            <Ionicons name={(iconName = "heart")} size={20} color={"red"} />
+          </TouchableOpacity>
         </View>
         <Card.Divider />
       </TouchableOpacity>
@@ -203,26 +241,6 @@ const ProfileScreen = (props) => {
               <Text style={styles.label}>{points} / 100</Text>
             </View>
           </View>
-          {/* <View>
-          <FontAwesome
-            name="refresh"
-            size={35}
-            color="#FFF"
-            style={{ marginRight: 35, marginTop: 5 }}
-            onPress={() => setRefresh(!refresh)}
-          />
-        </View> */}
-          <View style={styles.refreshcontainer}>
-            <Text style={{ padding: 5 }}>Raffraichir la page</Text>
-            <FontAwesome
-              name="refresh"
-              size={20}
-              color="black"
-              style={styles.refreshbutton}
-              // style={{ marginLeft: 35, marginTop: 5 }}
-              onPress={() => setRefresh(!refresh)}
-            />
-          </View>
         </View>
         <ScrollView style={{ flex: 1, marginTop: 10 }}>
           <View style={styles.navigation}>
@@ -233,14 +251,14 @@ const ProfileScreen = (props) => {
                 color="#6D7D8B"
                 style={{ marginRight: 5 }}
                 onPress={() => {
-                  props.navigation.navigate('AddBook');
+                  props.navigation.navigate("AddBook");
                 }}
               />
               <Text
                 onPress={() => {
-                  props.navigation.navigate('AddBook');
+                  props.navigation.navigate("AddBook");
                 }}
-                style={{ color: '#252525', paddingLeft: 3 }}
+                style={{ color: "#252525", paddingLeft: 3 }}
               >
                 Scan
               </Text>
@@ -250,7 +268,7 @@ const ProfileScreen = (props) => {
             <View style={styles.link}>
               <AntDesign
                 onPress={() =>
-                  props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+                  props.navigation.navigate("Chat", { screen: "ChatScreen" })
                 }
                 name="message1"
                 size={24}
@@ -258,9 +276,9 @@ const ProfileScreen = (props) => {
               />
               <Text
                 onPress={() =>
-                  props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+                  props.navigation.navigate("Chat", { screen: "ChatScreen" })
                 }
-                style={{ color: '#252525', paddingLeft: 3 }}
+                style={{ color: "#252525", paddingLeft: 3 }}
               >
                 Messages
               </Text>
@@ -274,14 +292,14 @@ const ProfileScreen = (props) => {
                 color="#6D7D8B"
                 style={{ marginRight: 5 }}
                 onPress={() => {
-                  props.navigation.navigate('Store');
+                  props.navigation.navigate("Store");
                 }}
               />
               <Text
                 onPress={() => {
-                  props.navigation.navigate('Store');
+                  props.navigation.navigate("Store");
                 }}
-                style={{ color: '#252525', paddingLeft: 3 }}
+                style={{ color: "#252525", paddingLeft: 3 }}
               >
                 My Card
               </Text>
@@ -302,70 +320,101 @@ const ProfileScreen = (props) => {
 function mapStateToProps(state) {
   return { username: state.username, userId: state.userIdReducer };
 }
-
-export default connect(mapStateToProps, null)(ProfileScreen);
+function mapDispatchToProps(dispatch) {
+  return {
+    sendBookDetail: function (
+      title,
+      author,
+      language,
+      pageCount,
+      barcode,
+      editor,
+      imageLink,
+      description,
+      year,
+      id,
+      price
+    ) {
+      dispatch({
+        type: "BookDetail",
+        title,
+        author,
+        language,
+        pageCount,
+        barcode,
+        editor,
+        imageLink,
+        description,
+        year,
+        id,
+        price,
+      });
+    },
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DBE6E7',
-    color: '#252525',
+    backgroundColor: "#DBE6E7",
+    color: "#252525",
     // alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
   },
   username: {
-    color: '#ED610C',
+    color: "#ED610C",
     fontSize: 35,
-    fontWeight: 'bold',
-    textShadowColor: '#000',
+    fontWeight: "bold",
+    textShadowColor: "#000",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   aligntop: {
-    flexDirection: 'row',
-    textAlign: 'center',
+    flexDirection: "row",
+    textAlign: "center",
     paddingLeft: 5,
   },
   level: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 27,
-    fontStyle: 'italic',
-    textAlign: 'center',
-    textShadowColor: '#000',
+    fontStyle: "italic",
+    textAlign: "center",
+    textShadowColor: "#000",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   number: {
-    color: '#EC8D05',
+    color: "#EC8D05",
     fontSize: 27,
-    fontWeight: 'bold',
-    textShadowColor: '#000',
+    fontWeight: "bold",
+    textShadowColor: "#000",
     textShadowOffset: { width: -2, height: 2 },
     textShadowRadius: 10,
   },
   navigation: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: 'rgba(192, 195, 219,0.24)',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "rgba(192, 195, 219,0.24)",
     padding: 10,
     margin: 20,
     borderRadius: 15,
   },
   link: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   title: {
-    color: '#252525',
+    color: "#252525",
     margin: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
   },
   imageBook: {
@@ -377,25 +426,25 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sliderHorizontal: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   containerFavorites: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   graphWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   label: {
-    color: '#000',
-    position: 'absolute',
+    color: "#000",
+    position: "absolute",
     fontSize: 15,
   },
   bothCharts: {
-    flexDirection: 'row',
+    flexDirection: "row",
     margin: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   image: {
     width: 60,
@@ -404,10 +453,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   refreshcontainer: {
-    color: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    color: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   refreshbutton: {
     // paddingRight: 5,
