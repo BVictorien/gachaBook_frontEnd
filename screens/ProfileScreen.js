@@ -516,7 +516,7 @@ const styles = StyleSheet.create({
     padding: 5,
     fontWeight: 'bold',
     marginTop: 10,
-    fontSize: 21,
+    // fontSize: 21,
   },
   description: {
     color: '#252525',
