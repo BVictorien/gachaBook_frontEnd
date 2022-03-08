@@ -88,25 +88,31 @@ function BookScreen(props) {
           </Image>
         </View>
 
-        <View style={styles.containerbois}>
+        {/* <View style={styles.containerbois}>
           <Image
             style={styles.imageBois}
             resizeMode="cover"
             source={require("../assets/bois.png")}
           />
-        </View>
+        </View> */}
         <View style={styles.imageView}></View>
         <View style={styles.containerDetails}>
           <View style={styles.bookdetails}>
             <View style={styles.title}>
               <Text style={styles.name}>{title}</Text>
               <View style={styles.icons}>
-                <Ionicons
-                  style={{ paddingLeft: 5 }}
-                  name={(iconName = "basket")}
-                  size={25}
-                  color={"grey"}
-                />
+                <TouchableOpacity
+                  onPress={() => {
+                    props.addToCart(props.bookDetails[0]);
+                  }}
+                >
+                  <Ionicons
+                    style={{ paddingLeft: 5 }}
+                    name={(iconName = "basket")}
+                    size={25}
+                    color={"grey"}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
             <Text style={styles.author}>{author}</Text>
@@ -158,7 +164,18 @@ function mapStateToProps(state) {
     bookDetails: state.scanBookReducer,
   };
 }
-export default connect(mapStateToProps, null)(BookScreen);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addUsername: function (username) {
+      dispatch({ type: "addUsername", username: username });
+    },
+    addToCart: function (book) {
+      dispatch({ type: "addCart", book: book });
+    },
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BookScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {

@@ -19,14 +19,14 @@ import PaymentEnCours from "./screens/PaymentEnCours";
 import paymentCard from "./screens/paymentCard";
 import UserScreen from "./screens/UserScreen";
 
-/*-------------------------------------------------------------------------*/
+/*------------------------------nav-------------------------------------------*/
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 /*-------------------------------------------------------------------------*/
 import { Ionicons } from "@expo/vector-icons";
 
-/*-------------------------------------------------------------------------*/
+/*-------------------------redux------------------------------------------------*/
 import { provider, Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import scanBookReducer from "./reducers/scanBookReducer";
