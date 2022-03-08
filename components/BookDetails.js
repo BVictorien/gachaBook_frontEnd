@@ -24,9 +24,9 @@ export default class BookDetails extends Component {
         />
         <View>
           <Text style={styles.name}>Titre</Text>
-          <Text style={styles.description}>Descriptions du livre</Text>
+          <Text style={styles.description}>Auteur</Text>
         </View>
-        <View style={styles.icons}>
+        {/* <View style={styles.icons}>
           <Ionicons
             name={(iconName = 'heart')}
             size={25}
@@ -39,7 +39,7 @@ export default class BookDetails extends Component {
             color={'#252525'}
             style={{ padding: 7 }}
           />
-        </View>
+        </View> */}
         <Card.Divider />
       </TouchableOpacity>
     );
@@ -51,18 +51,18 @@ const styles = StyleSheet.create({
     // backgroundColor: '#CADCE6',
     backgroundColor: '#fff',
     flexDirection: 'row',
+    width: 350,
     marginBottom: 6,
-    // width: '95%',
-    borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
 
-    elevation: 5,
+    elevation: 2,
+    borderRadius: 3,
   },
   name: {
     color: '#252525',
@@ -84,16 +84,16 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   image: {
-    width: 70,
-    height: 90,
+    width: 60,
+    height: 80,
     marginRight: 10,
     margin: 10,
     // borderRadius: 50,
   },
-  shadowCard: {
-    shadowColor: '#171717',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
+  // shadowCard: {
+  //   shadowColor: '#171717',
+  //   shadowOffset: { width: -2, height: 4 },
+  //   shadowOpacity: 0.2,
+  //   shadowRadius: 3,
+  // },
 });

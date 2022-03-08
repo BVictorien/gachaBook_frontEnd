@@ -8,6 +8,7 @@ import {
 import { Input, Text, Icon, ListItem } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
 
 import socketIOClient from 'socket.io-client';
 var socket = socketIOClient('http://192.168.10.106:3000');
@@ -46,7 +47,7 @@ const ChatScreen = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.top}>
-          <Text
+          {/* <Text
             style={styles.topbutton}
             onPress={() => props.navigation.goBack()}
           >
@@ -56,8 +57,17 @@ const ChatScreen = (props) => {
               color="#FBAF19"
               style={{ marginRight: 35, marginTop: 5 }}
             />
-          </Text>
-          <Text style={styles.top}>Interlocuteur's Name</Text>
+          </Text> */}
+          <Ionicons
+            onPress={() => {
+              props.navigation.goBack();
+            }}
+            name={(iconName = 'arrow-back')}
+            size={30}
+            color={'#007576'}
+            style={styles.textBack}
+          />
+          <Text style={styles.top}>Messages</Text>
           <Text style={styles.top}>???</Text>
         </View>
 
@@ -75,7 +85,7 @@ const ChatScreen = (props) => {
                 <Icon
                   name="arrow-circle-up"
                   size={41}
-                  color="#E9940A"
+                  color="#007576"
                   onPress={() => {
                     socket.emit('sendMessage', {
                       message: currentMessage,
@@ -96,10 +106,10 @@ const ChatScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#505055',
+    backgroundColor: '#DBE6E7',
   },
   top: {
-    color: '#FFF',
+    color: 'black',
     fontSize: 23,
     fontWeight: 'bold',
     marginTop: 21,
@@ -141,7 +151,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginRight: 0,
     paddingLeft: 5,
-    backgroundColor: '#FFF555',
+    backgroundColor: '#fff',
     width: '55%',
     height: 95,
     borderRadius: 10,
@@ -154,6 +164,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 50,
     backgroundColor: '#456283',
+  },
+  textBack: {
+    color: '#007576',
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 30,
   },
 });
 
