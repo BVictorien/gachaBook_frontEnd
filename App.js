@@ -33,9 +33,16 @@ import scanBookReducer from "./reducers/scanBookReducer";
 import token from "./reducers/token";
 import username from "./reducers/username";
 import userIdReducer from "./reducers/userIdReducer";
+import cartReducer from "./reducers/cartReducer";
 
 const store = createStore(
-  combineReducers({ token, username, scanBookReducer, userIdReducer })
+  combineReducers({
+    token,
+    username,
+    scanBookReducer,
+    userIdReducer,
+    cartReducer,
+  })
 );
 
 /*-------------------------------------------------------------------------*/

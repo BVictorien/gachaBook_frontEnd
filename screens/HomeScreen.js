@@ -23,7 +23,7 @@ function HomeScreen(props) {
   /////////////////////////////////////States and var///////////////////////////////////////
   let logout;
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [last, setLast] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -35,7 +35,7 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   const handleSearch = () => {
     // console.log('Test réussi')
-    props.navigation.navigate('BottomNavigator', { screen: 'Search' });
+    props.navigation.navigate("BottomNavigator", { screen: "Search" });
   };
 
   /*--------------------------------------------------*/
@@ -43,7 +43,7 @@ function HomeScreen(props) {
     return (
       <View style={styles.homeBook}>
         <Image
-          onPress={() => props.navigation.navigate('BookScreen')}
+          onPress={() => props.navigation.navigate("BookScreen")}
           style={styles.imageBook}
           resizeMode="cover"
           source={{
@@ -70,7 +70,7 @@ function HomeScreen(props) {
       <Text
         style={styles.login}
         onPress={() =>
-          props.navigation.navigate('SignIn', { screen: 'SignIn' })
+          props.navigation.navigate("SignIn", { screen: "SignIn" })
         }
       >
         Connexion
@@ -86,18 +86,19 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   useEffect(() => {
     let fechedLastBooks = async () => {
-      let data = await fetch(`http:/192.168.10.106:3000/latest-books`);
+      let data = await fetch(`http:/192.168.10.151:3000/latest-books`);
 
       let lastBooks = await data.json();
+      // console.log(lastBooks);
       setLast(lastBooks);
     };
     fechedLastBooks();
 
-    AsyncStorage.getItem('userId', function (error, data) {
+    AsyncStorage.getItem("userId", function (error, data) {
       let userId = JSON.parse(data);
       props.getUserId(userId);
     });
-    AsyncStorage.getItem('userName', function (error, data) {
+    AsyncStorage.getItem("userName", function (error, data) {
       let userName = JSON.parse(data);
       props.addUsername(userName);
     });
@@ -114,13 +115,33 @@ function HomeScreen(props) {
           }}
         />
         <Text
+          onPress={() => {
+            props.navigation.navigate("BookScreen");
+            props.sendBookDetail(
+              lastbook.title,
+              lastbook.author,
+              lastbook.language,
+              lastbook.nb_pages,
+              lastbook.barcode,
+              lastbook.editor,
+              lastbook.image,
+              lastbook.description,
+              lastbook.year,
+              lastbook._id,
+              lastbook.price
+            );
+          }}
           style={styles.titleCard}
-          onPress={() => props.navigation.navigate('BookScreen')}
         >
           {lastbook.title}
         </Text>
         <View style={styles.descriptionCard}>
-          <Text style={styles.priceCard}>$19.99</Text>
+          <Text
+            onPress={() => props.navigation.navigate("BookScreen")}
+            style={styles.priceCard}
+          >
+            $19.99
+          </Text>
           <Text style={styles.kmCard}></Text>
         </View>
       </View>
@@ -210,52 +231,53 @@ function HomeScreen(props) {
     </SafeAreaView>
   );
 }
+/////////////////////////////////////STYLES/////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DBE6E7',
+    backgroundColor: "#DBE6E7",
     // width: '100%',
   },
   logout: {
-    color: '#E9940A',
+    color: "#E9940A",
     marginLeft: 75,
     marginTop: 9,
     fontSize: 20,
   },
   login: {
-    color: '#007576',
-    marginLeft: 'auto',
+    color: "#007576",
+    marginLeft: "auto",
     marginTop: 9,
     marginRight: 10,
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   input: {
-    shadowColor: '#F69D0C',
+    shadowColor: "#F69D0C",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   search: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 50,
     marginLeft: 15,
   },
   books: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   title: {
     padding: 0,
-    color: '#252525',
-    fontWeight: 'bold',
+    color: "#252525",
+    fontWeight: "bold",
     marginLeft: 15,
     marginTop: 10,
     marginBottom: 5,
     fontSize: 20,
   },
   logo: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 20,
     marginBottom: 20,
   },
@@ -265,10 +287,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   sliderHorizontal: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   descriptionCard: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   homeBook: {
     marginTop: 15,
@@ -279,7 +301,7 @@ const styles = StyleSheet.create({
     paddingRight: 5,
   },
   titleCard: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   refreshcontainer: {
     color: 'white',
@@ -291,7 +313,8 @@ const styles = StyleSheet.create({
     // paddingRight: 5,
   },
 });
-
+/////////////////////////////////////Redux///////////////////////////////////////////////////////////
+/*---------------------------------------------*/
 function mapStateToProps(state) {
   return {
     token: state.token,
@@ -304,23 +327,51 @@ function mapDispatchToProps(dispatch) {
   return {
     disconnect: function () {
       dispatch({
-        type: 'disconnect1',
+        type: "disconnect1",
       });
       dispatch({
-        type: 'disconnect2',
+        type: "disconnect2",
       });
       dispatch({
-        type: 'disconnect3',
+        type: "disconnect3",
       });
     },
     addToken: function (token) {
-      dispatch({ type: 'addToken', token: token });
+      dispatch({ type: "addToken", token: token });
     },
     getUserId: function (userId) {
-      dispatch({ type: 'getUserId', userId: userId });
+      dispatch({ type: "getUserId", userId: userId });
     },
     addUsername: function (username) {
-      dispatch({ type: 'addUsername', username: username });
+      dispatch({ type: "addUsername", username: username });
+    },
+    sendBookDetail: function (
+      title,
+      author,
+      language,
+      pageCount,
+      barcode,
+      editor,
+      imageLink,
+      description,
+      year,
+      id,
+      price
+    ) {
+      dispatch({
+        type: "BookDetail",
+        title,
+        author,
+        language,
+        pageCount,
+        barcode,
+        editor,
+        imageLink,
+        description,
+        year,
+        id,
+        price,
+      });
     },
   };
 }

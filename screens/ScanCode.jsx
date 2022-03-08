@@ -43,7 +43,9 @@ function ScanCode(props) {
       dataRes.items[0].volumeInfo.pageCount,
       data,
       dataRes.items[0].volumeInfo.publisher,
-      image
+      image,
+      dataRes.items[0].volumeInfo.description,
+      dataRes.items[0].volumeInfo.publishedDate
     );
     props.navigation.navigate("AddBook");
   };
@@ -110,7 +112,9 @@ function mapDispatchToProps(dispatch) {
       pageCount,
       barcode,
       editor,
-      imageLink
+      imageLink,
+      description,
+      year
     ) {
       dispatch({
         type: "BookDetail",
@@ -121,6 +125,8 @@ function mapDispatchToProps(dispatch) {
         barcode,
         editor,
         imageLink,
+        description,
+        year,
       });
     },
   };
