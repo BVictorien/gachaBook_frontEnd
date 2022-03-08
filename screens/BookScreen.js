@@ -43,8 +43,6 @@ function BookScreen(props) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `userId=${props.userId}&bookId=${id}`,
     });
-
-    
   };
   /*-------------------------------------------------------- */
   ////////////////////////////////////Return/////////////////////////////////////////
