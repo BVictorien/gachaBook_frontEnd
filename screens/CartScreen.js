@@ -1,5 +1,5 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -7,51 +7,55 @@ import {
   Text,
   ScrollView,
   SafeAreaView,
-} from 'react-native';
-import { Button, Card, Badge } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
+  TouchableOpacity,
+} from "react-native";
+import { Button, Card, Badge } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
+import { connect } from "react-redux";
 
-const BookDetailsCard = () => {
-  return (
-    <View style={[styles.bookItem, styles.shadowCard]}>
-      <Card.Divider />
-      <Image
-        style={styles.imageBook}
-        resizeMode="cover"
-        source={require('../assets/nicolas.jpg')}
-      />
-      <View>
-        <Text style={styles.name}>Titre</Text>
-        <Text style={styles.description}>Descriptions du livre</Text>
-      </View>
-      <View style={styles.icons}>
-        <Ionicons name={(iconName = 'trash')} size={25} color={'gray'} />
-        <Button buttonStyle={styles.points} title="6pts" />
-      </View>
-      <Card.Divider />
-    </View>
-  );
-};
+//////////////////////////////////////Functions///////////////////////////////////////////////
 
 const CartScreen = (props) => {
-  //////////////////////////////////////States and vars///////////////////////////
+  /////////////////////////////////////Methods/////////////////////////////////
+  /*------------------------------------------------------ */
+  useState(() => {}, [props]);
 
-  /////////////////////////////////////Return////////////////////////////////////
+  /*---------------------------------------------------------- */
+  const cartList = props.cart.map((x, i) => {
+    return (
+      <View key={i} style={[styles.bookItem, styles.shadowCard]}>
+        <Card.Divider />
+        <Image
+          style={styles.imageBook}
+          resizeMode="cover"
+          source={{ uri: x.imageLink }}
+        />
+        <View>
+          <Text style={styles.name}>{x.title}</Text>
+          <Text style={styles.description}>{x.author}</Text>
+        </View>
+        <View style={styles.icons}>
+          <TouchableOpacity onPress={() => props.deleteFCart(x.id)}>
+            <Ionicons name={(iconName = "trash")} size={25} color={"gray"} />
+          </TouchableOpacity>
+          <Button buttonStyle={styles.points} title={x.price} />
+        </View>
+        <Card.Divider />
+      </View>
+    );
+  });
+  /////////////////////////////////////Return/////////////////////////////
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={styles.background}>
         <View style={styles.logo}>
           <Image
             style={styles.imagePanier}
-            source={require('../assets/pic2.png')}
+            source={require("../assets/pic2.png")}
           />
           <Text style={styles.title}>Panier</Text>
         </View>
-        <View>
-          <BookDetailsCard />
-          <BookDetailsCard />
-          <BookDetailsCard />
-        </View>
+        <View>{cartList}</View>
         <View style={styles.total}>
           <Text style={styles.totalText}>Total :</Text>
           <Text>69 pts</Text>
@@ -60,14 +64,14 @@ const CartScreen = (props) => {
         <View style={styles.buttons}>
           <Button
             onPress={() => {
-              props.navigation.navigate('PaymentEnCours');
+              props.navigation.navigate("PaymentEnCours");
             }}
             buttonStyle={styles.payer}
             title="Payer"
           />
           <Button
             onPress={() => {
-              props.navigation.navigate('Store');
+              props.navigation.navigate("Store");
             }}
             buttonStyle={styles.reap}
             title="Réaprovisionner votre compte"
@@ -78,56 +82,78 @@ const CartScreen = (props) => {
   );
 };
 
-export default CartScreen;
+/////////////////////////////////////Return////////////////////////////////////////////////////
+function mapStateToProps(state) {
+  return {
+    token: state.token,
+    userId: state.userIdReducer,
+    username: state.username,
+    bookDetails: state.scanBookReducer,
+    cart: state.cartReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addUsername: function (username) {
+      dispatch({ type: "addUsername", username: username });
+    },
+    deleteFCart: function (bookId) {
+      dispatch({ type: "deleteFCart", bookId });
+    },
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);
+
 /////////////////////////////////////Return////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#DBE6E7',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
+    backgroundColor: "#DBE6E7",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
     // paddingTop: 1:0,
     // marginBottom: 20,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     // marginTop: 10,
   },
   logo: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
     width: 100,
     height: 100,
   },
   text: {
-    color: 'white',
+    color: "white",
     fontSize: 30,
   },
   title: {
-    color: '#252525',
+    color: "#252525",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     margin: 15,
   },
   connexion: {
-    color: '#F5960D',
+    color: "#F5960D",
   },
   description: {
-    color: '#fff',
+    color: "#fff",
   },
   bookItem: {
-    backgroundColor: '#1E202A',
-    flexDirection: 'row',
+    backgroundColor: "#1E202A",
+    flexDirection: "row",
     marginBottom: 6,
     padding: 10,
   },
   name: {
-    color: '#fff',
+    color: "#fff",
   },
   imageBook: {
     width: 40,
@@ -136,22 +162,22 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   icons: {
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    marginLeft: "auto",
+    alignItems: "center",
+    justifyContent: "center",
   },
   points: {
     marginLeft: 10,
-    backgroundColor: '#6D7D8B',
+    backgroundColor: "#6D7D8B",
   },
   total: {
     marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    marginLeft: "auto",
+    backgroundColor: "white",
     padding: 10,
     borderRadius: 50,
   },
@@ -159,17 +185,17 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   buttons: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 20,
   },
   payer: {
-    backgroundColor: '#007576',
+    backgroundColor: "#007576",
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
   },
   reap: {
-    backgroundColor: '#6D7D8B',
+    backgroundColor: "#6D7D8B",
     borderRadius: 50,
     width: 300,
   },
@@ -177,27 +203,27 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   bookItem: {
-    backgroundColor: '#CADCE6',
-    flexDirection: 'row',
+    backgroundColor: "#CADCE6",
+    flexDirection: "row",
     marginBottom: 6,
     // padding: 10,
     borderBottomLeftRadius: 50,
     borderTopLeftRadius: 50,
-    width: '95%',
+    width: "95%",
   },
   name: {
-    color: '#252525',
+    color: "#252525",
     padding: 5,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   description: {
-    color: '#252525',
+    color: "#252525",
     paddingLeft: 5,
   },
   icons: {
-    marginLeft: 'auto',
-    color: '#252525',
-    flexDirection: 'row',
+    marginLeft: "auto",
+    color: "#252525",
+    flexDirection: "row",
     padding: 5,
   },
   imageBook: {
@@ -207,7 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   shadowCard: {
-    shadowColor: '#171717',
+    shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
