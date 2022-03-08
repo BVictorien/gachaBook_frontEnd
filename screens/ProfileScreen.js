@@ -52,7 +52,7 @@ const ProfileScreen = (props) => {
 
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.144:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.151:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 

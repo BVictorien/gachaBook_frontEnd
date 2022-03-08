@@ -10,6 +10,10 @@ export default function (bookDetails = [], action) {
         barcode: action.barcode,
         editor: action.editor,
         imageLink: action.imageLink,
+        description: action.description,
+        year: action.year,
+        id: action.id,
+        price: action.price,
       },
     ];
     return newBookDetails;
