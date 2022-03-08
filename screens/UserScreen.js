@@ -14,13 +14,33 @@ const UserScreen = (props) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.banner}>
+          <Ionicons
+            onPress={() => {
+              props.navigation.navigate('BookScreen');
+            }}
+            name={(iconName = 'arrow-back')}
+            size={20}
+            color={'#fff'}
+            style={styles.textBack}
+          />
           <View style={styles.avatar}>
-            <Avatar
+            {/* <Avatar
               size={150}
               rounded
               icon={{ name: 'adb', type: 'material' }}
               containerStyle={{ backgroundColor: 'red' }}
-            ></Avatar>
+            ></Avatar> */}
+            <Avatar
+              size={200}
+              rounded
+              source={{
+                uri: 'https://randomuser.me/api/portraits/women/57.jpg',
+              }}
+              // title="Bj"
+              containerStyle={{ backgroundColor: 'grey' }}
+            >
+              {/* <Avatar.Accessory size={23} /> */}
+            </Avatar>
           </View>
         </View>
         <View style={styles.stars}>
@@ -106,28 +126,36 @@ export default UserScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(192, 195, 219,0.24)',
-    // backgroundColor: 'green',
+    backgroundColor: '#DBE6E7',
     alignItems: 'center',
     height: '100%',
     width: '100%',
   },
   avatar: {
     alignItems: 'center',
-    marginTop: 100,
+    marginTop: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   banner: {
-    backgroundColor: '#1E202A',
+    backgroundColor: '#007576',
     height: 175,
     width: '100%',
   },
   stars: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 80,
+    marginTop: 100,
   },
   buttonSend: {
-    backgroundColor: '#F5960D',
+    backgroundColor: '#007576',
     alignItems: 'center',
     width: 300,
     height: 50,
@@ -136,5 +164,14 @@ const styles = StyleSheet.create({
   },
   containerFavorites: {
     width: 350,
+  },
+  textBack: {
+    marginTop: 40,
+    // color: '#007576',
+    marginRight: 'auto',
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    // paddingTop: 30,
   },
 });

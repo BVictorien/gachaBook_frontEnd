@@ -52,10 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'row',
     marginBottom: 6,
-    // padding: 10,
-    // borderBottomLeftRadius: 50,
-    // borderTopLeftRadius: 50,
-    width: '95%',
+    // width: '95%',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
