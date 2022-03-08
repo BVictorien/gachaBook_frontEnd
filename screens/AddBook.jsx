@@ -27,7 +27,7 @@ function AddBook(props) {
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch('http://192.168.10.151:3000/save-book', {
+    let response = await fetch('http://192.168.10.106:3000/save-book', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,
@@ -46,7 +46,7 @@ function AddBook(props) {
 
     const hihi = async () => {
       let fechedUserBooks = await fetch(
-        `http://192.168.10.151:3000/get-user-books?userId=${props.userId}`
+        `http://192.168.10.106:3000/get-user-books?userId=${props.userId}`
       );
       let userBooks = await fechedUserBooks.json();
 
@@ -78,8 +78,7 @@ function AddBook(props) {
       setEditeur(props.bookDetails[0].editor);
       setImagelink(props.bookDetails[0].imageLink);
       setDescription(props.bookDetails[0].description);
-      setAnnee(props.bookDetails[0].year)
-
+      setAnnee(props.bookDetails[0].year);
     }
   }, [props]);
   /*------------------------------------------------------*/
