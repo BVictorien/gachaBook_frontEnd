@@ -2,7 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -27,7 +33,7 @@ function AddBook(props) {
   /*------------------------------------------------------*/
 
   async function saveBook() {
-    let response = await fetch('http://192.168.10.151:3000/save-book', {
+    let response = await fetch('http://192.168.10.106:3000/save-book', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,
@@ -46,7 +52,7 @@ function AddBook(props) {
 
     const hihi = async () => {
       let fechedUserBooks = await fetch(
-        `http://192.168.10.151:3000/get-user-books?userId=${props.userId}`
+        `http://192.168.10.106:3000/get-user-books?userId=${props.userId}`
       );
       let userBooks = await fechedUserBooks.json();
 
@@ -85,15 +91,18 @@ function AddBook(props) {
   ///////////////////////////////Return////////////////////////////////////////
   return (
     <View style={styles.background}>
-      <Ionicons
+      <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('BottomNavigator');
         }}
-        name={(iconName = 'arrow-back')}
-        size={20}
-        color={'#007576'}
-        style={styles.backText}
-      />
+      >
+        <Ionicons
+          name={(iconName = 'arrow-back')}
+          size={30}
+          color={'#007576'}
+          style={styles.backText}
+        />
+      </TouchableOpacity>
       <ScrollView>
         <View style={styles.logo}>
           <Image

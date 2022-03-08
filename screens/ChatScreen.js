@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import { Input, Text, Icon, ListItem } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
@@ -11,7 +12,7 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 import socketIOClient from 'socket.io-client';
-var socket = socketIOClient('http://192.168.10.151:3000');
+var socket = socketIOClient('http://192.168.10.106:3000');
 
 const ChatScreen = (props) => {
   const [currentMessage, setCurrentMessage] = useState();
@@ -47,26 +48,19 @@ const ChatScreen = (props) => {
     <>
       <View style={styles.container}>
         <View style={styles.top}>
-          {/* <Text
-            style={styles.topbutton}
-            onPress={() => props.navigation.goBack()}
-          >
-            <FontAwesome
-              name="reply"
-              size={35}
-              color="#FBAF19"
-              style={{ marginRight: 35, marginTop: 5 }}
-            />
-          </Text> */}
-          <Ionicons
+          <TouchableOpacity
             onPress={() => {
               props.navigation.goBack();
             }}
-            name={(iconName = 'arrow-back')}
-            size={30}
-            color={'#007576'}
-            style={styles.textBack}
-          />
+          >
+            <Ionicons
+              name={(iconName = 'arrow-back')}
+              size={30}
+              color={'#007576'}
+              style={styles.backText}
+            />
+          </TouchableOpacity>
+
           <Text style={styles.top}>Messages</Text>
           <Text style={styles.top}>???</Text>
         </View>
@@ -165,7 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: '#456283',
   },
-  textBack: {
+  backText: {
     color: '#007576',
     marginLeft: 20,
     fontSize: 20,

@@ -8,20 +8,20 @@ import {
   TouchableOpacity,
   SafeAreaView,
   RefreshControl,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { Input, Card } from "react-native-elements";
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Input, Card } from 'react-native-elements';
 
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import Svg, { G, Circle } from "react-native-svg";
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import Svg, { G, Circle } from 'react-native-svg';
 
-import BookDetails from "../components/BookDetails";
-import { EvilIcons } from "@expo/vector-icons";
+import BookDetails from '../components/BookDetails';
+import { EvilIcons } from '@expo/vector-icons';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { connect } from "react-redux";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { connect } from 'react-redux';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -51,19 +51,19 @@ const ProfileScreen = (props) => {
   useEffect(() => {
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.151:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.106:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
-      AsyncStorage.setItem("userWishList", JSON.stringify(userWishList));
+      AsyncStorage.setItem('userWishList', JSON.stringify(userWishList));
     };
     haha();
 
-    AsyncStorage.getItem("userWishList", function (error, data) {
+    AsyncStorage.getItem('userWishList', function (error, data) {
       let userWishList = JSON.parse(data);
       setWishList(userWishList);
     });
-    AsyncStorage.getItem("userBooks", function (error, data) {
+    AsyncStorage.getItem('userBooks', function (error, data) {
       let booklist = JSON.parse(data);
       setMyBooks(booklist);
     });
@@ -74,7 +74,7 @@ const ProfileScreen = (props) => {
       <TouchableOpacity
         key={i}
         onPress={() => {
-          props.navigation.navigate("BookScreen");
+          props.navigation.navigate('BookScreen');
           props.sendBookDetail(
             x.title,
             x.author,
@@ -107,7 +107,7 @@ const ProfileScreen = (props) => {
         key={i}
         style={[styles.bookItem, styles.shadowCard]}
         onPress={() => {
-          props.navigation.navigate("BookScreen");
+          props.navigation.navigate('BookScreen');
           props.sendBookDetail(
             x.title,
             x.author,
@@ -129,18 +129,25 @@ const ProfileScreen = (props) => {
           resizeMode="cover"
           source={{ uri: x.image }}
         />
-        <View>
-          <Text style={styles.name}>{x.title}</Text>
+        <View style={styles.detail}>
+          <Text style={styles.name}>
+            {x.title}
+            <Ionicons
+              name={(iconName = 'basket')}
+              size={20}
+              color={'grey'}
+              // style={{ paddingRight: 5 }}
+            />
+          </Text>
           <Text style={styles.description}>{x.author}</Text>
         </View>
         <View style={styles.icons}>
-          <Ionicons name={(iconName = "basket")} size={20} color={"#252525"} />
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate("SignIn", { screen: "SignIn" })
+              props.navigation.navigate('SignIn', { screen: 'SignIn' })
             }
           >
-            <Ionicons name={(iconName = "heart")} size={20} color={"red"} />
+            <Ionicons name={(iconName = 'trash')} size={20} color={'grey'} />
           </TouchableOpacity>
         </View>
         <Card.Divider />
@@ -244,66 +251,68 @@ const ProfileScreen = (props) => {
         </View>
         <ScrollView style={{ flex: 1, marginTop: 10 }}>
           <View style={styles.navigation}>
-            <View style={styles.link}>
+            <TouchableOpacity
+              style={styles.link}
+              onPress={() => {
+                props.navigation.navigate('AddBook');
+              }}
+            >
               <AntDesign
                 name="scan1"
                 size={24}
                 color="#6D7D8B"
                 style={{ marginRight: 5 }}
-                onPress={() => {
-                  props.navigation.navigate("AddBook");
-                }}
               />
               <Text
-                onPress={() => {
-                  props.navigation.navigate("AddBook");
-                }}
-                style={{ color: "#252525", paddingLeft: 3 }}
+                // onPress={() => {
+                //   props.navigation.navigate('AddBook');
+                // }}
+                style={{ color: '#252525', paddingLeft: 3 }}
               >
                 Scan
               </Text>
-            </View>
+            </TouchableOpacity>
             <Text style={styles.barre}>|</Text>
 
-            <View style={styles.link}>
-              <AntDesign
-                onPress={() =>
-                  props.navigation.navigate("Chat", { screen: "ChatScreen" })
-                }
-                name="message1"
-                size={24}
-                color="#6D7D8B"
-              />
+            <TouchableOpacity
+              style={styles.link}
+              onPress={() =>
+                props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+              }
+            >
+              <AntDesign name="message1" size={24} color="#6D7D8B" />
               <Text
-                onPress={() =>
-                  props.navigation.navigate("Chat", { screen: "ChatScreen" })
-                }
-                style={{ color: "#252525", paddingLeft: 3 }}
+                // onPress={() =>
+                //   props.navigation.navigate('Chat', { screen: 'ChatScreen' })
+                // }
+                style={{ color: '#252525', paddingLeft: 3 }}
               >
                 Messages
               </Text>
-            </View>
+            </TouchableOpacity>
             <Text style={styles.barre}>|</Text>
 
-            <View style={styles.link}>
+            <TouchableOpacity
+              style={styles.link}
+              onPress={() => {
+                props.navigation.navigate('Store');
+              }}
+            >
               <FontAwesome
                 name="credit-card-alt"
                 size={24}
                 color="#6D7D8B"
                 style={{ marginRight: 5 }}
-                onPress={() => {
-                  props.navigation.navigate("Store");
-                }}
               />
               <Text
-                onPress={() => {
-                  props.navigation.navigate("Store");
-                }}
-                style={{ color: "#252525", paddingLeft: 3 }}
+                // onPress={() => {
+                //   props.navigation.navigate('Store');
+                // }}
+                style={{ color: '#252525', paddingLeft: 3 }}
               >
                 My Card
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <Text style={styles.title}>Mes livres en ventes :</Text>
           <ScrollView horizontal={true}>
@@ -336,7 +345,7 @@ function mapDispatchToProps(dispatch) {
       price
     ) {
       dispatch({
-        type: "BookDetail",
+        type: 'BookDetail',
         title,
         author,
         language,
@@ -357,64 +366,65 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#DBE6E7",
-    color: "#252525",
+    backgroundColor: '#DBE6E7',
+    color: '#252525',
     // alignItems: 'center',
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    padding: 20,
   },
   topContainer: {
     marginTop: 30,
     marginLeft: 20,
   },
   username: {
-    color: "#ED610C",
+    color: '#ED610C',
     fontSize: 35,
-    fontWeight: "bold",
-    textShadowColor: "#000",
+    fontWeight: 'bold',
+    textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
-    textAlign: "center",
+    textAlign: 'center',
   },
   aligntop: {
-    flexDirection: "row",
-    textAlign: "center",
+    flexDirection: 'row',
+    textAlign: 'center',
     paddingLeft: 5,
   },
   level: {
-    color: "#FFF",
+    color: '#FFF',
     fontSize: 27,
-    fontStyle: "italic",
-    textAlign: "center",
-    textShadowColor: "#000",
+    fontStyle: 'italic',
+    textAlign: 'center',
+    textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
   number: {
-    color: "#EC8D05",
+    color: '#EC8D05',
     fontSize: 27,
-    fontWeight: "bold",
-    textShadowColor: "#000",
+    fontWeight: 'bold',
+    textShadowColor: '#000',
     textShadowOffset: { width: -2, height: 2 },
     textShadowRadius: 10,
   },
   navigation: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(192, 195, 219,0.24)",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(192, 195, 219,0.24)',
     padding: 10,
     margin: 20,
     borderRadius: 15,
   },
   link: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
-    color: "#252525",
+    color: '#252525',
     margin: 10,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 20,
   },
   imageBook: {
@@ -426,54 +436,105 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sliderHorizontal: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   containerFavorites: {
-    alignItems: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   graphWrapper: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   label: {
-    color: "#000",
-    position: "absolute",
+    color: '#000',
+    position: 'absolute',
     fontSize: 15,
   },
   bothCharts: {
-    flexDirection: "row",
+    flexDirection: 'row',
     margin: 5,
-    flexDirection: "row",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   image: {
     width: 60,
     height: 60,
     marginRight: 10,
-    borderRadius: 50,
+    // borderRadius: 50,
   },
   refreshcontainer: {
-    color: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   refreshbutton: {
     // paddingRight: 5,
   },
-  // containerFavorites: {
-  //   justifyContent: 'center',
-  // },
-});
+  containerFavorites: {
+    justifyContent: 'center',
+  },
+  detail: {},
+  bookItem: {
+    // backgroundColor: '#CADCE6',
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    // width: 350,
+    marginBottom: 6,
+    shadowColor: '#000',
+    justifyContent: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
 
-/* <View>
-         <FontAwesome
-           name="envelope-o"
-           size={35}
-           color="#FFF"
-           style={{ marginRight: 35, marginTop: 5 }}
-           onPress={() =>
-             props.navigation.navigate("Chat", { screen: "ChatScreen" })
-           }
-         />
-       </View> */
+    elevation: 2,
+    borderRadius: 3,
+  },
+  bookItem: {
+    // backgroundColor: '#CADCE6',
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    width: '100%',
+    marginBottom: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+    borderRadius: 3,
+  },
+  name: {
+    color: '#252525',
+    padding: 5,
+    fontWeight: 'bold',
+    marginTop: 10,
+    fontSize: 21,
+  },
+  description: {
+    color: '#252525',
+    paddingLeft: 5,
+  },
+  icons: {
+    marginLeft: 'auto',
+    color: '#252525',
+    // flexDirection: 'row',
+    padding: 5,
+    justifyContent: 'center',
+    marginRight: 15,
+  },
+  image: {
+    width: 60,
+    height: 80,
+    marginRight: 10,
+    margin: 10,
+    // borderRadius: 50,
+  },
+});
