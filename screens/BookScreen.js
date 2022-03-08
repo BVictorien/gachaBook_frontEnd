@@ -89,7 +89,17 @@ function BookScreen(props) {
         <View style={styles.imageView}></View>
         <View style={styles.containerDetails}>
           <View style={styles.bookdetails}>
-            <Text style={styles.name}>{title}</Text>
+            <View style={styles.title}>
+              <Text style={styles.name}>{title}</Text>
+              <View style={styles.icons}>
+                <Ionicons
+                  style={{ paddingLeft: 5 }}
+                  name={(iconName = 'basket')}
+                  size={25}
+                  color={'grey'}
+                />
+              </View>
+            </View>
             <Text style={styles.author}>{author}</Text>
             <View style={styles.navigation}>
               <View style={styles.link}>
@@ -124,10 +134,7 @@ function BookScreen(props) {
               title="Contacter le vendeur"
               onPress={() => props.navigation.navigate('UserScreen')}
             />
-          </View>
-
-          <View style={styles.icons}>
-            <Ionicons name={(iconName = 'basket')} size={25} color={'grey'} />
+            <View style={{ height: 100 }}></View>
           </View>
         </View>
       </View>
@@ -195,6 +202,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  title: {
+    flexDirection: 'row',
   },
 
   containerDetails: {
