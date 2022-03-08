@@ -1,6 +1,6 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, Input, Text, Card } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -33,15 +33,18 @@ const BookDetailsCard = () => {
 function PaymentEnCours(props) {
   return (
     <View style={styles.background}>
-      <Ionicons
+      <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('BottomNavigator');
         }}
-        name={(iconName = 'arrow-back')}
-        size={20}
-        color={'#007576'}
-        style={styles.textBack}
-      />
+      >
+        <Ionicons
+          name={(iconName = 'arrow-back')}
+          size={30}
+          color={'#007576'}
+          style={styles.backText}
+        />
+      </TouchableOpacity>
       <View style={styles.logo}>
         <Image style={styles.image} source={require('../assets/pic7.png')} />
         {/* <Text style={styles.title}>Inscription</Text> */}
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     // width: 170,
   },
-  textBack: {
+  backText: {
     marginTop: 15,
     color: '#007576',
     marginRight: 'auto',

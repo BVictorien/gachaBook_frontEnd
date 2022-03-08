@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Avatar, Button } from 'react-native-elements';
 import CustomSwitch from '../components/CustomSwitch';
@@ -14,15 +14,18 @@ const UserScreen = (props) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.banner}>
-          <Ionicons
+          <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('BookScreen');
             }}
-            name={(iconName = 'arrow-back')}
-            size={20}
-            color={'#fff'}
-            style={styles.textBack}
-          />
+          >
+            <Ionicons
+              name={(iconName = 'arrow-back')}
+              size={30}
+              color={'#007576'}
+              style={styles.backText}
+            />
+          </TouchableOpacity>
           <View style={styles.avatar}>
             {/* <Avatar
               size={150}

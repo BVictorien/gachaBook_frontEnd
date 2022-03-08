@@ -1,6 +1,6 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,15 +8,18 @@ import { Ionicons } from '@expo/vector-icons';
 function Store(props) {
   return (
     <View style={styles.background}>
-      <Ionicons
+      <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('BottomNavigator');
         }}
-        name={(iconName = 'arrow-back')}
-        size={20}
-        color={'#007576'}
-        style={styles.backButton}
-      />
+      >
+        <Ionicons
+          name={(iconName = 'arrow-back')}
+          size={30}
+          color={'#007576'}
+          style={styles.backText}
+        />
+      </TouchableOpacity>
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image style={styles.image} source={require('../assets/pic5.png')} />
@@ -127,5 +130,14 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 40,
     width: '100%',
+  },
+  backText: {
+    marginTop: 15,
+    color: '#007576',
+    marginTop: 50,
+    marginRight: 'auto',
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
