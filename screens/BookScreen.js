@@ -117,17 +117,6 @@ function BookScreen(props) {
                   Points
                 </Text>
               </View>
-              <Text style={styles.description}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident amet perferendis nobis, nesciunt voluptas aut quasi
-                veritatis magnam. Placeat velit rem unde natus cum earum
-                similique, amet totam nesciunt nostrum.
-              </Text>
-              <Button
-                buttonStyle={styles.contact}
-                title="Contacter le vendeur"
-                onPress={() => props.navigation.navigate('UserScreen')}
-              />
             </View>
             <Text style={styles.description}>{description}</Text>
             <Button
