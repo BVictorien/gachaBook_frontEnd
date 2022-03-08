@@ -46,7 +46,7 @@ function SearchScreen(props) {
         }}
       />
       <View style={{ alignItems: 'center' }}>
-        <Text style={styles.title}>Around Me</Text>
+        <Text style={styles.title}>Autour de moi :</Text>
       </View>
       <ScrollView style={{ flex: 1, marginTop: 10 }}>
         <View style={styles.container}>

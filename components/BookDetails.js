@@ -27,8 +27,18 @@ export default class BookDetails extends Component {
           <Text style={styles.description}>Descriptions du livre</Text>
         </View>
         <View style={styles.icons}>
-          <Ionicons name={(iconName = 'basket')} size={20} color={'#252525'} />
-          <Ionicons name={(iconName = 'heart')} size={20} color={'red'} />
+          <Ionicons
+            name={(iconName = 'heart')}
+            size={25}
+            color={'red'}
+            style={{ padding: 7 }}
+          />
+          <Ionicons
+            name={(iconName = 'basket')}
+            size={25}
+            color={'#252525'}
+            style={{ padding: 7 }}
+          />
         </View>
         <Card.Divider />
       </TouchableOpacity>
@@ -38,18 +48,31 @@ export default class BookDetails extends Component {
 //////////////////////////////////////Styles///////////////////////////////////////////////
 const styles = StyleSheet.create({
   bookItem: {
-    backgroundColor: '#CADCE6',
+    // backgroundColor: '#CADCE6',
+    backgroundColor: '#fff',
     flexDirection: 'row',
     marginBottom: 6,
     // padding: 10,
-    borderBottomLeftRadius: 50,
-    borderTopLeftRadius: 50,
+    // borderBottomLeftRadius: 50,
+    // borderTopLeftRadius: 50,
     width: '95%',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   name: {
     color: '#252525',
     padding: 5,
     fontWeight: 'bold',
+    marginTop: 10,
+    fontSize: 21,
   },
   description: {
     color: '#252525',
@@ -58,14 +81,17 @@ const styles = StyleSheet.create({
   icons: {
     marginLeft: 'auto',
     color: '#252525',
-    flexDirection: 'row',
+    // flexDirection: 'row',
     padding: 5,
+    justifyContent: 'center',
+    marginRight: 15,
   },
   image: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 90,
     marginRight: 10,
-    borderRadius: 50,
+    margin: 10,
+    // borderRadius: 50,
   },
   shadowCard: {
     shadowColor: '#171717',
