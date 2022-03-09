@@ -44,7 +44,7 @@ function BookScreen(props) {
   }, []);
   /*-------------------------------------------------------- */
   const updateWishList = async () => {
-    const data = await fetch('http://192.168.10.106:3000/update-whishlist', {
+    const data = await fetch('http://192.168.10.119:3000/update-whishlist', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&bookId=${id}`,
@@ -53,7 +53,7 @@ function BookScreen(props) {
   /*-------------------------------------------------------- */
   ////////////////////////////////////Return/////////////////////////////////////////
   return (
-    <ScrollView style={{ flex: 1, marginTop: 10 }}>
+    <ScrollView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.headNavigation}>
           <TouchableOpacity
@@ -111,9 +111,9 @@ function BookScreen(props) {
                 >
                   <Ionicons
                     style={{ paddingLeft: 5 }}
-                    name={(iconName = "basket")}
+                    name={(iconName = 'basket')}
                     size={25}
-                    color={"grey"}
+                    color={'grey'}
                   />
                 </TouchableOpacity>
               </View>
@@ -171,10 +171,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addUsername: function (username) {
-      dispatch({ type: "addUsername", username: username });
+      dispatch({ type: 'addUsername', username: username });
     },
     addToCart: function (book) {
-      dispatch({ type: "addCart", book: book });
+      dispatch({ type: 'addCart', book: book });
     },
   };
 }
@@ -182,21 +182,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(BookScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#DBE6E7',
 
     color: '#fff',
-    height: '100%',
+    // minHeight: '100vh',
     width: '100%',
+    padding: 10,
   },
   headNavigation: {
+    // width: '100%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   heart: {
     marginTop: 15,
     marginRight: 20,
-    marginLeft: 'auto',
-    paddingTop: 30,
+    // marginRight: 200,
+    // paddingLeft: 200,
+    // marginRight: 'auto',
+    // paddingTop: 30,
+    // right: 0,
   },
   containerBook: {
     alignItems: 'center',
@@ -212,10 +218,10 @@ const styles = StyleSheet.create({
     width: 200,
     height: 300,
   },
-  imageBois: {
-    alignItems: 'center',
-    padding: 20,
-  },
+  // imageBois: {
+  //   alignItems: 'center',
+  //   padding: 20,
+  // },
   navigation: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -263,9 +269,9 @@ const styles = StyleSheet.create({
     // width: '90%',
     padding: 20,
   },
-  icons: {
-    marginLeft: 'auto',
-  },
+  // icons: {
+  //   marginLeft: 'auto',
+  // },
   contact: {
     backgroundColor: '#007576',
     borderRadius: 50,
@@ -277,13 +283,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     width: 1,
   },
-  textBack: {
+  backText: {
     marginTop: 15,
     color: '#007576',
-    marginRight: 'auto',
+    // marginRight: 'auto',
     marginLeft: 20,
+    // marginRight: 'auto',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingTop: 30,
+    // paddingTop: 30,
   },
 });

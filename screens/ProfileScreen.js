@@ -51,7 +51,7 @@ const ProfileScreen = (props) => {
   useEffect(() => {
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.106:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.119:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-    padding: 20,
+    // padding: 20,
   },
   topContainer: {
     marginTop: 30,
@@ -423,7 +423,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#252525',
-    margin: 10,
+    // margin: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
     fontWeight: 'bold',
     fontSize: 20,
   },
@@ -498,8 +500,10 @@ const styles = StyleSheet.create({
     // backgroundColor: '#CADCE6',
     backgroundColor: '#fff',
     flexDirection: 'row',
-    width: '100%',
+    // width: '100%',
     marginBottom: 6,
+    marginLeft: 20,
+    marginRight: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
