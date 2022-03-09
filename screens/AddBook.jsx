@@ -26,7 +26,7 @@ function AddBook(props) {
   const [codeBarre, setCodeBarre] = useState('');
   const [disponibilite, setDisponibilite] = useState(true);
   const [condition, setCondition] = useState('');
-  const [prix, setPrix] = useState('');
+  const [prix, setPrix] = useState('0');
   const [imageLink, setImagelink] = useState('');
 
   //////////////////////////////Methods //////////////////////////////////////
