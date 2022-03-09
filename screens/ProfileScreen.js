@@ -51,11 +51,7 @@ const ProfileScreen = (props) => {
   useEffect(() => {
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-<<<<<<< HEAD
         `http://192.168.10.150:3000/user-wishList?userId=${props.userId}`
-=======
-        `http://192.168.10.119:3000/user-wishList?userId=${props.userId}`
->>>>>>> debugFront
       );
       let userWishList = await fechedUserWishlist.json();
 

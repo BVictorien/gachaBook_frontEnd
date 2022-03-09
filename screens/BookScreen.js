@@ -5,22 +5,22 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { Image, Button } from "react-native-elements";
-import { Ionicons } from "@expo/vector-icons";
-import { connect } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Button } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /////////////////////////////////////Function//////////////////////////////////////////////////
 function BookScreen(props) {
   ////////////////////////////////////States declaration////////////////////////////
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [language, setLanguage] = useState("");
-  const [pageCount, setPageCount] = useState("");
-  const [barcode, setBarcode] = useState("");
-  const [editor, setEditor] = useState("");
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [language, setLanguage] = useState('');
+  const [pageCount, setPageCount] = useState('');
+  const [barcode, setBarcode] = useState('');
+  const [editor, setEditor] = useState('');
   const [image, setImage] = useState();
   const [description, setDescription] = useState();
   const [year, setYear] = useState();
@@ -44,15 +44,9 @@ function BookScreen(props) {
   }, []);
   /*-------------------------------------------------------- */
   const updateWishList = async () => {
-<<<<<<< HEAD
-    const data = await fetch("http://192.168.10.150:3000/update-whishlist", {
-      method: "PUT",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-=======
-    const data = await fetch('http://192.168.10.119:3000/update-whishlist', {
+    const data = await fetch('http://192.168.10.150:3000/update-whishlist', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
->>>>>>> debugFront
       body: `userId=${props.userId}&bookId=${id}`,
     });
   };
@@ -64,13 +58,13 @@ function BookScreen(props) {
         <View style={styles.headNavigation}>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate("BottomNavigator");
+              props.navigation.navigate('BottomNavigator');
             }}
           >
             <Ionicons
-              name={(iconName = "arrow-back")}
+              name={(iconName = 'arrow-back')}
               size={30}
-              color={"#007576"}
+              color={'#007576'}
               style={styles.backText}
             />
           </TouchableOpacity>
@@ -81,9 +75,9 @@ function BookScreen(props) {
           >
             <Ionicons
               style={styles.heart}
-              name={(iconName = "heart")}
+              name={(iconName = 'heart')}
               size={30}
-              color={"red"}
+              color={'red'}
             />
           </TouchableOpacity>
         </View>
@@ -130,34 +124,34 @@ function BookScreen(props) {
             <Text style={styles.author}>{author}</Text>
             <View style={styles.navigation}>
               <View style={styles.link}>
-                <Text style={{ color: "#949494" }}>Propre</Text>
-                <Text style={{ color: "rgba(148, 148, 148,0.65)" }}>Etat</Text>
+                <Text style={{ color: '#949494' }}>Propre</Text>
+                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Etat</Text>
               </View>
               <Text style={styles.barre}>|</Text>
               <View style={styles.link}>
-                <Text style={{ color: "#949494" }}>{pageCount}</Text>
-                <Text style={{ color: "rgba(148, 148, 148,0.65)" }}>
+                <Text style={{ color: '#949494' }}>{pageCount}</Text>
+                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>
                   Nombre de page
                 </Text>
               </View>
               <Text style={styles.barre}>|</Text>
               <View style={styles.link}>
-                <Text style={{ color: "#949494" }}>{language}</Text>
-                <Text style={{ color: "rgba(148, 148, 148,0.65)" }}>
+                <Text style={{ color: '#949494' }}>{language}</Text>
+                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>
                   Langage
                 </Text>
               </View>
               <Text style={styles.barre}>|</Text>
               <View style={styles.link}>
-                <Text style={{ color: "#949494" }}>{price} ₲</Text>
-                <Text style={{ color: "rgba(148, 148, 148,0.65)" }}>Price</Text>
+                <Text style={{ color: '#949494' }}>{price} ₲</Text>
+                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Price</Text>
               </View>
             </View>
             <Text style={styles.description}>{description}</Text>
             <Button
               buttonStyle={styles.contact}
               title="Contacter le vendeur"
-              onPress={() => props.navigation.navigate("UserScreen")}
+              onPress={() => props.navigation.navigate('UserScreen')}
             />
             <View style={{ height: 100 }}></View>
           </View>
@@ -182,14 +176,9 @@ function mapDispatchToProps(dispatch) {
     addUsername: function (username) {
       dispatch({ type: 'addUsername', username: username });
     },
-<<<<<<< HEAD
     addToCart: function (book, price) {
-      dispatch({ type: "addCart", book: book });
-      dispatch({ type: "addTotal", price: price });
-=======
-    addToCart: function (book) {
       dispatch({ type: 'addCart', book: book });
->>>>>>> debugFront
+      dispatch({ type: 'addTotal', price: price });
     },
   };
 }
@@ -197,17 +186,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(BookScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-<<<<<<< HEAD
-    flex: 1,
-    backgroundColor: "#DBE6E7",
-
-    color: "#fff",
-    height: "100%",
-    width: "100%",
-  },
-  headNavigation: {
-    flexDirection: "row",
-=======
     // flex: 1,
     backgroundColor: '#DBE6E7',
 
@@ -220,132 +198,100 @@ const styles = StyleSheet.create({
     // width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
->>>>>>> debugFront
   },
   heart: {
     marginTop: 15,
     marginRight: 20,
-<<<<<<< HEAD
-    marginLeft: "auto",
+    marginLeft: 'auto',
     paddingTop: 30,
-=======
-    // marginRight: 200,
-    // paddingLeft: 200,
-    // marginRight: 'auto',
-    // paddingTop: 30,
-    // right: 0,
->>>>>>> debugFront
   },
   containerBook: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 15,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   containerbois: {},
   imageView: {
-    alignItems: "center",
+    alignItems: 'center',
     margin: 20,
   },
   image: {
     width: 200,
     height: 300,
   },
-<<<<<<< HEAD
-  imageBois: {
-    alignItems: "center",
-    padding: 20,
-  },
-=======
   // imageBois: {
   //   alignItems: 'center',
   //   padding: 20,
   // },
->>>>>>> debugFront
   navigation: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(245, 245, 245,0.53)",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(245, 245, 245,0.53)',
     padding: 15,
     marginTop: 20,
     // margin: 25,
     borderRadius: 20,
   },
   link: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
   },
   title: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 
   containerDetails: {
     margin: 10,
     // marginTop: -10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bookdetails: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   name: {
-    justifyContent: "center",
-    color: "black",
-    fontWeight: "bold",
+    justifyContent: 'center',
+    color: 'black',
+    fontWeight: 'bold',
     fontSize: 21,
   },
   author: {
-    color: "grey",
-    fontWeight: "bold",
+    color: 'grey',
+    fontWeight: 'bold',
   },
   description: {
-    color: "gray",
+    color: 'gray',
     // marginTop: 20,
     marginBottom: 20,
     // margin: 20,
     // width: '90%',
     padding: 20,
   },
-<<<<<<< HEAD
   icons: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
   },
-=======
-  // icons: {
-  //   marginLeft: 'auto',
-  // },
->>>>>>> debugFront
   contact: {
-    backgroundColor: "#007576",
+    backgroundColor: '#007576',
     borderRadius: 50,
-    alignItems: "center",
+    alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
   },
   barre: {
-    backgroundColor: "black",
+    backgroundColor: 'black',
     width: 1,
   },
   backText: {
     marginTop: 15,
-<<<<<<< HEAD
-    color: "#007576",
-    marginRight: "auto",
-=======
     color: '#007576',
     // marginRight: 'auto',
->>>>>>> debugFront
     marginLeft: 20,
     // marginRight: 'auto',
     fontSize: 20,
-<<<<<<< HEAD
-    fontWeight: "bold",
-    paddingTop: 30,
-=======
     fontWeight: 'bold',
-    // paddingTop: 30,
->>>>>>> debugFront
+    paddingTop: 30,
   },
 });
