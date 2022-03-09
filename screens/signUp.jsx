@@ -15,7 +15,11 @@ function SignUp(props) {
   const [listErrorsSignUp, setErrorsSignUp] = useState([]);
 
   const handleSubmitSignUp = async () => {
+<<<<<<< HEAD
     const data = await fetch('http://192.168.10.150:3000/sign-up', {
+=======
+    const data = await fetch('http://192.168.10.119:3000/sign-up', {
+>>>>>>> debugFront
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&token=${token}`,

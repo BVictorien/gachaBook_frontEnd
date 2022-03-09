@@ -44,16 +44,22 @@ function BookScreen(props) {
   }, []);
   /*-------------------------------------------------------- */
   const updateWishList = async () => {
+<<<<<<< HEAD
     const data = await fetch("http://192.168.10.150:3000/update-whishlist", {
       method: "PUT",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+=======
+    const data = await fetch('http://192.168.10.119:3000/update-whishlist', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+>>>>>>> debugFront
       body: `userId=${props.userId}&bookId=${id}`,
     });
   };
   /*-------------------------------------------------------- */
   ////////////////////////////////////Return/////////////////////////////////////////
   return (
-    <ScrollView style={{ flex: 1, marginTop: 10 }}>
+    <ScrollView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.headNavigation}>
           <TouchableOpacity
@@ -114,9 +120,9 @@ function BookScreen(props) {
                 >
                   <Ionicons
                     style={{ paddingLeft: 5 }}
-                    name={(iconName = "basket")}
+                    name={(iconName = 'basket')}
                     size={25}
-                    color={"grey"}
+                    color={'grey'}
                   />
                 </TouchableOpacity>
               </View>
@@ -174,11 +180,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addUsername: function (username) {
-      dispatch({ type: "addUsername", username: username });
+      dispatch({ type: 'addUsername', username: username });
     },
+<<<<<<< HEAD
     addToCart: function (book, price) {
       dispatch({ type: "addCart", book: book });
       dispatch({ type: "addTotal", price: price });
+=======
+    addToCart: function (book) {
+      dispatch({ type: 'addCart', book: book });
+>>>>>>> debugFront
     },
   };
 }
@@ -186,6 +197,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(BookScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
+<<<<<<< HEAD
     flex: 1,
     backgroundColor: "#DBE6E7",
 
@@ -195,12 +207,34 @@ const styles = StyleSheet.create({
   },
   headNavigation: {
     flexDirection: "row",
+=======
+    // flex: 1,
+    backgroundColor: '#DBE6E7',
+
+    color: '#fff',
+    // minHeight: '100vh',
+    width: '100%',
+    padding: 10,
+  },
+  headNavigation: {
+    // width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+>>>>>>> debugFront
   },
   heart: {
     marginTop: 15,
     marginRight: 20,
+<<<<<<< HEAD
     marginLeft: "auto",
     paddingTop: 30,
+=======
+    // marginRight: 200,
+    // paddingLeft: 200,
+    // marginRight: 'auto',
+    // paddingTop: 30,
+    // right: 0,
+>>>>>>> debugFront
   },
   containerBook: {
     alignItems: "center",
@@ -216,10 +250,17 @@ const styles = StyleSheet.create({
     width: 200,
     height: 300,
   },
+<<<<<<< HEAD
   imageBois: {
     alignItems: "center",
     padding: 20,
   },
+=======
+  // imageBois: {
+  //   alignItems: 'center',
+  //   padding: 20,
+  // },
+>>>>>>> debugFront
   navigation: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -267,9 +308,15 @@ const styles = StyleSheet.create({
     // width: '90%',
     padding: 20,
   },
+<<<<<<< HEAD
   icons: {
     marginLeft: "auto",
   },
+=======
+  // icons: {
+  //   marginLeft: 'auto',
+  // },
+>>>>>>> debugFront
   contact: {
     backgroundColor: "#007576",
     borderRadius: 50,
@@ -281,13 +328,24 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     width: 1,
   },
-  textBack: {
+  backText: {
     marginTop: 15,
+<<<<<<< HEAD
     color: "#007576",
     marginRight: "auto",
+=======
+    color: '#007576',
+    // marginRight: 'auto',
+>>>>>>> debugFront
     marginLeft: 20,
+    // marginRight: 'auto',
     fontSize: 20,
+<<<<<<< HEAD
     fontWeight: "bold",
     paddingTop: 30,
+=======
+    fontWeight: 'bold',
+    // paddingTop: 30,
+>>>>>>> debugFront
   },
 });
