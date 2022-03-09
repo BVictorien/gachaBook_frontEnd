@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 //////////////////////////////////////Functions///////////////////////////////////////////////
 
 const CartScreen = (props) => {
+  /////////////////////////////////////States and vars/////////////////////////////////
+
   /////////////////////////////////////Methods/////////////////////////////////
   /*------------------------------------------------------ */
   useState(() => {}, [props]);
@@ -35,7 +37,7 @@ const CartScreen = (props) => {
           <Text style={styles.description}>{x.author}</Text>
         </View>
         <View style={styles.icons}>
-          <TouchableOpacity onPress={() => props.deleteFCart(x.id)}>
+          <TouchableOpacity onPress={() => props.deleteFCart(x.id, x.price)}>
             <Ionicons name={(iconName = "trash")} size={25} color={"gray"} />
           </TouchableOpacity>
           <Button buttonStyle={styles.points} title={x.price} />
@@ -58,7 +60,7 @@ const CartScreen = (props) => {
         <View>{cartList}</View>
         <View style={styles.total}>
           <Text style={styles.totalText}>Total :</Text>
-          <Text>69 pts</Text>
+          <Text>{props.total} ₲</Text>
         </View>
 
         <View style={styles.buttons}>
@@ -90,6 +92,7 @@ function mapStateToProps(state) {
     username: state.username,
     bookDetails: state.scanBookReducer,
     cart: state.cartReducer,
+    total: state.cartTotalReducer,
   };
 }
 
@@ -98,8 +101,9 @@ function mapDispatchToProps(dispatch) {
     addUsername: function (username) {
       dispatch({ type: "addUsername", username: username });
     },
-    deleteFCart: function (bookId) {
+    deleteFCart: function (bookId, price) {
       dispatch({ type: "deleteFCart", bookId });
+      dispatch({ type: "subCart", price });
     },
   };
 }
