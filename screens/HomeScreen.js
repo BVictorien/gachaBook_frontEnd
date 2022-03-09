@@ -109,7 +109,6 @@ function HomeScreen(props) {
       let userProfil2 = JSON.parse(data);
       props.getUserProfil(userProfil2);
     });
-   
   }, [refreshing]);
   /*--------------------------------------------------*/
   const viw = last.map((lastbook, i) => {
@@ -128,7 +127,8 @@ function HomeScreen(props) {
             lastbook.description,
             lastbook.year,
             lastbook._id,
-            lastbook.price
+            lastbook.price,
+            lastbook.selletId[0]
           );
         }}
         style={styles.homeBook}
@@ -354,7 +354,8 @@ function mapDispatchToProps(dispatch) {
       description,
       year,
       id,
-      price
+      price,
+      sellerId
     ) {
       dispatch({
         type: "BookDetail",
@@ -369,6 +370,7 @@ function mapDispatchToProps(dispatch) {
         year,
         id,
         price,
+        sellerId,
       });
     },
     getUserProfil: function (userProfil) {
