@@ -84,7 +84,8 @@ const CartScreen = (props) => {
   );
 };
 
-/////////////////////////////////////Return////////////////////////////////////////////////////
+/////////////////////////////////////Redux////////////////////////////////////////////////////
+/*-------------------------------------------------------------*/
 function mapStateToProps(state) {
   return {
     token: state.token,
@@ -95,21 +96,19 @@ function mapStateToProps(state) {
     total: state.cartTotalReducer,
   };
 }
-
+/*-------------------------------------------------------------*/
 function mapDispatchToProps(dispatch) {
   return {
-    addUsername: function (username) {
-      dispatch({ type: "addUsername", username: username });
-    },
     deleteFCart: function (bookId, price) {
       dispatch({ type: "deleteFCart", bookId });
       dispatch({ type: "subCart", price });
     },
   };
 }
+/*-------------------------------------------------------------*/
 export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);
 
-/////////////////////////////////////Return////////////////////////////////////////////////////
+/////////////////////////////////////Styles////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   background: {
     flex: 1,
