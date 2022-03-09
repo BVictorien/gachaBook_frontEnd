@@ -27,16 +27,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 /*-------------------------redux------------------------------------------------*/
-<<<<<<< HEAD
-import { provider, Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import scanBookReducer from "./reducers/scanBookReducer";
-import token from "./reducers/token";
-import username from "./reducers/username";
-import userIdReducer from "./reducers/userIdReducer";
-import cartReducer from "./reducers/cartReducer";
-import cartTotalReducer from "./reducers/cartTotalReducer";
-=======
 import { provider, Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import scanBookReducer from './reducers/scanBookReducer';
@@ -44,7 +34,7 @@ import token from './reducers/token';
 import username from './reducers/username';
 import userIdReducer from './reducers/userIdReducer';
 import cartReducer from './reducers/cartReducer';
->>>>>>> debugFront
+import cartTotalReducer from './reducers/cartTotalReducer';
 
 const store = createStore(
   combineReducers({
