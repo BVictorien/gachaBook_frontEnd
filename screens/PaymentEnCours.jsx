@@ -4,6 +4,7 @@ import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Button, Input, Text, Card } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import { connect } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //////////////////////////////////////Function//////////////////////////////////////////////
 const BookDetailsCard = () => {
@@ -36,6 +37,7 @@ function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
   const viw42 = props.cart.map((x, i) => {
+    console.log(x);
     return (
       <View key={i} style={styles.bookItem}>
         <Card.Divider />
@@ -49,7 +51,7 @@ function PaymentEnCours(props) {
           <Text style={styles.description}>{x.author}</Text>
           <View style={styles.buttons}>
             <Button
-              onLongPress={() => props.deleteFCart(x.id, x.price)}
+              onLongPress={() => props.payFCart(x.id, x.price)}
               buttonStyle={styles.button1}
               title="Valider"
             />
@@ -106,6 +108,7 @@ function mapStateToProps(state) {
     bookDetails: state.scanBookReducer,
     cart: state.cartReducer,
     total: state.cartTotalReducer,
+    userProfil: state.userProfil,
   };
 }
 /*-------------------------------------------------------------*/
@@ -114,6 +117,11 @@ function mapDispatchToProps(dispatch) {
     deleteFCart: function (bookId, price) {
       dispatch({ type: "deleteFCart", bookId });
       dispatch({ type: "subCart", price });
+    },
+    payFCart: function (bookId, price) {
+      dispatch({ type: "deleteFCart", bookId });
+      dispatch({ type: "subCart", price });
+      dispatch({ type: "payer", price });
     },
   };
 }
