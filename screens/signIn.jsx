@@ -28,7 +28,7 @@ function SignIn(props) {
       props.addToken(body.token);
       props.addUsername(body.user.username);
       props.getUserId(body.user._id);
-      console.log(body.user._id);
+      console.log(body);
       setUserExists(true);
 
       const hihi = async () => {
