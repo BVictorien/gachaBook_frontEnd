@@ -44,9 +44,9 @@ function BookScreen(props) {
   }, []);
   /*-------------------------------------------------------- */
   const updateWishList = async () => {
-    const data = await fetch('http://192.168.10.150:3000/update-whishlist', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    const data = await fetch("http://192.168.10.109:3000/update-whishlist", {
+      method: "PUT",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `userId=${props.userId}&bookId=${id}`,
     });
   };
