@@ -10,13 +10,13 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
-} from 'react-native';
-import { Input, Text, Icon, Button } from 'react-native-elements';
-import LatestBooks from '../components/LatestBooks';
-import NearestBooks from '../components/NearestBooks';
-import { connect } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FontAwesome } from '@expo/vector-icons';
+} from "react-native";
+import { Input, Text, Icon, Button } from "react-native-elements";
+import LatestBooks from "../components/LatestBooks";
+import NearestBooks from "../components/NearestBooks";
+import { connect } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { FontAwesome } from "@expo/vector-icons";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -91,10 +91,10 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   useEffect(() => {
     let fechedLastBooks = async () => {
-      let data = await fetch(`http:/192.168.10.120:3000/latest-books`);
+      let data = await fetch(`http:/192.168.10.109:3000/latest-books`);
 
       let lastBooks = await data.json();
-      // console.log(lastBooks);
+      console.log("LASSSSSSSTTTTTTT", lastBooks);
       setLast(lastBooks);
     };
     fechedLastBooks();
@@ -114,6 +114,7 @@ function HomeScreen(props) {
   }, [refreshing]);
   /*--------------------------------------------------*/
   const viw = last.map((lastbook, i) => {
+    console.log("booooooooooooooooook", lastbook.sellerID[0]);
     return (
       <TouchableOpacity
         onPress={() => {
@@ -130,7 +131,7 @@ function HomeScreen(props) {
             lastbook.year,
             lastbook._id,
             lastbook.price,
-            
+            lastbook.sellerID[0]
           );
         }}
         style={styles.homeBook}
@@ -167,7 +168,7 @@ function HomeScreen(props) {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require('../assets/bg1.png')}
+        source={require("../assets/bg1.png")}
         resizeMode="cover"
         style={styles.bg}
       ></ImageBackground>
@@ -180,7 +181,7 @@ function HomeScreen(props) {
         <View>
           <View style={styles.search}>
             <Text
-              style={{ color: '#032547', fontWeight: 'bold', fontSize: 30 }}
+              style={{ color: "#032547", fontWeight: "bold", fontSize: 30 }}
             >
               GachaBook
             </Text>
@@ -264,7 +265,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   search: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 40,
     marginLeft: 15,
   },
@@ -273,8 +274,8 @@ const styles = StyleSheet.create({
   },
   title: {
     padding: 0,
-    color: '#032547',
-    fontWeight: 'bold',
+    color: "#032547",
+    fontWeight: "bold",
     marginLeft: 15,
     marginTop: 5,
     marginBottom: 5,
@@ -282,8 +283,8 @@ const styles = StyleSheet.create({
   },
   bg: {
     flex: 1,
-    justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    justifyContent: "center",
+    height: Dimensions.get("window").height / 1,
   },
   logo: {
     justifyContent: "center",
@@ -368,7 +369,7 @@ function mapDispatchToProps(dispatch) {
       year,
       id,
       price,
-      sellerId
+      sellerID
     ) {
       dispatch({
         type: "BookDetail",
@@ -383,7 +384,7 @@ function mapDispatchToProps(dispatch) {
         year,
         id,
         price,
-        sellerId,
+        sellerID,
       });
     },
     getUserProfil: function (userProfil) {

@@ -14,6 +14,7 @@ export default function (bookDetails = [], action) {
         year: action.year,
         id: action.id,
         price: action.price,
+        sellerID: action.sellerID,
       },
     ];
     return newBookDetails;

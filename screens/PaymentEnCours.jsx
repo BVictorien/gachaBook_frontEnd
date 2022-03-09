@@ -36,6 +36,15 @@ const BookDetailsCard = () => {
 function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
+  const payment = async (sellerID, price) => {
+    const data = await fetch("http://192.168.10.109:3000/update-seller", {
+      method: "PUT",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `sellerID=${sellerID}&price=${price}`,
+    });
+  };
+
+  /*----------------------------------------------------------- */
   const viw42 = props.cart.map((x, i) => {
     console.log(x);
     return (
@@ -51,7 +60,10 @@ function PaymentEnCours(props) {
           <Text style={styles.description}>{x.author}</Text>
           <View style={styles.buttons}>
             <Button
-              onLongPress={() => props.payFCart(x.id, x.price)}
+              onLongPress={() => {
+                props.payFCart(x.id, x.price);
+                payment(x.sellerID, x.price);
+              }}
               buttonStyle={styles.button1}
               title="Valider"
             />
