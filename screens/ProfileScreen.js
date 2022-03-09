@@ -68,8 +68,23 @@ const ProfileScreen = (props) => {
       let booklist = JSON.parse(data);
       setMyBooks(booklist);
     });
-    
+    const hoho = async () => {
+      let updateUser = await fetch("http://192.168.10.109:3000/update-profil", {
+        method: "PUT",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
+      });
+      let userProfil = {
+        count_rating: props.userProfil.userProfil.count_rating,
+        points: props.userProfil.userProfil.points,
+        level: props.userProfil.userProfil.level,
+      };
+      
+      AsyncStorage.setItem("userProfil", JSON.stringify(userProfil));
 
+    };
+    hoho();
+   
   }, [props, refreshing]);
   /*-------------------------------------------------------*/
   const constdeleteWishList = async (x) => {
