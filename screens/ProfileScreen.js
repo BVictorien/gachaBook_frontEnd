@@ -32,8 +32,8 @@ const ProfileScreen = (props) => {
   ////////////////////////////////////Variable//////////////////////////////
   const radius = 80;
   const circleCircumference = 2 * Math.PI * radius;
-  const coins =22;
-  const points =30;
+  const coins = props.userProfil.userProfil.count_rating;
+  const points = props.userProfil.userProfil.points;
   const restToHundred = 100 - points;
   const totalCoins = coins + restToHundred;
   const totalPoints = points + restToHundred;
@@ -69,7 +69,8 @@ const ProfileScreen = (props) => {
       setMyBooks(booklist);
     });
     
-  }, [, refreshing]);
+
+  }, [props, refreshing]);
   /*-------------------------------------------------------*/
   const constdeleteWishList = async (x) => {
     const data = await fetch("http://192.168.10.109:3000/delete-whishlist", {
