@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   RefreshControl,
   TouchableOpacity,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import { Input, Text, Icon, Button } from 'react-native-elements';
 import LatestBooks from '../components/LatestBooks';
@@ -87,7 +89,7 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   useEffect(() => {
     let fechedLastBooks = async () => {
-      let data = await fetch(`http:/192.168.10.109:3000/latest-books`);
+      let data = await fetch(`http:/192.168.10.120:3000/latest-books`);
 
       let lastBooks = await data.json();
       // console.log(lastBooks);
@@ -152,20 +154,26 @@ function HomeScreen(props) {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, []);
+
   /*--------------------------------------------------*/
   /////////////////////////////////////Return/////////////////////////////////////
   return (
     <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('../assets/bg1.png')}
+        resizeMode="cover"
+        style={styles.bg}
+      ></ImageBackground>
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={styles.container}>
+        <View>
           <View style={styles.search}>
             <Text
-              style={{ color: '#252525', fontWeight: 'bold', fontSize: 30 }}
+              style={{ color: '#032547', fontWeight: 'bold', fontSize: 30 }}
             >
               GachaBook
             </Text>
@@ -235,8 +243,8 @@ function HomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DBE6E7',
-    // width: '100%',
+    // backgroundColor: '#DBE6E7',
+    // // width: '100%',
   },
   logout: {
     color: '#E9940A',
@@ -260,7 +268,7 @@ const styles = StyleSheet.create({
   },
   search: {
     flexDirection: 'row',
-    marginTop: 50,
+    marginTop: 40,
     marginLeft: 15,
   },
   books: {
@@ -268,12 +276,17 @@ const styles = StyleSheet.create({
   },
   title: {
     padding: 0,
-    color: '#252525',
+    color: '#032547',
     fontWeight: 'bold',
     marginLeft: 15,
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 5,
     fontSize: 20,
+  },
+  bg: {
+    flex: 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 1,
   },
   logo: {
     justifyContent: 'center',

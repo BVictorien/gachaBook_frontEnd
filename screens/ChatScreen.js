@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 import socketIOClient from 'socket.io-client';
-var socket = socketIOClient('http://192.168.10.109:3000');
+var socket = socketIOClient('http://192.168.10.120:3000');
 
 const ChatScreen = (props) => {
   const [currentMessage, setCurrentMessage] = useState();
