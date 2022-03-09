@@ -34,8 +34,8 @@ const ProfileScreen = (props) => {
   ////////////////////////////////////Variable//////////////////////////////
   const radius = 80;
   const circleCircumference = 2 * Math.PI * radius;
-  const coins = 77;
-  const points = 95;
+  const coins = props.userProfil.userProfil.count_rating;
+  const points = props.userProfil.userProfil.points;
   const restToHundred = 100 - points;
   const totalCoins = coins + restToHundred;
   const totalPoints = points + restToHundred;
@@ -48,6 +48,7 @@ const ProfileScreen = (props) => {
   const [myBooks, setMyBooks] = useState([]);
   const [wishList, setWishList] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
+
   /////////////////////////////////////Methodes/////////////////////////////////////////
   /*-------------------------------------------------------*/
   useEffect(() => {
@@ -69,7 +70,24 @@ const ProfileScreen = (props) => {
       let booklist = JSON.parse(data);
       setMyBooks(booklist);
     });
-  }, [refreshing]);
+    const hoho = async () => {
+      let updateUser = await fetch("http://192.168.10.109:3000/update-profil", {
+        method: "PUT",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
+      });
+      let userProfil = {
+        count_rating: props.userProfil.userProfil.count_rating,
+        points: props.userProfil.userProfil.points,
+        level: props.userProfil.userProfil.level,
+      };
+      
+      AsyncStorage.setItem("userProfil", JSON.stringify(userProfil));
+
+    };
+    hoho();
+   
+  }, [props, refreshing]);
   /*-------------------------------------------------------*/
   const constdeleteWishList = async (x) => {
     const data = await fetch('http://192.168.10.109:3000/delete-whishlist', {
@@ -213,14 +231,18 @@ const ProfileScreen = (props) => {
                   )}
                 </G>
               </Svg>
-              <Text style={styles.label}>{coins} coins</Text>
+              <Text style={styles.label}>
+                {props.userProfil.userProfil.count_rating} ₲
+              </Text>
             </View>
 
             <View>
               <Text style={styles.username}>{props.username}</Text>
               <View style={styles.aligntop}>
                 <Text style={styles.level}>Niveau </Text>
-                <Text style={styles.number}> 17 </Text>
+                <Text style={styles.number}>
+                  {props.userProfil.userProfil.level}{" "}
+                </Text>
               </View>
             </View>
 
@@ -256,7 +278,9 @@ const ProfileScreen = (props) => {
                   )}
                 </G>
               </Svg>
-              <Text style={styles.label}>{points} / 100</Text>
+              <Text style={styles.label}>
+                {props.userProfil.userProfil.points} / 100
+              </Text>
             </View>
           </View>
         </View>
@@ -338,7 +362,11 @@ const ProfileScreen = (props) => {
 };
 /////////////////////////////////////Redux//////////////////////////////////////////////////////////
 function mapStateToProps(state) {
-  return { username: state.username, userId: state.userIdReducer };
+  return {
+    username: state.username,
+    userId: state.userIdReducer,
+    userProfil: state.userProfilReducer,
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {
