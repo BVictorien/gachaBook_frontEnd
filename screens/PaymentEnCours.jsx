@@ -120,7 +120,7 @@ function mapDispatchToProps(dispatch) {
     payFCart: function (bookId, price) {
       dispatch({ type: "deleteFCart", bookId });
       dispatch({ type: "subCart", price });
-      dispatch({ type: "payer" });
+      dispatch({ type: "payer", price });
 
     },
 
