@@ -4,7 +4,10 @@ import {
   Text,
   View,
   ScrollView,
+  Dimensions,
+  ImageBackground,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Image, Button } from 'react-native-elements';
@@ -44,120 +47,144 @@ function BookScreen(props) {
   }, []);
   /*-------------------------------------------------------- */
   const updateWishList = async () => {
-    const data = await fetch("http://192.168.10.109:3000/update-whishlist", {
-      method: "PUT",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    const data = await fetch('http://192.168.10.120:3000/update-whishlist', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&bookId=${id}`,
     });
   };
   /*-------------------------------------------------------- */
   ////////////////////////////////////Return/////////////////////////////////////////
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <View style={styles.headNavigation}>
-          <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate('BottomNavigator');
-            }}
-          >
-            <Ionicons
-              name={(iconName = 'arrow-back')}
-              size={30}
-              color={'#007576'}
-              style={styles.backText}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              updateWishList();
-            }}
-          >
-            <Ionicons
-              style={styles.heart}
-              name={(iconName = 'heart')}
-              size={30}
-              color={'red'}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.containerBook}>
-          <Image>
-            <Image
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: image }}
-            />
-          </Image>
-        </View>
+    // <ScrollView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('../assets/bg2.png')}
+        resizeMode="cover"
+        style={styles.bg}
+      ></ImageBackground>
+      <ScrollView>
+        <View>
+          <View style={styles.headNavigation}>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate('BottomNavigator');
+              }}
+            >
+              <Ionicons
+                name={(iconName = 'arrow-back')}
+                size={30}
+                color={'#000'}
+                style={styles.backText}
+              />
+            </TouchableOpacity>
+            <Text style={styles.titrePage}>Detail du livre</Text>
+            <TouchableOpacity
+              onPress={() => {
+                updateWishList();
+              }}
+            >
+              <Ionicons
+                style={styles.heart}
+                name={(iconName = 'heart')}
+                size={30}
+                color={'red'}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.containerBook}>
+            <View style={styles.cadreBook}>
+              {/* <View style={styles.imgBg}></View> */}
+              <Image>
+                <Image
+                  style={styles.image}
+                  resizeMode="cover"
+                  source={{ uri: image }}
+                />
+              </Image>
+            </View>
+          </View>
 
-        {/* <View style={styles.containerbois}>
+          {/* <View style={styles.containerbois}>
           <Image
-            style={styles.imageBois}
-            resizeMode="cover"
+          style={styles.imageBois}
+          resizeMode="cover"
             source={require('../assets/bois.png')}
-          />
-        </View> */}
-        <View style={styles.imageView}></View>
-        <View style={styles.containerDetails}>
-          <View style={styles.bookdetails}>
-            <View style={styles.title}>
-              <Text style={styles.name}>{title}</Text>
-              <View style={styles.icons}>
-                <TouchableOpacity
-                  onPress={() => {
-                    props.addToCart(
-                      props.bookDetails[0],
-                      props.bookDetails[0].price
-                    );
-                  }}
-                >
-                  <Ionicons
-                    style={{ paddingLeft: 5 }}
-                    name={(iconName = 'basket')}
-                    size={25}
-                    color={'grey'}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <Text style={styles.author}>{author}</Text>
-            <View style={styles.navigation}>
-              <View style={styles.link}>
-                <Text style={{ color: '#949494' }}>Propre</Text>
-                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Etat</Text>
-              </View>
-              <Text style={styles.barre}>|</Text>
-              <View style={styles.link}>
-                <Text style={{ color: '#949494' }}>{pageCount}</Text>
-                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>
-                  Nombre de page
-                </Text>
-              </View>
-              <Text style={styles.barre}>|</Text>
-              <View style={styles.link}>
-                <Text style={{ color: '#949494' }}>{language}</Text>
-                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>
-                  Langage
-                </Text>
-              </View>
-              <Text style={styles.barre}>|</Text>
-              <View style={styles.link}>
-                <Text style={{ color: '#949494' }}>{price} ₲</Text>
-                <Text style={{ color: 'rgba(148, 148, 148,0.65)' }}>Price</Text>
-              </View>
-            </View>
-            <Text style={styles.description}>{description}</Text>
-            <Button
-              buttonStyle={styles.contact}
-              title="Contacter le vendeur"
-              onPress={() => props.navigation.navigate('UserScreen')}
             />
-            <View style={{ height: 100 }}></View>
+          </View> */}
+          <View style={styles.imageView}></View>
+          <View style={styles.containerDetails}>
+            <View style={styles.bookdetails}>
+              <View style={styles.title}>
+                <Text style={styles.name}>{title}</Text>
+                <View style={styles.icons}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      props.addToCart(
+                        props.bookDetails[0],
+                        props.bookDetails[0].price
+                      );
+                    }}
+                  >
+                    <Ionicons
+                      style={{ paddingLeft: 5 }}
+                      name={(iconName = 'basket')}
+                      size={25}
+                      color={'grey'}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Text style={styles.author}>{author}</Text>
+              <View style={styles.navigation}>
+                <View style={styles.link}>
+                  <Text style={{ color: '#032547', fontWeight: 'bold' }}>
+                    Propre
+                  </Text>
+                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
+                    Etat
+                  </Text>
+                </View>
+                <Text style={styles.barre}>|</Text>
+                <View style={styles.link}>
+                  <Text style={{ color: '#032547', fontWeight: 'bold' }}>
+                    {pageCount}
+                  </Text>
+                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
+                    Nombre de page
+                  </Text>
+                </View>
+                <Text style={styles.barre}>|</Text>
+                <View style={styles.link}>
+                  <Text style={{ color: '#032547', fontWeight: 'bold' }}>
+                    {language}
+                  </Text>
+                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
+                    Langage
+                  </Text>
+                </View>
+                <Text style={styles.barre}>|</Text>
+                <View style={styles.link}>
+                  <Text style={{ color: '#032547', fontWeight: 'bold' }}>
+                    {price} ₲
+                  </Text>
+                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
+                    Prix
+                  </Text>
+                </View>
+              </View>
+              <Text style={styles.description}>{description}</Text>
+              <Button
+                buttonStyle={styles.contact}
+                title="Contacter le vendeur"
+                onPress={() => props.navigation.navigate('UserScreen')}
+              />
+              <View style={{ height: 100 }}></View>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -186,43 +213,59 @@ export default connect(mapStateToProps, mapDispatchToProps)(BookScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: '#DBE6E7',
+    flex: 1,
+    // backgroundColor: '#DBE6E7',
 
     color: '#fff',
     // minHeight: '100vh',
-    width: '100%',
-    padding: 10,
+    // width: '100%',
+    // width: Dimensions.get('window').width / 1,
+    // padding: 10,
+    // justifyContent: 'center',
   },
   headNavigation: {
     // width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  bg: {
+    flex: 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 1,
+  },
   heart: {
-    marginTop: 15,
     marginRight: 20,
     marginLeft: 'auto',
+    marginTop: 15,
     paddingTop: 30,
+    borderColor: 'black',
   },
-  containerBook: {
-    alignItems: 'center',
+  titrePage: {
     marginTop: 15,
     justifyContent: 'center',
+    paddingTop: 30,
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 21,
   },
-  containerbois: {},
-  imageView: {
+  cadreBook: {
     alignItems: 'center',
-    margin: 20,
+    justifyContent: 'center',
+    marginTop: 15,
+    // paddingLeft: 'auto',
+    backgroundColor: 'rgba(245, 245, 245,0.20)',
+    width: 220,
+    height: 320,
   },
+  containerBook: {
+    // justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   image: {
     width: 200,
     height: 300,
   },
-  // imageBois: {
-  //   alignItems: 'center',
-  //   padding: 20,
-  // },
   navigation: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -279,6 +322,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
+    // height: Dimensions.get('window').height / 10,
   },
   barre: {
     backgroundColor: 'black',
@@ -286,7 +330,7 @@ const styles = StyleSheet.create({
   },
   backText: {
     marginTop: 15,
-    color: '#007576',
+    color: 'black',
     // marginRight: 'auto',
     marginLeft: 20,
     // marginRight: 'auto',

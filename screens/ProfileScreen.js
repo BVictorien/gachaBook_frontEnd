@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   SafeAreaView,
   RefreshControl,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Input, Card } from 'react-native-elements';
@@ -51,7 +53,7 @@ const ProfileScreen = (props) => {
   useEffect(() => {
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.109:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.120:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
@@ -162,6 +164,11 @@ const ProfileScreen = (props) => {
   /////////////////////////////////////Return///////////////////////////////////////////////////////////
   return (
     <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('../assets/bg2.png')}
+        resizeMode="cover"
+        style={styles.bg}
+      ></ImageBackground>
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
@@ -378,6 +385,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginLeft: 20,
   },
+  bg: {
+    flex: 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 1,
+  },
   username: {
     color: '#ED610C',
     fontSize: 35,
@@ -428,6 +440,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     fontWeight: 'bold',
     fontSize: 20,
+    padding: 10,
   },
   imageBook: {
     width: 150,
@@ -478,24 +491,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   detail: {},
-  bookItem: {
-    // backgroundColor: '#CADCE6',
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    // width: 350,
-    marginBottom: 6,
-    shadowColor: '#000',
-    justifyContent: 'center',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+  // bookItem: {
+  //   // backgroundColor: '#CADCE6',
+  //   backgroundColor: '#fff',
+  //   flexDirection: 'row',
+  //   // width: 350,
+  //   marginBottom: 6,
+  //   shadowColor: '#000',
+  //   justifyContent: 'center',
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 1,
+  //   },
+  //   shadowOpacity: 0.2,
+  //   shadowRadius: 1.41,
 
-    elevation: 2,
-    borderRadius: 3,
-  },
+  //   elevation: 2,
+  //   borderRadius: 3,
+  // },
   bookItem: {
     // backgroundColor: '#CADCE6',
     backgroundColor: '#fff',
