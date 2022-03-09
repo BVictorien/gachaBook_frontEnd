@@ -75,13 +75,13 @@ const BottomNavigator = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#009788',
+        activeTintColor: '#fff',
         inactiveTintColor: '#6D7D8B',
         style: {
-          backgroundColor: '#fff',
+          backgroundColor: '#032547',
           borderTopWidth: 0,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
+          // borderTopLeftRadius: 20,
+          // borderTopRightRadius: 20,
           // marginTop: -40,
         },
       }}
