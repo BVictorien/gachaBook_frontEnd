@@ -37,6 +37,7 @@ function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
   const viw42 = props.cart.map((x, i) => {
+    console.log(x);
     return (
       <View key={i} style={styles.bookItem}>
         <Card.Divider />
@@ -121,9 +122,7 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: "deleteFCart", bookId });
       dispatch({ type: "subCart", price });
       dispatch({ type: "payer", price });
-
     },
-
   };
 }
 /*-------------------------------------------------------------*/
