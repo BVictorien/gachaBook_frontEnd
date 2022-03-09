@@ -140,15 +140,7 @@ const ProfileScreen = (props) => {
           source={{ uri: x.image }}
         />
         <View style={styles.detail}>
-          <Text style={styles.name}>
-            {x.title}
-            {/* <Ionicons
-              name={(iconName = "basket")}
-              size={20}
-              color={"grey"}
-              // style={{ paddingRight: 5 }}
-            /> */}
-          </Text>
+          <Text style={styles.name}>{x.title}</Text>
           <Text style={styles.description}>{x.author}</Text>
         </View>
         <View style={styles.icons}>
@@ -494,7 +486,9 @@ const styles = StyleSheet.create({
   containerFavorites: {
     justifyContent: 'center',
   },
-  detail: {},
+  detail: {
+    width: '50%',
+  },
   // bookItem: {
   //   // backgroundColor: '#CADCE6',
   //   backgroundColor: '#fff',
