@@ -205,7 +205,7 @@ function HomeScreen(props) {
                 <Icon
                   name="search"
                   size={30}
-                  color="#007576"
+                  color="#032547"
                   onPress={() => handleSearch()}
                 />
               }
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   login: {
-    color: '#007576',
+    color: '#032547',
     marginLeft: 'auto',
     marginTop: 9,
     marginRight: 10,

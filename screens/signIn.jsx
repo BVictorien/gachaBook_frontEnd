@@ -94,7 +94,7 @@ function SignIn(props) {
           <Ionicons
             name="close"
             size={25}
-            color="#007576"
+            color="#032547"
             onPress={() => props.navigation.navigate('BottomNavigator')}
           />
 
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   bg: {
     flex: 1,
     justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    height: Dimensions.get('window').height / 0.5,
   },
   header: {
     flexDirection: 'row',
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   signIn: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
@@ -223,12 +223,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   connexion: {
-    color: '#007576',
+    color: '#032547',
     fontWeight: 'bold',
   },
   input: {
     borderRadius: 5,
     backgroundColor: 'white',
+    padding: 5,
   },
   error: {
     color: '#FF7',

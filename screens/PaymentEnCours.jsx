@@ -46,14 +46,14 @@ function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
   const payment = async (sellerID, price, bookId) => {
-    const data = await fetch("http://192.168.10.136:3000/update-seller", {
-      method: "PUT",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    const data = await fetch('http://192.168.10.136:3000/update-seller', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `sellerID=${sellerID}&price=${price}`,
     });
-    let updateUser = await fetch("http://192.168.10.136:3000/update-profil", {
-      method: "PUT",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    let updateUser = await fetch('http://192.168.10.136:3000/update-profil', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
     });
     let userProfil = {
@@ -62,12 +62,12 @@ function PaymentEnCours(props) {
       level: props.userProfil.userProfil.level,
     };
 
-    AsyncStorage.setItem("userProfil", JSON.stringify(userProfil));
+    AsyncStorage.setItem('userProfil', JSON.stringify(userProfil));
 
     let deleteBook = await fetch(
       `http://192.168.10.136:3000/delete-book?bookId=${bookId}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
       }
     );
   };
@@ -134,7 +134,7 @@ function PaymentEnCours(props) {
           <Ionicons
             name={(iconName = 'arrow-back')}
             size={30}
-            color={'#007576'}
+            color={'#032547'}
             style={styles.backText}
           />
         </TouchableOpacity>
@@ -183,16 +183,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(PaymentEnCours);
 //////////////////////////////////////Styles//////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: '#DBE6E7',
     // justifyContent: 'space-evenly',
     // paddingLeft: 10,
     // paddingRight: 10,
+    // paddingTop: 10,
   },
   bg: {
     flex: 1,
     justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    height: Dimensions.get('window').height / 0.5,
   },
   // header: {
   //   flexDirection: 'row',
@@ -274,7 +275,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   button1: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
     paddingLeft: 30,
     paddingRight: 30,
@@ -293,10 +294,12 @@ const styles = StyleSheet.create({
   },
   backText: {
     // marginTop: 15,
-    color: '#007576',
+    color: '#032547',
     marginRight: 'auto',
     marginLeft: 20,
-    fontSize: 20,
+    // fontSize: 20,
+    marginTop: 30,
+    marginBottom: 30,
     fontWeight: 'bold',
     // paddingTop: 30,
   },
