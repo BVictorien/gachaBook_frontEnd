@@ -1,4 +1,11 @@
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 import { Avatar, Button } from 'react-native-elements';
 import CustomSwitch from '../components/CustomSwitch';
@@ -14,6 +21,11 @@ const UserScreen = (props) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.banner}>
+          <ImageBackground
+            source={require('../assets/bg1.png')}
+            resizeMode="cover"
+            style={styles.bg}
+          ></ImageBackground>
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('BookScreen');
@@ -22,7 +34,7 @@ const UserScreen = (props) => {
             <Ionicons
               name={(iconName = 'arrow-back')}
               size={30}
-              color={'#007576'}
+              color={'#032547'}
               style={styles.backText}
             />
           </TouchableOpacity>
@@ -34,7 +46,7 @@ const UserScreen = (props) => {
               containerStyle={{ backgroundColor: 'red' }}
             ></Avatar> */}
             <Avatar
-              size={200}
+              size={150}
               rounded
               source={{
                 uri: 'https://randomuser.me/api/portraits/women/57.jpg',
@@ -134,6 +146,11 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  bg: {
+    flex: 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 1,
+  },
   avatar: {
     alignItems: 'center',
     marginTop: 15,
@@ -148,17 +165,17 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   banner: {
-    backgroundColor: '#007576',
+    // backgroundColor: '#032547',
     height: 175,
     width: '100%',
   },
   stars: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 100,
+    marginTop: 50,
   },
   buttonSend: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     alignItems: 'center',
     width: 300,
     height: 50,
@@ -168,12 +185,14 @@ const styles = StyleSheet.create({
   containerFavorites: {
     width: 350,
   },
-  textBack: {
-    marginTop: 40,
-    // color: '#007576',
-    marginRight: 'auto',
+  backText: {
+    marginTop: 20,
+    // paddingTop: 100,
+    // color: '#032547',
+    // marginRight: 'auto',
     marginLeft: 20,
-    fontSize: 20,
+    // fontSize: 20,
+
     fontWeight: 'bold',
     // paddingTop: 30,
   },

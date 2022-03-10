@@ -75,10 +75,11 @@ function BookScreen(props) {
               <Ionicons
                 name={(iconName = 'arrow-back')}
                 size={30}
+                color={'#000'}
                 style={styles.backText}
               />
             </TouchableOpacity>
-            <Text h3 style={styles.titrePage}>
+            <Text h4 style={styles.titrePage}>
               Detail du livre
             </Text>
             <TouchableOpacity
@@ -132,7 +133,7 @@ function BookScreen(props) {
                       style={{ paddingLeft: 5 }}
                       name={(iconName = 'basket')}
                       size={25}
-                      color={'#007576'}
+                      color={'#032547'}
                     />
                   </TouchableOpacity>
                 </View>
@@ -140,30 +141,28 @@ function BookScreen(props) {
               <Text style={styles.author}>{author}</Text>
               <View style={styles.navigation}>
                 <View style={styles.link}>
-                  <Text style={{ color: 'rgba(148, 148, 148)' }}>Etat</Text>
+                  <Text style={{ color: '#505050' }}>Etat</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     Propre
                   </Text>
                 </View>
                 <Text style={styles.barre}>|</Text>
                 <View style={styles.link}>
-                  <Text style={{ color: 'rgba(148, 148, 148)' }}>
-                    Nombre de page
-                  </Text>
+                  <Text style={{ color: '#505050' }}>Nombre de page</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     {pageCount}
                   </Text>
                 </View>
                 <Text style={styles.barre}>|</Text>
                 <View style={styles.link}>
-                  <Text style={{ color: 'rgba(148, 148, 148)' }}>Langage</Text>
+                  <Text style={{ color: '#505050' }}>Langage</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     {language}
                   </Text>
                 </View>
                 <Text style={styles.barre}>|</Text>
                 <View style={styles.link}>
-                  <Text style={{ color: 'rgba(148, 148, 148)' }}>Prix</Text>
+                  <Text style={{ color: '#505050' }}>Prix</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     {price} ₲
                   </Text>
@@ -227,7 +226,7 @@ const styles = StyleSheet.create({
   bg: {
     flex: 1,
     justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    height: Dimensions.get('window').height / 0.5,
   },
   heart: {
     marginRight: 20,
@@ -238,7 +237,7 @@ const styles = StyleSheet.create({
   titrePage: {
     marginTop: 15,
     justifyContent: 'center',
-    paddingTop: 20,
+    paddingTop: 30,
     color: 'black',
     fontWeight: 'bold',
     fontSize: 21,
@@ -313,11 +312,10 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
   contact: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
-    alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
+    width: 300,
+    marginBottom: 10,
     // height: Dimensions.get('window').height / 10,
   },
   barre: {
@@ -330,7 +328,7 @@ const styles = StyleSheet.create({
     // marginRight: 'auto',
     marginLeft: 20,
     // marginRight: 'auto',
-    fontSize: 20,
+    // fontSize: 20,
     fontWeight: 'bold',
     paddingTop: 30,
   },

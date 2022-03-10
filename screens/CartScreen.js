@@ -120,7 +120,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);
 /////////////////////////////////////Styles////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: '#DBE6E7',
     // justifyContent: 'center',
     // alignItems: 'center',
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignItems: 'center',
+    marginTop: 20,
   },
   image: {
     width: 100,
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   payer: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,

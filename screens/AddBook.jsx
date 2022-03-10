@@ -7,7 +7,10 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  Dimensions,
   TouchableOpacity,
+  ImageBackground,
+  SafeAreaView,
 } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -90,20 +93,25 @@ function AddBook(props) {
   /*------------------------------------------------------*/
   ///////////////////////////////Return////////////////////////////////////////
   return (
-    <View style={styles.background}>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate('BottomNavigator');
-        }}
-      >
-        <Ionicons
-          name={(iconName = 'arrow-back')}
-          size={30}
-          color={'#007576'}
-          style={styles.backText}
-        />
-      </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('../assets/bg2.png')}
+        resizeMode="cover"
+        style={styles.bg}
+      ></ImageBackground>
       <ScrollView>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('BottomNavigator');
+          }}
+        >
+          <Ionicons
+            name={(iconName = 'arrow-back')}
+            size={30}
+            color={'#032547'}
+            style={styles.backText}
+          />
+        </TouchableOpacity>
         <View style={styles.logo}>
           <Image
             style={styles.imagelogo}
@@ -197,7 +205,7 @@ function AddBook(props) {
             title="Prendre photo du livre"
           />
           <Button
-            buttonStyle={styles.photoButton}
+            buttonStyle={styles.photoButton2}
             title="Ajouter le Livre"
             onPress={() => {
               saveBook(), props.navigation.navigate('BottomNavigator');
@@ -205,7 +213,7 @@ function AddBook(props) {
           />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -219,14 +227,22 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  bg: {
+    flex: 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 0.5,
+  },
   backText: {
     marginTop: 15,
-    color: '#007576',
+    color: '#032547',
     marginTop: 50,
     marginRight: 'auto',
     marginLeft: 20,
-    fontSize: 20,
+    // fontSize: 20,
     fontWeight: 'bold',
+  },
+  imagelogo: {
+    // justifyContent: 'center',
   },
   ajoutText: {
     fontSize: 30,
@@ -245,7 +261,7 @@ const styles = StyleSheet.create({
     height: 120,
   },
   button: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
@@ -253,18 +269,26 @@ const styles = StyleSheet.create({
   input: {
     borderRadius: 5,
     backgroundColor: 'white',
+    padding: 5,
   },
   photoButton: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
-    width: 350,
-    marginBottom: 20,
-    marginLeft: 10,
+    width: 300,
+    marginBottom: 10,
+    // paddingBottom: 10,
+  },
+  photoButton2: {
+    backgroundColor: '#B0CAE2',
+    borderRadius: 50,
+    width: 300,
+    marginBottom: 10,
+    // paddingBottom: 10,
   },
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20,
     width: '100%',
   },

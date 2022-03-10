@@ -31,7 +31,7 @@ function Store(props) {
           <Ionicons
             name={(iconName = 'arrow-back')}
             size={30}
-            color={'#007576'}
+            color={'#032547'}
             style={styles.backText}
           />
         </TouchableOpacity>
@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
   bg: {
     flex: 1,
     justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    height: Dimensions.get('window').height / 0.5,
   },
   backButton: {
     marginTop: 15,
-    color: '#007576',
+    color: '#032547',
     marginRight: 'auto',
     marginLeft: 20,
     fontSize: 20,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   button: {
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,
@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
   },
   backText: {
     marginTop: 15,
-    color: '#007576',
+    color: '#032547',
     marginTop: 50,
     marginRight: 'auto',
     marginLeft: 20,
-    fontSize: 20,
+    // fontSize: 20,
     fontWeight: 'bold',
   },
 });
