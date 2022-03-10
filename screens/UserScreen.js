@@ -1,6 +1,13 @@
 /////////////////////////////////////Import//////////////////////////////////////////////////
-import { StyleSheet, View, ScrollView, TouchableOpacity,ImageBackground,Dimensions } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
 import {
   Avatar,
   Button,
@@ -8,13 +15,13 @@ import {
   Card,
   Image,
   Text,
-} from "react-native-elements";
-import CustomSwitch from "../components/CustomSwitch";
-import { Ionicons } from "@expo/vector-icons";
+} from 'react-native-elements';
+import CustomSwitch from '../components/CustomSwitch';
+import { Ionicons } from '@expo/vector-icons';
 
-import BookDetails from "../components/BookDetails";
-import { connect } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import BookDetails from '../components/BookDetails';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /////////////////////////////////////Function////////////////////////////////////////////////
 const UserScreen = (props) => {
@@ -26,14 +33,14 @@ const UserScreen = (props) => {
   useEffect(() => {
     const hoho = async () => {
       let fechedUser = await fetch(
-        `http://192.168.10.136:3000/profil?userID=${props.bookDetails[0].sellerID}`
+        `http://192.168.10.124:3000/profil?userID=${props.bookDetails[0].sellerID}`
       );
       let userWishList = await fechedUser.json();
       setUserProfil(userWishList);
-      console.log("USSSSSEEEERRRRR", userWishList);
+      console.log('USSSSSEEEERRRRR', userWishList);
 
       let fechedUserBooks = await fetch(
-        `http://192.168.10.136:3000/get-user-books?userId=${props.bookDetails[0].sellerID}`
+        `http://192.168.10.124:3000/get-user-books?userId=${props.bookDetails[0].sellerID}`
       );
       let userBooks = await fechedUserBooks.json();
 
@@ -48,7 +55,7 @@ const UserScreen = (props) => {
     return (
       <TouchableOpacity
         style={[styles.bookItem, styles.shadowCard]}
-        onPress={() => props.navigation.navigate("BookScreen")}
+        onPress={() => props.navigation.navigate('BookScreen')}
       >
         <Card.Divider />
         <Image
@@ -80,55 +87,49 @@ const UserScreen = (props) => {
           ></ImageBackground>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate("BookScreen");
+              props.navigation.navigate('BookScreen');
             }}
           >
             <Ionicons
-              name={(iconName = "arrow-back")}
+              name={(iconName = 'arrow-back')}
               size={30}
               color={'#032547'}
               style={styles.backText}
             />
           </TouchableOpacity>
           <View style={styles.avatar}>
-            {/* <Avatar
-              size={150}
-              rounded
-              icon={{ name: 'adb', type: 'material' }}
-              containerStyle={{ backgroundColor: 'red' }}
-            ></Avatar> */}
             <Avatar
               size={150}
               rounded
-              source={{
-                uri: "https://randomuser.me/api/portraits/women/57.jpg",
-              }}
-              // title="Bj"
-              containerStyle={{ backgroundColor: "grey" }}
+              source={require('../assets/avatar.png')}
+              containerStyle={{ backgroundColor: 'grey' }}
             >
               {/* <Avatar.Accessory size={23} /> */}
             </Avatar>
           </View>
         </View>
-        <View style={styles.stars}>
-          <Text>{userProfil.username}</Text>
-          <Text>Niveau : {userProfil.level}</Text>
+        {/* <View style={styles.stars}> */}
+        <View>
+          <Text style={styles.user}>{userProfil.username}</Text>
+        </View>
+        <View style={styles.niveau}>
+          <Text style={styles.level}>Niveau : {userProfil.level}</Text>
           <Text>Points : {userProfil.points}</Text>
         </View>
+        {/* </View> */}
         <Button
           buttonStyle={styles.buttonSend}
           title="Contacter le vendeur"
-          onPress={() => props.navigation.navigate("Chat")}
+          onPress={() => props.navigation.navigate('Chat')}
           icon={{
-            name: "envelope",
-            type: "font-awesome",
+            name: 'envelope',
+            type: 'font-awesome',
             size: 15,
-            color: "white",
+            color: 'white',
           }}
           iconRight
         ></Button>
-
-        {vizw}
+        <View style={styles.containerBook}>{vizw}</View>
       </View>
     </ScrollView>
   );
@@ -160,7 +161,7 @@ function mapDispatchToProps(dispatch) {
       sellerID
     ) {
       dispatch({
-        type: "BookDetail",
+        type: 'BookDetail',
         title,
         author,
         language,
@@ -176,7 +177,7 @@ function mapDispatchToProps(dispatch) {
       });
     },
     getUserProfil: function (userProfil) {
-      dispatch({ type: "getUser", userProfil });
+      dispatch({ type: 'getUser', userProfil });
     },
   };
 }
@@ -185,20 +186,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(UserScreen);
 /////////////////////////////////////Styles////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#DBE6E7",
-    alignItems: "center",
-    height: "100%",
-    width: "100%",
+    backgroundColor: '#DBE6E7',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
   },
   bg: {
     flex: 1,
     justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    height: Dimensions.get('window').height / 0.5,
   },
   avatar: {
-    alignItems: "center",
-    marginTop: 15,
-    shadowColor: "#000",
+    alignItems: 'center',
+    marginTop: 10,
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -211,12 +212,18 @@ const styles = StyleSheet.create({
   banner: {
     // backgroundColor: '#032547',
     height: 175,
-    width: "100%",
+    width: '100%',
   },
   stars: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 50,
+  },
+  niveau: {
+    flexDirection: 'row',
+  },
+  level: {
+    paddingRight: 10,
   },
   buttonSend: {
     backgroundColor: '#032547',
@@ -225,12 +232,13 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: 10,
     borderRadius: 50,
+    marginBottom: 20,
   },
   containerFavorites: {
     width: 350,
   },
   backText: {
-    marginTop: 20,
+    marginTop: 25,
     // paddingTop: 100,
     // color: '#032547',
     // marginRight: 'auto',
@@ -240,13 +248,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     // paddingTop: 30,
   },
+  user: {
+    marginTop: 60,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
   bookItem: {
     // backgroundColor: '#CADCE6',
-    backgroundColor: "#fff",
-    flexDirection: "row",
+    backgroundColor: '#fff',
+    flexDirection: 'row',
     width: 350,
     marginBottom: 6,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -258,23 +271,26 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   name: {
-    color: "#032547",
+    color: '#032547',
     padding: 5,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 10,
-    fontSize: 21,
+    fontSize: 16,
   },
   description: {
-    color: "#032547",
+    color: '#032547',
     paddingLeft: 5,
   },
   icons: {
-    marginLeft: "auto",
-    color: "#032547",
+    marginLeft: 'auto',
+    color: '#032547',
     // flexDirection: 'row',
     padding: 5,
-    justifyContent: "center",
+    justifyContent: 'center',
     marginRight: 15,
+  },
+  containerBook: {
+    paddingBottom: 150,
   },
   image: {
     width: 60,
