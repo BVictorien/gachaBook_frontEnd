@@ -26,7 +26,7 @@ function SignUp(props) {
     const data = await fetch('http://192.168.10.136:3000/sign-up', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&token=${token}`,
+      body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
     });
     const body = await data.json();
     if (body.result == true) {
