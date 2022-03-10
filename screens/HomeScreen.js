@@ -11,7 +11,7 @@ import {
   ImageBackground,
   Dimensions,
 } from 'react-native';
-import { Input, Text, Icon, Button } from 'react-native-elements';
+import { Input, Text, Icon, Button, Card } from 'react-native-elements';
 import LatestBooks from '../components/LatestBooks';
 import NearestBooks from '../components/NearestBooks';
 import { connect } from 'react-redux';
@@ -96,6 +96,7 @@ function HomeScreen(props) {
       let lastBooks = await data.json();
 
       setLast(lastBooks);
+      AsyncStorage.setItem('lastBook', JSON.stringify(lastBooks));
     };
     fechedLastBooks();
 

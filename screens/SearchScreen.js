@@ -1,3 +1,4 @@
+/////////////////////////////////////Import///////////////////////////////////////////////////
 import {
   StyleSheet,
   Text,
@@ -6,37 +7,76 @@ import {
   Dimensions,
   SafeAreaView,
   ImageBackground,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import * as Location from 'expo-location';
-import MapView from 'react-native-maps';
-import * as Permissions from 'expo-permissions';
-import { Input, Icon } from 'react-native-elements';
+  TouchableOpacity,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import * as Location from "expo-location";
+import MapView from "react-native-maps";
+import * as Permissions from "expo-permissions";
+import { Input, Icon, Card, Image } from "react-native-elements";
+import { connect } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BookDetails from "../components/BookDetails";
 
-import BookDetails from '../components/BookDetails';
-
+/////////////////////////////////////Function///////////////////////////////////////////////////
 function SearchScreen(props) {
-  const [search, setSearch] = useState('');
+  /////////////////////////////////////States and vars//////////////////////////////////
+  const [search, setSearch] = useState("");
+  const [books, setBooks] = useState([]);
+
+  /////////////////////////////////////Methods///////////////////////////////////////////
+  /**------------------------------------------------------------------ */
   const updateSearch = (search) => {
     setSearch(search);
   };
-
+  /**------------------------------------------------------------------ */
   useEffect(() => {
     async function askPermissions() {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status === 'granted') {
+      if (status === "granted") {
         Location.watchPositionAsync({ distanceInterval: 2 }, (location) => {
           // console.log(location);
         });
       }
     }
     askPermissions();
-  }, []);
 
+    AsyncStorage.getItem("lastBook", function (error, data) {
+      let lastBook = JSON.parse(data);
+      setBooks(lastBook);
+    });
+  }, []);
+  /**------------------------------------------------------------------ */
+  const vizw = books.map((x, i) => {
+    return (
+      <TouchableOpacity
+      key={i}
+        style={[styles.bookItem, styles.shadowCard]}
+        onPress={() => props.navigation.navigate("BookScreen")}
+      >
+        <Card.Divider />
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: x.image }}
+        />
+        <View>
+          <Text style={styles.name}>{x.title}</Text>
+          <Text style={styles.description}>{x.author}</Text>
+        </View>
+
+        <Card.Divider />
+      </TouchableOpacity>
+    );
+  });
+
+  /**------------------------------------------------------------------ */
+
+  ////////////////////////////////////return///////////////////////////////////////////
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require('../assets/bg2.png')}
+        source={require("../assets/bg2.png")}
         resizeMode="cover"
         style={styles.bg}
       ></ImageBackground>
@@ -50,7 +90,7 @@ function SearchScreen(props) {
           />
         </View>
         <MapView
-          style={{ width: '100%', height: '45%' }}
+          style={{ width: "100%", height: "45%" }}
           // style={{ flex: 1 }}
           initialRegion={{
             latitude: 48.866667,
@@ -60,26 +100,11 @@ function SearchScreen(props) {
           }}
         />
         <ScrollView style={{ flex: 1, marginTop: 10 }}>
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: "center" }}>
             <Text style={styles.title}>Autour de moi :</Text>
           </View>
           <View style={styles.containerBook}>
-            <BookDetails
-              navigation={props.navigation}
-              // style={{ width: '100%', height: '25%' }}
-            ></BookDetails>
-            <BookDetails
-              navigation={props.navigation}
-              // style={{ width: '100%', height: '25%' }}
-            ></BookDetails>
-            <BookDetails
-              navigation={props.navigation}
-              // style={{ width: '100%', height: '25%' }}
-            ></BookDetails>
-            <BookDetails
-              navigation={props.navigation}
-              // style={{ width: '100%', height: '25%' }}
-            ></BookDetails>
+           {vizw}
           </View>
         </ScrollView>
       </ScrollView>
@@ -88,8 +113,78 @@ function SearchScreen(props) {
   );
 }
 
-export default SearchScreen;
 
+
+////////////////////////////////////Redux/////////////////////////////////////////////////
+/*---------------------------------------------*/
+function mapStateToProps(state) {
+  return {
+    token: state.token,
+    userId: state.userIdReducer,
+    username: state.username,
+  };
+}
+/*---------------------------------------------*/
+function mapDispatchToProps(dispatch) {
+  return {
+    disconnect: function () {
+      dispatch({
+        type: 'disconnect1',
+      });
+      dispatch({
+        type: 'disconnect2',
+      });
+      dispatch({
+        type: 'disconnect3',
+      });
+    },
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
+    getUserId: function (userId) {
+      dispatch({ type: 'getUserId', userId: userId });
+    },
+    addUsername: function (username) {
+      dispatch({ type: 'addUsername', username: username });
+    },
+    sendBookDetail: function (
+      title,
+      author,
+      language,
+      pageCount,
+      barcode,
+      editor,
+      imageLink,
+      description,
+      year,
+      id,
+      price,
+      sellerID
+    ) {
+      dispatch({
+        type: 'BookDetail',
+        title,
+        author,
+        language,
+        pageCount,
+        barcode,
+        editor,
+        imageLink,
+        description,
+        year,
+        id,
+        price,
+        sellerID,
+      });
+    },
+    getUserProfil: function (userProfil) {
+      dispatch({ type: 'getUser', userProfil });
+    },
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SearchScreen);
+
+////////////////////////////////////Styles//////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -102,25 +197,68 @@ const styles = StyleSheet.create({
   },
   bg: {
     flex: 1,
-    justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    justifyContent: "center",
+    height: Dimensions.get("window").height / 1,
   },
   containerBook: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
-    color: '#252525',
+    color: "#252525",
     margin: 10,
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   search: {
-    backgroundColor: 'white',
-    width: '90%',
+    backgroundColor: "white",
+    width: "90%",
     height: 50,
 
     margin: 10,
     marginTop: 40,
     borderRadius: 30,
+  },
+  bookItem: {
+    // backgroundColor: '#CADCE6',
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    width: 350,
+    marginBottom: 6,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+    borderRadius: 3,
+  },
+  name: {
+    color: "#032547",
+    padding: 5,
+    fontWeight: "bold",
+    marginTop: 10,
+    fontSize: 21,
+  },
+  description: {
+    color: "#032547",
+    paddingLeft: 5,
+  },
+  icons: {
+    marginLeft: "auto",
+    color: "#032547",
+    // flexDirection: 'row',
+    padding: 5,
+    justifyContent: "center",
+    marginRight: 15,
+  },
+  image: {
+    width: 60,
+    height: 80,
+    marginRight: 10,
+    margin: 10,
+    // borderRadius: 50,
   },
 });

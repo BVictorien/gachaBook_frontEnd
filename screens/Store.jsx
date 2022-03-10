@@ -43,24 +43,24 @@ function Store(props) {
             />
           </View>
           <View style={styles.input}>
-            <Text style={styles.point}>15 points</Text>
-            <Text style={styles.prix}>7 €</Text>
+            <Text style={styles.point}>5 €</Text>
+            <Text style={styles.prix}>10 ₲</Text>
           </View>
           <View style={styles.input}>
-            <Text style={styles.point}>25 points</Text>
-            <Text style={styles.prix}>10 €</Text>
+            <Text style={styles.point}>10 €</Text>
+            <Text style={styles.prix}>20 ₲</Text>
           </View>
           <View style={styles.input}>
-            <Text style={styles.point}>35 points</Text>
-            <Text style={styles.prix}>15 €</Text>
+            <Text style={styles.point}>15 €</Text>
+            <Text style={styles.prix}>30 ₲</Text>
           </View>
           <View style={styles.input}>
-            <Text style={styles.point}>50 points</Text>
-            <Text style={styles.prix}>20 €</Text>
+            <Text style={styles.point}>20 €</Text>
+            <Text style={styles.prix}>40 ₲</Text>
           </View>
           <View style={styles.input}>
-            <Text style={styles.point}>100 points</Text>
-            <Text style={styles.prix}>25 €</Text>
+            <Text style={styles.point}>25 €</Text>
+            <Text style={styles.prix}>50 ₲</Text>
           </View>
           <Button
             onPress={() => {
