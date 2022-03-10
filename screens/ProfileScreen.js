@@ -54,7 +54,7 @@ const ProfileScreen = (props) => {
   useEffect(() => {
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.109:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.136:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
@@ -71,7 +71,7 @@ const ProfileScreen = (props) => {
       setMyBooks(booklist);
     });
     const hoho = async () => {
-      let updateUser = await fetch("http://192.168.10.109:3000/update-profil", {
+      let updateUser = await fetch("http://192.168.10.136:3000/update-profil", {
         method: "PUT",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
@@ -88,7 +88,7 @@ const ProfileScreen = (props) => {
   }, [props, refreshing]);
   /*-------------------------------------------------------*/
   const constdeleteWishList = async (x) => {
-    const data = await fetch("http://192.168.10.109:3000/delete-whishlist", {
+    const data = await fetch("http://192.168.10.136:3000/delete-whishlist", {
       method: "PUT",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `userId=${props.userId}&bookId=${x}`,

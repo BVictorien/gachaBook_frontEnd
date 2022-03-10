@@ -37,7 +37,7 @@ function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
   const payment = async (sellerID, price) => {
-    const data = await fetch("http://192.168.10.109:3000/update-seller", {
+    const data = await fetch("http://192.168.10.136:3000/update-seller", {
       method: "PUT",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `sellerID=${sellerID}&price=${price}`,
