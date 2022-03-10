@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Image, Button } from 'react-native-elements';
+import { Image, Button, Text } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -75,7 +75,6 @@ function BookScreen(props) {
               <Ionicons
                 name={(iconName = 'arrow-back')}
                 size={30}
-                color={'#000'}
                 style={styles.backText}
               />
             </TouchableOpacity>
