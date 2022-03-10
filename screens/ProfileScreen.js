@@ -409,13 +409,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 /////////////////////////////////////Styles//////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#DBE6E7',
     color: '#252525',
     // alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%',
+    // width: '100%',
+    // height: '100%',
     // padding: 20,
   },
   topContainer: {
@@ -502,6 +502,7 @@ const styles = StyleSheet.create({
     color: '#000',
     position: 'absolute',
     fontSize: 15,
+    fontWeight: 'bold',
   },
   bothCharts: {
     flexDirection: 'row',
