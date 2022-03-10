@@ -1,5 +1,5 @@
 /////////////////////////////////////Import//////////////////////////////////////////////
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -10,13 +10,13 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
-} from "react-native";
-import { Input, Text, Icon, Button } from "react-native-elements";
-import LatestBooks from "../components/LatestBooks";
-import NearestBooks from "../components/NearestBooks";
-import { connect } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FontAwesome } from "@expo/vector-icons";
+} from 'react-native';
+import { Input, Text, Icon, Button } from 'react-native-elements';
+import LatestBooks from '../components/LatestBooks';
+import NearestBooks from '../components/NearestBooks';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FontAwesome } from '@expo/vector-icons';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -26,7 +26,7 @@ function HomeScreen(props) {
   /////////////////////////////////////States and var///////////////////////////////////////
   let logout;
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [last, setLast] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -38,7 +38,7 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   const handleSearch = () => {
     // console.log('Test réussi')
-    props.navigation.navigate("BottomNavigator", { screen: "Search" });
+    props.navigation.navigate('BottomNavigator', { screen: 'Search' });
   };
 
   /*--------------------------------------------------*/
@@ -48,7 +48,7 @@ function HomeScreen(props) {
     return (
       <View style={styles.homeBook}>
         <Image
-          onPress={() => props.navigation.navigate("BookScreen")}
+          onPress={() => props.navigation.navigate('BookScreen')}
           style={styles.imageBook}
           resizeMode="cover"
           source={{
@@ -75,7 +75,7 @@ function HomeScreen(props) {
       <Text
         style={styles.login}
         onPress={() =>
-          props.navigation.navigate("SignIn", { screen: "SignIn" })
+          props.navigation.navigate('SignIn', { screen: 'SignIn' })
         }
       >
         Connexion
@@ -99,15 +99,15 @@ function HomeScreen(props) {
     };
     fechedLastBooks();
 
-    AsyncStorage.getItem("userId", function (error, data) {
+    AsyncStorage.getItem('userId', function (error, data) {
       let userId = JSON.parse(data);
       props.getUserId(userId);
     });
-    AsyncStorage.getItem("userName", function (error, data) {
+    AsyncStorage.getItem('userName', function (error, data) {
       let userName = JSON.parse(data);
       props.addUsername(userName);
     });
-    AsyncStorage.getItem("userProfil", function (error, data) {
+    AsyncStorage.getItem('userProfil', function (error, data) {
       let userProfil2 = JSON.parse(data);
       props.getUserProfil(userProfil2);
     });
@@ -117,7 +117,7 @@ function HomeScreen(props) {
     return (
       <TouchableOpacity
         onPress={() => {
-          props.navigation.navigate("BookScreen");
+          props.navigation.navigate('BookScreen');
           props.sendBookDetail(
             lastbook.title,
             lastbook.author,
@@ -146,7 +146,7 @@ function HomeScreen(props) {
         <Text style={styles.titleCard}>{lastbook.title}</Text>
         <View style={styles.descriptionCard}>
           <Text
-            onPress={() => props.navigation.navigate("BookScreen")}
+            onPress={() => props.navigation.navigate('BookScreen')}
             style={styles.priceCard}
           >
             {lastbook.price} ₲
@@ -167,7 +167,7 @@ function HomeScreen(props) {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../assets/bg1.png")}
+        source={require('../assets/bg1.png')}
         resizeMode="cover"
         style={styles.bg}
       ></ImageBackground>
@@ -180,7 +180,7 @@ function HomeScreen(props) {
         <View>
           <View style={styles.search}>
             <Text
-              style={{ color: "#032547", fontWeight: "bold", fontSize: 30 }}
+              style={{ color: '#032547', fontWeight: 'bold', fontSize: 30 }}
             >
               GachaBook
             </Text>
@@ -188,8 +188,8 @@ function HomeScreen(props) {
           </View>
           <View
             style={{
-              backgroundColor: "white",
-              width: "90%",
+              backgroundColor: 'white',
+              width: '90%',
               height: 50,
               marginLeft: 15,
               marginRight: 15,
@@ -215,7 +215,7 @@ function HomeScreen(props) {
           <View style={styles.logo}>
             <Image
               style={styles.image}
-              source={require("../assets/pic1.png")}
+              source={require('../assets/pic1.png')}
             />
           </View>
 
@@ -244,37 +244,37 @@ const styles = StyleSheet.create({
     // // width: '100%',
   },
   logout: {
-    color: "#E9940A",
+    color: '#E9940A',
     marginLeft: 75,
     marginTop: 9,
     fontSize: 20,
   },
   login: {
-    color: "#007576",
-    marginLeft: "auto",
+    color: '#007576',
+    marginLeft: 'auto',
     marginTop: 9,
     marginRight: 10,
     fontSize: 15,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   input: {
-    shadowColor: "#F69D0C",
+    shadowColor: '#F69D0C',
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   search: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 40,
     marginLeft: 15,
   },
   books: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   title: {
     padding: 0,
-    color: "#032547",
-    fontWeight: "bold",
+    color: '#032547',
+    fontWeight: 'bold',
     marginLeft: 15,
     marginTop: 5,
     marginBottom: 5,
@@ -282,12 +282,12 @@ const styles = StyleSheet.create({
   },
   bg: {
     flex: 1,
-    justifyContent: "center",
-    height: Dimensions.get("window").height / 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 1,
   },
   logo: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,
   },
@@ -297,10 +297,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   sliderHorizontal: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   descriptionCard: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   homeBook: {
     marginTop: 15,
@@ -312,13 +312,13 @@ const styles = StyleSheet.create({
     paddingRight: 5,
   },
   titleCard: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   refreshcontainer: {
-    color: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   refreshbutton: {
     // paddingRight: 5,
@@ -338,23 +338,23 @@ function mapDispatchToProps(dispatch) {
   return {
     disconnect: function () {
       dispatch({
-        type: "disconnect1",
+        type: 'disconnect1',
       });
       dispatch({
-        type: "disconnect2",
+        type: 'disconnect2',
       });
       dispatch({
-        type: "disconnect3",
+        type: 'disconnect3',
       });
     },
     addToken: function (token) {
-      dispatch({ type: "addToken", token: token });
+      dispatch({ type: 'addToken', token: token });
     },
     getUserId: function (userId) {
-      dispatch({ type: "getUserId", userId: userId });
+      dispatch({ type: 'getUserId', userId: userId });
     },
     addUsername: function (username) {
-      dispatch({ type: "addUsername", username: username });
+      dispatch({ type: 'addUsername', username: username });
     },
     sendBookDetail: function (
       title,
@@ -371,7 +371,7 @@ function mapDispatchToProps(dispatch) {
       sellerID
     ) {
       dispatch({
-        type: "BookDetail",
+        type: 'BookDetail',
         title,
         author,
         language,
@@ -387,7 +387,7 @@ function mapDispatchToProps(dispatch) {
       });
     },
     getUserProfil: function (userProfil) {
-      dispatch({ type: "getUser", userProfil });
+      dispatch({ type: 'getUser', userProfil });
     },
   };
 }

@@ -65,19 +65,19 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   name: {
-    color: '#252525',
+    color: '#032547',
     padding: 5,
     fontWeight: 'bold',
     marginTop: 10,
     fontSize: 21,
   },
   description: {
-    color: '#252525',
+    color: '#032547',
     paddingLeft: 5,
   },
   icons: {
     marginLeft: 'auto',
-    color: '#252525',
+    color: '#032547',
     // flexDirection: 'row',
     padding: 5,
     justifyContent: 'center',
