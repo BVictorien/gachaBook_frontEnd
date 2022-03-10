@@ -295,7 +295,7 @@ const ProfileScreen = (props) => {
               <AntDesign
                 name="scan1"
                 size={24}
-                color="#484848"
+                color="#252525"
                 style={{ marginRight: 5 }}
               />
               <Text
@@ -315,7 +315,7 @@ const ProfileScreen = (props) => {
                 props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
             >
-              <AntDesign name="message1" size={24} color="#484848" />
+              <AntDesign name="message1" size={24} color="#252525" />
               <Text
                 // onPress={() =>
                 //   props.navigation.navigate('Chat', { screen: 'ChatScreen' })
@@ -336,7 +336,7 @@ const ProfileScreen = (props) => {
               <FontAwesome
                 name="credit-card-alt"
                 size={24}
-                color="#484848"
+                color="#252525"
                 style={{ marginRight: 5 }}
               />
               <Text

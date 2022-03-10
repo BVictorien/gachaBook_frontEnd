@@ -35,8 +35,8 @@ function PaymentCard(props) {
             props.navigation.navigate('Store');
           }}
           name={(iconName = 'arrow-back')}
-          size={20}
-          color={'#007576'}
+          size={30}
+          color={'#032547'}
           style={styles.textBack}
         />
         <View style={styles.containerCard}>
@@ -90,7 +90,7 @@ export default PaymentCard;
 //////////////////////////////////////Style///////////////////////////////////////////////
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: '#DBE6E7',
     // justifyContent: 'center',
     // marginTop: 30,
@@ -99,17 +99,17 @@ const styles = StyleSheet.create({
   },
   textBack: {
     // marginTop: 15,
-    color: '#007576',
+    color: '#032547',
     marginRight: 'auto',
     marginLeft: 20,
-    fontSize: 20,
+    // fontSize: 20,
     fontWeight: 'bold',
     paddingTop: 30,
   },
   bg: {
     flex: 1,
     justifyContent: 'center',
-    height: Dimensions.get('window').height / 1,
+    height: Dimensions.get('window').height / 0.5,
   },
   // image: {
   //   marginBottom: 25,
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   input: {
     borderRadius: 5,
     backgroundColor: 'white',
+    padding: 5,
   },
   dateCVN: {
     flexDirection: 'row',
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   button: {
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: '#007576',
+    backgroundColor: '#032547',
     borderRadius: 50,
     width: 300,
     marginBottom: 10,

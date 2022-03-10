@@ -56,7 +56,7 @@ const ChatScreen = (props) => {
             <Ionicons
               name={(iconName = 'arrow-back')}
               size={30}
-              color={'#007576'}
+              color={'#032547'}
               style={styles.backText}
             />
           </TouchableOpacity>
@@ -79,7 +79,7 @@ const ChatScreen = (props) => {
                 <Icon
                   name="arrow-circle-up"
                   size={41}
-                  color="#007576"
+                  color="#032547"
                   onPress={() => {
                     socket.emit('sendMessage', {
                       message: currentMessage,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#456283',
   },
   backText: {
-    color: '#007576',
+    color: '#032547',
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
