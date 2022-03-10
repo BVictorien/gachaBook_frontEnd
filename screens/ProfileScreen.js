@@ -49,10 +49,9 @@ const ProfileScreen = (props) => {
   const [wishList, setWishList] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  /////////////////////////////////////Methodes/////////////////////////////////////////
+  /////////////////////////////////////Methods/////////////////////////////////////////
   /*-------------------------------------------------------*/
   useEffect(() => {
-    console.log("AHAHAHAHAHAHAHAHAHAH", props);
     const haha = async () => {
       let fechedUserWishlist = await fetch(
         `http://192.168.10.136:3000/user-wishList?userId=${props.userId}`
@@ -77,7 +76,6 @@ const ProfileScreen = (props) => {
       );
 
       let updateUser = await fechedUpdateUser.json();
-      console.log("XXXXXXXXX", updateUser);
 
       let userProfil = {
         count_rating: updateUser.count_rating,
