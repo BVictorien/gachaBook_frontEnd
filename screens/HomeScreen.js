@@ -94,7 +94,7 @@ function HomeScreen(props) {
       let data = await fetch(`http:/192.168.10.136:3000/latest-books`);
 
       let lastBooks = await data.json();
-      console.log("LASSSSSSSTTTTTTT", lastBooks);
+
       setLast(lastBooks);
     };
     fechedLastBooks();
@@ -114,7 +114,6 @@ function HomeScreen(props) {
   }, [refreshing]);
   /*--------------------------------------------------*/
   const viw = last.map((lastbook, i) => {
-    console.log("booooooooooooooooook", lastbook.sellerID[0]);
     return (
       <TouchableOpacity
         onPress={() => {

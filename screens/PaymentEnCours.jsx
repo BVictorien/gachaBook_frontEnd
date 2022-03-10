@@ -36,14 +36,37 @@ const BookDetailsCard = () => {
 function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
-  const payment = async (sellerID, price) => {
+  const payment = async (sellerID, price, bookId) => {
     const data = await fetch("http://192.168.10.136:3000/update-seller", {
       method: "PUT",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `sellerID=${sellerID}&price=${price}`,
     });
+    let updateUser = await fetch("http://192.168.10.136:3000/update-profil", {
+      method: "PUT",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
+    });
+    let userProfil = {
+      count_rating: props.userProfil.userProfil.count_rating,
+      points: props.userProfil.userProfil.points,
+      level: props.userProfil.userProfil.level,
+    };
+
+    AsyncStorage.setItem("userProfil", JSON.stringify(userProfil));
+
+    let deleteBook = await fetch(
+      `http://192.168.10.136:3000/delete-book?bookId=${bookId}`,
+      {
+        method: "DELETE",
+      }
+    );
   };
 
+  /*----------------------------------------------------------- */
+  useEffect(() => {
+    console.log(props);
+  }, []);
   /*----------------------------------------------------------- */
   const viw42 = props.cart.map((x, i) => {
     console.log(x);
@@ -62,7 +85,7 @@ function PaymentEnCours(props) {
             <Button
               onLongPress={() => {
                 props.payFCart(x.id, x.price);
-                payment(x.sellerID, x.price);
+                payment(x.sellerID, x.price, x.id);
               }}
               buttonStyle={styles.button1}
               title="Valider"
@@ -121,6 +144,7 @@ function mapStateToProps(state) {
     cart: state.cartReducer,
     total: state.cartTotalReducer,
     userProfil: state.userProfil,
+    userProfil: state.userProfilReducer,
   };
 }
 /*-------------------------------------------------------------*/

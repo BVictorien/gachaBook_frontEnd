@@ -52,6 +52,7 @@ const ProfileScreen = (props) => {
   /////////////////////////////////////Methodes/////////////////////////////////////////
   /*-------------------------------------------------------*/
   useEffect(() => {
+    console.log("AHAHAHAHAHAHAHAHAHAH", props);
     const haha = async () => {
       let fechedUserWishlist = await fetch(
         `http://192.168.10.136:3000/user-wishList?userId=${props.userId}`
@@ -71,21 +72,30 @@ const ProfileScreen = (props) => {
       setMyBooks(booklist);
     });
     const hoho = async () => {
-      let updateUser = await fetch("http://192.168.10.136:3000/update-profil", {
-        method: "PUT",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
-      });
-      let userProfil = {
-        count_rating: props.userProfil.userProfil.count_rating,
-        points: props.userProfil.userProfil.points,
-        level: props.userProfil.userProfil.level,
-      };
+      let fechedUpdateUser = await fetch(
+        `http://192.168.10.136:3000/profil?userID=${props.userId}`
+      );
 
+      let updateUser = await fechedUpdateUser.json();
+      console.log("XXXXXXXXX", updateUser);
+
+      let userProfil = {
+        count_rating: updateUser.count_rating,
+        points: updateUser.points,
+        level: updateUser.level,
+      };
+      props.getUserProfil(userProfil);
       AsyncStorage.setItem("userProfil", JSON.stringify(userProfil));
+
+      let fechedUserBooks = await fetch(
+        `http://192.168.10.136:3000/get-user-books?userId=${props.userId}`
+      );
+      let userBooks = await fechedUserBooks.json();
+
+      AsyncStorage.setItem("userBooks", JSON.stringify(userBooks));
     };
     hoho();
-  }, [props, refreshing]);
+  }, [refreshing]);
   /*-------------------------------------------------------*/
   const constdeleteWishList = async (x) => {
     const data = await fetch("http://192.168.10.136:3000/delete-whishlist", {
@@ -391,6 +401,9 @@ function mapDispatchToProps(dispatch) {
         price,
         sellerID,
       });
+    },
+    getUserProfil: function (userProfil) {
+      dispatch({ type: "getUser", userProfil });
     },
   };
 }

@@ -34,7 +34,7 @@ function BookScreen(props) {
   ////////////////////////////////////Methods//////////////////////////////////////
   /*-------------------------------------------------------- */
   useEffect(() => {
-    console.log(props);
+    
     setTitle(props.bookDetails[0].title);
     setAuthor(props.bookDetails[0].author);
     setLanguage(props.bookDetails[0].language);
