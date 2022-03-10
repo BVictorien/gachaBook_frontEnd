@@ -54,7 +54,7 @@ const ProfileScreen = (props) => {
   useEffect(() => {
     const haha = async () => {
       let fechedUserWishlist = await fetch(
-        `http://192.168.10.120:3000/user-wishList?userId=${props.userId}`
+        `http://192.168.10.124:3000/user-wishList?userId=${props.userId}`
       );
       let userWishList = await fechedUserWishlist.json();
 
@@ -71,9 +71,9 @@ const ProfileScreen = (props) => {
       setMyBooks(booklist);
     });
     const hoho = async () => {
-      let updateUser = await fetch("http://192.168.10.109:3000/update-profil", {
-        method: "PUT",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      let updateUser = await fetch('http://192.168.10.124:3000/update-profil', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
       });
       let userProfil = {
@@ -81,16 +81,14 @@ const ProfileScreen = (props) => {
         points: props.userProfil.userProfil.points,
         level: props.userProfil.userProfil.level,
       };
-      
-      AsyncStorage.setItem("userProfil", JSON.stringify(userProfil));
 
+      AsyncStorage.setItem('userProfil', JSON.stringify(userProfil));
     };
     hoho();
-   
   }, [props, refreshing]);
   /*-------------------------------------------------------*/
   const constdeleteWishList = async (x) => {
-    const data = await fetch('http://192.168.10.109:3000/delete-whishlist', {
+    const data = await fetch('http://192.168.10.124:3000/delete-whishlist', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&bookId=${x}`,
@@ -233,7 +231,7 @@ const ProfileScreen = (props) => {
               <View style={styles.aligntop}>
                 <Text style={styles.level}>Niveau </Text>
                 <Text style={styles.number}>
-                  {props.userProfil.userProfil.level}{" "}
+                  {props.userProfil.userProfil.level}{' '}
                 </Text>
               </View>
             </View>
@@ -287,14 +285,14 @@ const ProfileScreen = (props) => {
               <AntDesign
                 name="scan1"
                 size={24}
-                color="#6D7D8B"
+                color="#484848"
                 style={{ marginRight: 5 }}
               />
               <Text
                 // onPress={() => {
                 //   props.navigation.navigate('AddBook');
                 // }}
-                style={{ color: '#252525', paddingLeft: 3 }}
+                style={{ color: '#484848', paddingLeft: 3, fontWeight: 'bold' }}
               >
                 Scan
               </Text>
@@ -307,12 +305,12 @@ const ProfileScreen = (props) => {
                 props.navigation.navigate('Chat', { screen: 'ChatScreen' })
               }
             >
-              <AntDesign name="message1" size={24} color="#6D7D8B" />
+              <AntDesign name="message1" size={24} color="#484848" />
               <Text
                 // onPress={() =>
                 //   props.navigation.navigate('Chat', { screen: 'ChatScreen' })
                 // }
-                style={{ color: '#252525', paddingLeft: 3 }}
+                style={{ color: '#484848', paddingLeft: 3, fontWeight: 'bold' }}
               >
                 Messages
               </Text>
@@ -328,14 +326,14 @@ const ProfileScreen = (props) => {
               <FontAwesome
                 name="credit-card-alt"
                 size={24}
-                color="#6D7D8B"
+                color="#484848"
                 style={{ marginRight: 5 }}
               />
               <Text
                 // onPress={() => {
                 //   props.navigation.navigate('Store');
                 // }}
-                style={{ color: '#252525', paddingLeft: 3 }}
+                style={{ color: '#484848', paddingLeft: 3, fontWeight: 'bold' }}
               >
                 My Card
               </Text>

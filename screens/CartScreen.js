@@ -52,7 +52,7 @@ const CartScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require('../assets/bg2.png')}
+        source={require('../assets/bg3.png')}
         resizeMode="cover"
         style={styles.bg}
       ></ImageBackground>

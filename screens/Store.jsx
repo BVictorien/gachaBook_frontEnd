@@ -1,71 +1,95 @@
 //////////////////////////////////////IMPORT///////////////////////////////////////////////
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+  SafeAreaView,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
 //////////////////////////////////////Function///////////////////////////////////////////////
 function Store(props) {
   return (
-    <View style={styles.background}>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate('BottomNavigator');
-        }}
-      >
-        <Ionicons
-          name={(iconName = 'arrow-back')}
-          size={30}
-          color={'#007576'}
-          style={styles.backText}
-        />
-      </TouchableOpacity>
-      <View style={styles.container}>
-        <View style={styles.logo}>
-          <Image style={styles.image} source={require('../assets/pic5.png')} />
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.point}>15 points</Text>
-          <Text style={styles.prix}>7 €</Text>
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.point}>25 points</Text>
-          <Text style={styles.prix}>10 €</Text>
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.point}>35 points</Text>
-          <Text style={styles.prix}>15 €</Text>
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.point}>50 points</Text>
-          <Text style={styles.prix}>20 €</Text>
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.point}>100 points</Text>
-          <Text style={styles.prix}>25 €</Text>
-        </View>
-        <Button
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require('../assets/bg1.png')}
+        resizeMode="cover"
+        style={styles.bg}
+      ></ImageBackground>
+      <ScrollView>
+        <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('paymentCard');
+            props.navigation.navigate('BottomNavigator');
           }}
-          buttonStyle={styles.button}
-          title="Recharger mon compte"
-        />
-        <Image source={require('../assets/cardBrand.png')} />
-      </View>
-    </View>
+        >
+          <Ionicons
+            name={(iconName = 'arrow-back')}
+            size={30}
+            color={'#007576'}
+            style={styles.backText}
+          />
+        </TouchableOpacity>
+        <View style={styles.containerStore}>
+          <View style={styles.logo}>
+            <Image
+              style={styles.image}
+              source={require('../assets/pic5.png')}
+            />
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.point}>15 points</Text>
+            <Text style={styles.prix}>7 €</Text>
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.point}>25 points</Text>
+            <Text style={styles.prix}>10 €</Text>
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.point}>35 points</Text>
+            <Text style={styles.prix}>15 €</Text>
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.point}>50 points</Text>
+            <Text style={styles.prix}>20 €</Text>
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.point}>100 points</Text>
+            <Text style={styles.prix}>25 €</Text>
+          </View>
+          <Button
+            onPress={() => {
+              props.navigation.navigate('paymentCard');
+            }}
+            buttonStyle={styles.button}
+            title="Recharger mon compte"
+          />
+          <Image source={require('../assets/cardBrand.png')} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 export default Store;
 //////////////////////////////////////Style///////////////////////////////////////////////
 const styles = StyleSheet.create({
-  background: {
+  container: {
     flex: 1,
-    backgroundColor: '#DBE6E7',
+    // backgroundColor: '#DBE6E7',
     // justifyContent: 'center',
     // marginTop: 30,
-    width: '100%',
-    height: '100%',
+    // width: '100%',
+    // height: '100%',
+  },
+  bg: {
+    flex: 1,
+    justifyContent: 'center',
+    height: Dimensions.get('window').height / 1,
   },
   backButton: {
     marginTop: 15,
@@ -77,7 +101,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
 
-  container: {
+  containerStore: {
     alignItems: 'center',
   },
   title: {
@@ -127,7 +151,7 @@ const styles = StyleSheet.create({
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 40,
     width: '100%',
   },

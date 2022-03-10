@@ -1,16 +1,15 @@
 /////////////////////////////////////Import//////////////////////////////////////////////////
 import {
   StyleSheet,
-  Text,
   View,
   ScrollView,
   Dimensions,
-  ImageBackground,
   TouchableOpacity,
+  ImageBackground,
   SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Image, Button } from 'react-native-elements';
+import { Image, Button, Text } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -47,7 +46,7 @@ function BookScreen(props) {
   }, []);
   /*-------------------------------------------------------- */
   const updateWishList = async () => {
-    const data = await fetch('http://192.168.10.120:3000/update-whishlist', {
+    const data = await fetch('http://192.168.10.124:3000/update-whishlist', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&bookId=${id}`,
@@ -74,11 +73,13 @@ function BookScreen(props) {
               <Ionicons
                 name={(iconName = 'arrow-back')}
                 size={30}
-                color={'#000'}
+                // color={'#000'}
                 style={styles.backText}
               />
             </TouchableOpacity>
-            <Text style={styles.titrePage}>Detail du livre</Text>
+            <Text h3 style={styles.titrePage}>
+              Detail du livre
+            </Text>
             <TouchableOpacity
               onPress={() => {
                 updateWishList();
@@ -130,7 +131,7 @@ function BookScreen(props) {
                       style={{ paddingLeft: 5 }}
                       name={(iconName = 'basket')}
                       size={25}
-                      color={'grey'}
+                      color={'#007576'}
                     />
                   </TouchableOpacity>
                 </View>
@@ -138,38 +139,32 @@ function BookScreen(props) {
               <Text style={styles.author}>{author}</Text>
               <View style={styles.navigation}>
                 <View style={styles.link}>
+                  <Text style={{ color: 'rgba(148, 148, 148)' }}>Etat</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     Propre
                   </Text>
-                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
-                    Etat
-                  </Text>
                 </View>
                 <Text style={styles.barre}>|</Text>
                 <View style={styles.link}>
+                  <Text style={{ color: 'rgba(148, 148, 148)' }}>
+                    Nombre de page
+                  </Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     {pageCount}
                   </Text>
-                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
-                    Nombre de page
-                  </Text>
                 </View>
                 <Text style={styles.barre}>|</Text>
                 <View style={styles.link}>
+                  <Text style={{ color: 'rgba(148, 148, 148)' }}>Langage</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     {language}
                   </Text>
-                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
-                    Langage
-                  </Text>
                 </View>
                 <Text style={styles.barre}>|</Text>
                 <View style={styles.link}>
+                  <Text style={{ color: 'rgba(148, 148, 148)' }}>Prix</Text>
                   <Text style={{ color: '#032547', fontWeight: 'bold' }}>
                     {price} ₲
-                  </Text>
-                  <Text style={{ color: 'rgba(148, 148, 148,0.80)' }}>
-                    Prix
                   </Text>
                 </View>
               </View>
@@ -238,12 +233,11 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginTop: 15,
     paddingTop: 30,
-    borderColor: 'black',
   },
   titrePage: {
     marginTop: 15,
     justifyContent: 'center',
-    paddingTop: 30,
+    paddingTop: 20,
     color: 'black',
     fontWeight: 'bold',
     fontSize: 21,
@@ -256,6 +250,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(245, 245, 245,0.20)',
     width: 220,
     height: 320,
+    borderRadius: 10,
   },
   containerBook: {
     // justifyContent: 'center',
@@ -302,11 +297,11 @@ const styles = StyleSheet.create({
     fontSize: 21,
   },
   author: {
-    color: 'grey',
+    color: '#032547',
     fontWeight: 'bold',
   },
   description: {
-    color: 'gray',
+    color: '#032547',
     // marginTop: 20,
     marginBottom: 20,
     // margin: 20,
