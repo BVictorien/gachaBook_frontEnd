@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 import socketIOClient from 'socket.io-client';
-var socket = socketIOClient('http://192.168.10.124:3000');
+var socket = socketIOClient('http://192.168.10.136:3000');
 
 const ChatScreen = (props) => {
   const [currentMessage, setCurrentMessage] = useState();
@@ -61,8 +61,8 @@ const ChatScreen = (props) => {
             />
           </TouchableOpacity>
 
-          <Text style={styles.top}>Messages</Text>
-          <Text style={styles.top}>???</Text>
+          <Text style={styles.top}>Victorien</Text>
+          <Text style={styles.top}> </Text>
         </View>
 
         <ScrollView>{listMessageItems}</ScrollView>
