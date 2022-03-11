@@ -91,7 +91,7 @@ function HomeScreen(props) {
   /*--------------------------------------------------*/
   useEffect(() => {
     let fechedLastBooks = async () => {
-      let data = await fetch(`http:/192.168.10.124:3000/latest-books`);
+      let data = await fetch(`http:/192.168.10.106:3000/latest-books`);
 
       let lastBooks = await data.json();
 
