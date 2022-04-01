@@ -36,7 +36,11 @@ function AddBook(props) {
   /*------------------------------------------------------*/
 
   async function saveBook() {
+<<<<<<< HEAD
     let response = await fetch('https://gachabook.herokuapp.com/save-book', {
+=======
+    let response = await fetch('http://192.168.10.106:3000/save-book', {
+>>>>>>> 00f826e65a8904e12310d224f5281386a70c1407
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `title=${titre}&author=${auteur}&description=${description}&language=${langue}&nbPages=${nbPages}&editor=${editeur}&year=${annee}&barcode=${codeBarre}&price=${prix}&condition=${condition}&image=${imageLink}&id=${props.userId}`,

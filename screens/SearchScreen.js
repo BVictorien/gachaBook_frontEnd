@@ -89,7 +89,7 @@ function SearchScreen(props) {
             rightIcon={<Icon name="search" size={30} color="#252525" />}
           />
         </View>
-        <MapView
+        {/* <MapView
           style={{ width: '100%', height: 300 }}
           // style={{ flex: 1 }}
           initialRegion={{
@@ -98,7 +98,14 @@ function SearchScreen(props) {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-        />
+        /> */}
+        <View style={styles.containerMap}>
+          <Image
+            style={styles.imageMap}
+            resizeMode="cover"
+            source={require('../assets/map.png')}
+          />
+        </View>
         <ScrollView style={{ flex: 1, marginTop: 10 }}>
           <View style={{ alignItems: 'center' }}>
             <Text style={styles.title}>Autour de moi :</Text>
@@ -214,6 +221,12 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 40,
     borderRadius: 30,
+  },
+  containerMap: {
+    height: 300,
+  },
+  imageMap: {
+    height: '100%',
   },
   bookItem: {
     // backgroundColor: '#CADCE6',
