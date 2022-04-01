@@ -33,14 +33,14 @@ const UserScreen = (props) => {
   useEffect(() => {
     const hoho = async () => {
       let fechedUser = await fetch(
-        `http://192.168.10.124:3000/profil?userID=${props.bookDetails[0].sellerID}`
+        `https://gachabook.herokuapp.com/profil?userID=${props.bookDetails[0].sellerID}`
       );
       let userWishList = await fechedUser.json();
       setUserProfil(userWishList);
       
 
       let fechedUserBooks = await fetch(
-        `http://192.168.10.124:3000/get-user-books?userId=${props.bookDetails[0].sellerID}`
+        `https://gachabook.herokuapp.com/get-user-books?userId=${props.bookDetails[0].sellerID}`
       );
       let userBooks = await fechedUserBooks.json();
 

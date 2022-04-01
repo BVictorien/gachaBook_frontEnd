@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 import socketIOClient from 'socket.io-client';
-var socket = socketIOClient('http://192.168.10.136:3000');
+var socket = socketIOClient('https://gachabook.herokuapp.com/');
 
 const ChatScreen = (props) => {
   const [currentMessage, setCurrentMessage] = useState();

@@ -19,7 +19,7 @@ function PaymentCard(props) {
   const [montant, setMontant] = useState(25);
   //////////////////////////////////////Methods///////////////////////////////////////////////
   const payment = async (sellerID, price, bookId) => {
-    const data = await fetch('http://192.168.10.124:3000/add-monney', {
+    const data = await fetch('https://gachabook.herokuapp.com/add-monney', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&price=${montant}`,

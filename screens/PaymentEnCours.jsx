@@ -46,12 +46,12 @@ function PaymentEnCours(props) {
   //////////////////////////////////////Methods//////////////////////////////////////////////
   /*----------------------------------------------------------- */
   const payment = async (sellerID, price, bookId) => {
-    const data = await fetch('http://192.168.10.124:3000/update-seller', {
+    const data = await fetch('https://gachabook.herokuapp.com/update-seller', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `sellerID=${sellerID}&price=${price}`,
     });
-    let updateUser = await fetch('http://192.168.10.124:3000/update-profil', {
+    let updateUser = await fetch('https://gachabook.herokuapp.com/update-profil', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userId=${props.userId}&count_rating=${props.userProfil.userProfil.count_rating}&points=${props.userProfil.userProfil.points}`,
@@ -65,7 +65,7 @@ function PaymentEnCours(props) {
     AsyncStorage.setItem('userProfil', JSON.stringify(userProfil));
 
     let deleteBook = await fetch(
-      `http://192.168.10.124:3000/delete-book?bookId=${bookId}`,
+      `https://gachabook.herokuapp.com/delete-book?bookId=${bookId}`,
       {
         method: 'DELETE',
       }
